@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>我的个人博客</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2017-10-27T04:00:10.592Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>liyuanbiao</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Java转Kotlin boolean属性的坑</title>
+    <link href="http://yoursite.com/2017/10/27/Java%E8%BD%ACKotlin-boolean%E5%B1%9E%E6%80%A7%E7%9A%84%E5%9D%91/"/>
+    <id>http://yoursite.com/2017/10/27/Java转Kotlin-boolean属性的坑/</id>
+    <published>2017-10-27T03:59:22.000Z</published>
+    <updated>2017-10-27T04:00:10.592Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h3><p>假设一个 <code>JavaBean</code> 类中有 <code>boolean</code> 类型的字段叫做 <code>enabled</code><br>它生成的<code>setter</code>/<code>getter</code> 方法将是</p><ul><li>setter: <code>setEnabled(boolean enabled)</code></li><li>getter: <code>isEnabled()</code></li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static class JavaBean&#123;</div><div class="line">        private boolean enabled;</div><div class="line"></div><div class="line">        public boolean isEnabled() &#123;</div><div class="line">            return enabled;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void setEnabled(boolean enabled) &#123;</div><div class="line">            this.enabled = enabled;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure><p>使用 <code>Android Studio</code> 的 <code>kotlin</code> 插件转换后将生成 <code>isEnabled</code> 属性，而不是 <code>enabled</code> 属性。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class JavaBean &#123;</div><div class="line">    var isEnabled: Boolean = false</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>我们知道<code>kotlin</code>编译后也是生成<code>class</code>文件，所以也是可以转成<code>java</code>文件的，通过查看反编译后的结果来学习<code>kotlin</code>不失为一种好方法。</p><p>可以在 <code>Android Studio</code> 执行下面的操作将 <code>kotlin</code> 代码重新转成<code>java</code>代码。<br>Tools / Kotlin / Show Kotlin Bytecode / Decompile. </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public final class JavaBean &#123;</div><div class="line">   private boolean isEnabled;</div><div class="line"></div><div class="line">   public final boolean isEnabled() &#123;</div><div class="line">      return this.isEnabled;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   public final void setEnabled(boolean var1) &#123;</div><div class="line">      this.isEnabled = var1;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>可以看到是 <code>isEnabled</code> ，不是 <code>enabled</code>。</p><h4 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h4><ul><li><p>我在项目中使用的是<strong>Gson</strong>来解析后台返回来的数据。<strong>Gson</strong>是通过反射字段的名称来赋值的，然而数据中是 <code>enbaled</code> ，代码里是 <code>isEnabled</code> ，它将永远不能被赋值，永远为<code>false</code>，解决方法可以是</p><ul><li>给字段添加 <code>@SerializedName(value = &quot;enbaled&quot;)</code></li><li>直接将 <code>isEnabled</code> 改成 <code>enbaled</code>，保证kotlin的幕后字段与后台返回数据一致即可.</li></ul></li><li><p>如果你项目中用的是<strong>fastjson</strong>，那么需要为每个字段添加<code>setter</code>/<code>getter</code> 方法。<strong>fastjson</strong>是根据<strong>Javabean</strong>属性来赋值的，所以必须保证属性名正确。由于之前<strong>fastjson</strong>出现过序列化成功，但是反序列化失败的bug，致使我放弃使用<strong>fastjson</strong>。虽然<strong>fastjson</strong>以快著称，但是快不是唯一的需求，它只在数据量大的时候有明显差异，数据量小的时候差异几乎可是忽略不计，所以我选择<strong>Gson</strong>。</p></li></ul><h3 id="细谈Java属性"><a href="#细谈Java属性" class="headerlink" title="细谈Java属性"></a>细谈Java属性</h3><p>在Java里面生成 <code>setter</code>/<code>getter</code> 方法是有一定规则的。</p><ul><li>如果类的成员变量的名字是xxx，那么为了更改或获取成员变量的值，即更改或获取属性，在类中可以使用两个方法：<ul><li>getXxx()，用来获取属性xxx。</li><li>setXxx()，用来修改属性xxx.。</li></ul></li><li>对于boolean类型的成员变量，即布尔逻辑类型的属性，允许使用”is”代替上面的”get”。</li><li>类中访问属性的方法都必须是public的，一般属性是private的。</li><li>类中如果有构造方法，那么这个构造方法也是public的并且是无参数的。</li></ul><p>因为Java属性是由 <code>setter</code>/<code>getter</code> 方法决定的，而不是字段。在一个Java类里面，如果有<code>void setName(String name)</code>和<code>String getName()</code>方法，那么可以认为这个类有<code>name</code>这个属性（<strong>可读可写</strong>），如果仅有get，那么这个<code>name</code>属性就是个<strong>只读属性</strong>。即使没有<code>name</code>这个字段也是一样成立的。</p><p>也就是说，对于 <code>boolean</code> 类型，<code>enabled</code> 和 <code>isEnabled</code> 这两个字段生成的<code>setter</code>/<code>getter</code> 方法是一致的。当这两个字段同时存在时，只能针对其中一个生成<code>setter</code>/<code>getter</code> 方法。看下图你就明白了</p><p><img src="media/15057223127898/15057241768106.jpg" alt=""></p><p><code>isEnabled</code> 已经无法再生成了，因为已经存在了。在项目当中应该避免则这样的命名，选择其一即可。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h3 id=&quot;踩坑&quot;&gt;&lt;a href=&quot;#踩坑&quot; class=&quot;headerlink&quot; title=&quot;踩坑&quot;&gt;&lt;/a&gt;踩坑&lt;/h3&gt;&lt;p&gt;假设一个 &lt;code&gt;JavaBean&lt;/code&gt; 类中有 &lt;code&gt;boolean&lt;/code&gt; 类型的字段叫做
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>hello hexo</title>
+    <link href="http://yoursite.com/2017/10/27/hello-hexo/"/>
+    <id>http://yoursite.com/2017/10/27/hello-hexo/</id>
+    <published>2017-10-27T02:06:26.000Z</published>
+    <updated>2017-10-27T02:07:16.028Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="hello-hexo"><a href="#hello-hexo" class="headerlink" title="hello hexo"></a>hello hexo</h1><p>这是我搭建的第一篇hexo博客</p><ul><li>开心</li><li>激动</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;hello-hexo&quot;&gt;&lt;a href=&quot;#hello-hexo&quot; class=&quot;headerlink&quot; title=&quot;hello hexo&quot;&gt;&lt;/a&gt;hello
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2017/10/27/hello-world/"/>
+    <id>http://yoursite.com/2017/10/27/hello-world/</id>
+    <published>2017-10-27T02:02:14.357Z</published>
+    <updated>2017-10-27T02:02:14.357Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>
