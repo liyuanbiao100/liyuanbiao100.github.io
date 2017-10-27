@@ -6,22 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://liyuanbiao100.github.io">
-  <title>Java转Kotlin boolean属性的坑 | 我的个人博客</title>
+  <title>Tag: java | 我的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
-<meta name="keywords" content="java,kotlin,android">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java转Kotlin boolean属性的坑">
-<meta property="og:url" content="https://liyuanbiao100.github.io/2017/10/27/Java转Kotlin-boolean属性的坑/index.html">
+  <meta name="description" content="知识整理">
+<meta property="og:type" content="website">
+<meta property="og:title" content="我的个人博客">
+<meta property="og:url" content="https://liyuanbiao100.github.io/tags/java/index.html">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
+<meta property="og:description" content="知识整理">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://liyuanbiao100.github.io/2017/10/27/Java转Kotlin-boolean属性的坑/media/15057223127898/15057241768106.jpg">
-<meta property="og:updated_time" content="2017-10-27T07:16:13.614Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java转Kotlin boolean属性的坑">
-<meta name="twitter:description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
-<meta name="twitter:image" content="https://liyuanbiao100.github.io/2017/10/27/Java转Kotlin-boolean属性的坑/media/15057223127898/15057241768106.jpg">
+<meta name="twitter:title" content="我的个人博客">
+<meta name="twitter:description" content="知识整理">
   
     <link rel="alternative" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
   
@@ -157,71 +153,36 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java转Kotlin-boolean属性的坑" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      Java转Kotlin boolean属性的坑
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/10/27/Java转Kotlin-boolean属性的坑/" class="archive-article-date">
+  	<time datetime="2017-10-27T03:59:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/10/27/Java转Kotlin-boolean属性的坑/">Java转Kotlin boolean属性的坑</a>
     </h1>
   
 
-        
-        <a href="/2017/10/27/Java转Kotlin-boolean属性的坑/" class="archive-article-date">
-  	<time datetime="2017-10-27T03:59:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h3><p>假设一个 <code>JavaBean</code> 类中有 <code>boolean</code> 类型的字段叫做 <code>enabled</code><br>它生成的<code>setter</code>/<code>getter</code> 方法将是</p>
-<ul>
-<li>setter: <code>setEnabled(boolean enabled)</code></li>
-<li>getter: <code>isEnabled()</code></li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">public static class JavaBean&#123;</div><div class="line">        private boolean enabled;</div><div class="line"></div><div class="line">        public boolean isEnabled() &#123;</div><div class="line">            return enabled;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        public void setEnabled(boolean enabled) &#123;</div><div class="line">            this.enabled = enabled;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>使用 <code>Android Studio</code> 的 <code>kotlin</code> 插件转换后将生成 <code>isEnabled</code> 属性，而不是 <code>enabled</code> 属性。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">class JavaBean &#123;</div><div class="line">    var isEnabled: Boolean = false</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们知道<code>kotlin</code>编译后也是生成<code>class</code>文件，所以也是可以转成<code>java</code>文件的，通过查看反编译后的结果来学习<code>kotlin</code>不失为一种好方法。</p>
-<p>可以在 <code>Android Studio</code> 执行下面的操作将 <code>kotlin</code> 代码重新转成<code>java</code>代码。<br>Tools / Kotlin / Show Kotlin Bytecode / Decompile. </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public final class JavaBean &#123;</div><div class="line">   private boolean isEnabled;</div><div class="line"></div><div class="line">   public final boolean isEnabled() &#123;</div><div class="line">      return this.isEnabled;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   public final void setEnabled(boolean var1) &#123;</div><div class="line">      this.isEnabled = var1;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>可以看到是 <code>isEnabled</code> ，不是 <code>enabled</code>。</p>
-<h4 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h4><ul>
-<li><p>我在项目中使用的是<strong>Gson</strong>来解析后台返回来的数据。<strong>Gson</strong>是通过反射字段的名称来赋值的，然而数据中是 <code>enbaled</code> ，代码里是 <code>isEnabled</code> ，它将永远不能被赋值，永远为<code>false</code>，解决方法可以是</p>
-<ul>
-<li>给字段添加 <code>@SerializedName(value = &quot;enbaled&quot;)</code></li>
-<li>直接将 <code>isEnabled</code> 改成 <code>enbaled</code>，保证kotlin的幕后字段与后台返回数据一致即可.</li>
-</ul>
-</li>
-<li><p>如果你项目中用的是<strong>fastjson</strong>，那么需要为每个字段添加<code>setter</code>/<code>getter</code> 方法。<strong>fastjson</strong>是根据<strong>Javabean</strong>属性来赋值的，所以必须保证属性名正确。由于之前<strong>fastjson</strong>出现过序列化成功，但是反序列化失败的bug，致使我放弃使用<strong>fastjson</strong>。虽然<strong>fastjson</strong>以快著称，但是快不是唯一的需求，它只在数据量大的时候有明显差异，数据量小的时候差异几乎可是忽略不计，所以我选择<strong>Gson</strong>。</p>
-</li>
-</ul>
-<h3 id="细谈Java属性"><a href="#细谈Java属性" class="headerlink" title="细谈Java属性"></a>细谈Java属性</h3><p>在Java里面生成 <code>setter</code>/<code>getter</code> 方法是有一定规则的。</p>
-<ul>
-<li>如果类的成员变量的名字是xxx，那么为了更改或获取成员变量的值，即更改或获取属性，在类中可以使用两个方法：<ul>
-<li>getXxx()，用来获取属性xxx。</li>
-<li>setXxx()，用来修改属性xxx.。</li>
-</ul>
-</li>
-<li>对于boolean类型的成员变量，即布尔逻辑类型的属性，允许使用”is”代替上面的”get”。</li>
-<li>类中访问属性的方法都必须是public的，一般属性是private的。</li>
-<li>类中如果有构造方法，那么这个构造方法也是public的并且是无参数的。</li>
-</ul>
-<p>因为Java属性是由 <code>setter</code>/<code>getter</code> 方法决定的，而不是字段。在一个Java类里面，如果有<code>void setName(String name)</code>和<code>String getName()</code>方法，那么可以认为这个类有<code>name</code>这个属性（<strong>可读可写</strong>），如果仅有get，那么这个<code>name</code>属性就是个<strong>只读属性</strong>。即使没有<code>name</code>这个字段也是一样成立的。</p>
-<p>也就是说，对于 <code>boolean</code> 类型，<code>enabled</code> 和 <code>isEnabled</code> 这两个字段生成的<code>setter</code>/<code>getter</code> 方法是一致的。当这两个字段同时存在时，只能针对其中一个生成<code>setter</code>/<code>getter</code> 方法。看下图你就明白了</p>
-<p><img src="media/15057223127898/15057241768106.jpg" alt=""></p>
-<p><code>isEnabled</code> 已经无法再生成了，因为已经存在了。在项目当中应该避免则这样的命名，选择其一即可。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -241,106 +202,19 @@
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=https://liyuanbiao100.github.io/2017/10/27/Java转Kotlin-boolean属性的坑/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
   
   
-    <a href="/2017/10/27/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -363,9 +237,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
