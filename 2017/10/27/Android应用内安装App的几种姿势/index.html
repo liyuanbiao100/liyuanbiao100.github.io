@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://liyuanbiao100.github.io">
-  <title>Tag: android | 我的个人博客</title>
+  <title>Android应用内安装App的几种姿势 | 我的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="知识整理">
-<meta property="og:type" content="website">
-<meta property="og:title" content="我的个人博客">
-<meta property="og:url" content="https://liyuanbiao100.github.io/tags/android/index.html">
+  <meta name="description" content="调用系统安装程序这种方式最为简单，只需要调起系统界面即可。看代码 123456789101112131415/** * 调用系统安装界面 * * @param context * @param apkFile */public static void startInstallActivity(Context context, File apkFile) &amp;#123;    if (apkFile">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android应用内安装App的几种姿势">
+<meta property="og:url" content="https://liyuanbiao100.github.io/2017/10/27/Android应用内安装App的几种姿势/index.html">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="知识整理">
+<meta property="og:description" content="调用系统安装程序这种方式最为简单，只需要调起系统界面即可。看代码 123456789101112131415/** * 调用系统安装界面 * * @param context * @param apkFile */public static void startInstallActivity(Context context, File apkFile) &amp;#123;    if (apkFile">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-27T09:17:44.463Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的个人博客">
-<meta name="twitter:description" content="知识整理">
+<meta name="twitter:title" content="Android应用内安装App的几种姿势">
+<meta name="twitter:description" content="调用系统安装程序这种方式最为简单，只需要调起系统界面即可。看代码 123456789101112131415/** * 调用系统安装界面 * * @param context * @param apkFile */public static void startInstallActivity(Context context, File apkFile) &amp;#123;    if (apkFile">
   
     <link rel="alternative" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
   
@@ -159,36 +161,80 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Android应用内安装App的几种姿势" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Android应用内安装App的几种姿势
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/27/Android应用内安装App的几种姿势/" class="archive-article-date">
+
+        
+        <a href="/2017/10/27/Android应用内安装App的几种姿势/" class="archive-article-date">
   	<time datetime="2017-10-27T09:16:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/27/Android应用内安装App的几种姿势/">Android应用内安装App的几种姿势</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="调用系统安装程序"><a href="#调用系统安装程序" class="headerlink" title="调用系统安装程序"></a>调用系统安装程序</h4><p>这种方式最为简单，只需要调起系统界面即可。看代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 调用系统安装界面</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * <span class="doctag">@param</span> context</span></div><div class="line"><span class="comment"> * <span class="doctag">@param</span> apkFile</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">startInstallActivity</span><span class="params">(Context context, File apkFile)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (apkFile == <span class="keyword">null</span> || !apkFile.exists()) <span class="keyword">return</span>;</div><div class="line"></div><div class="line">    Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_VIEW);</div><div class="line">    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</div><div class="line">    intent.setDataAndType(Uri.parse(<span class="string">"file://"</span> + apkFile.toString()), <span class="string">"application/vnd.android.package-archive"</span>);</div><div class="line">    context.startActivity(intent);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="调用系统pm命令"><a href="#调用系统pm命令" class="headerlink" title="调用系统pm命令"></a>调用系统pm命令</h4><p>这种方式是在通过终端执行<em>pm</em>命令来实现 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pm install -r [filepath]</div></pre></td></tr></table></figure>
+<p>其中<code>-r</code>代表覆盖安装。<br>这种方式可以实现静默安装，不需要调起系统界面。但是有一个前提，就是需要<em>root</em>权限，没有去<em>root</em>权限，<em>pm</em>命令不能执行。获取<em>root</em>权限不是本文范畴，请自行百度或者google。</p>
+<p>满足前提的情况下，我们可能用到以下方法。</p>
+<ul>
+<li>判断设备是否有root权限,通过执行su命令是否正确来检查设备是否被root</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 检查设备是否被root</span></div><div class="line"><span class="comment"> *</span></div><div class="line"><span class="comment"> * <span class="doctag">@return</span></span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isRoot</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        Process process = Runtime.getRuntime().exec(<span class="string">"su"</span>);</div><div class="line">        process.getOutputStream().write(<span class="string">"exit\n"</span>.getBytes());</div><div class="line">        process.getOutputStream().flush();</div><div class="line">        <span class="keyword">int</span> i = process.waitFor();</div><div class="line">        <span class="keyword">if</span> (<span class="number">0</span> == i) &#123;</div><div class="line">            process = Runtime.getRuntime().exec(<span class="string">"su"</span>);</div><div class="line">            <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>执行终端命令</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">     * 执行终端命令</span></div><div class="line"><span class="comment">     *</span></div><div class="line"><span class="comment">     * <span class="doctag">@param</span> cmd</span></div><div class="line"><span class="comment">     * <span class="doctag">@return</span></span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> IOException</span></div><div class="line"><span class="comment">     * <span class="doctag">@throws</span> InterruptedException</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">execRootCmdSilent</span><span class="params">(String cmd)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</div><div class="line">        <span class="keyword">int</span> result = -<span class="number">1</span>;</div><div class="line">        DataOutputStream dos = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            Process p = Runtime.getRuntime().exec(<span class="string">"su"</span>);</div><div class="line">            dos = <span class="keyword">new</span> DataOutputStream(p.getOutputStream());</div><div class="line">            Log.i(TAG, cmd);</div><div class="line">            dos.writeBytes(cmd + <span class="string">"\n"</span>);</div><div class="line">            dos.flush();</div><div class="line">            dos.writeBytes(<span class="string">"exit\n"</span>);</div><div class="line">            dos.flush();</div><div class="line">            p.waitFor();</div><div class="line">            result = p.exitValue();</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span> (dos != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    dos.close();</div><div class="line">                &#125; <span class="keyword">catch</span> (IOException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>安装apk，在终端执行 <code>pm install -r filePath</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">installApk</span><span class="params">(String filePath)</span> <span class="keyword">throws</span> IOException, InterruptedException </span>&#123;</div><div class="line">   <span class="keyword">if</span> (TextUtils.isEmpty(filePath) || !<span class="keyword">new</span> File(filePath).exists()) <span class="keyword">return</span>;</div><div class="line">   execRootCmdSilent(<span class="string">"pm install -r "</span> + filePath);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h4 id="反射PackageManager的installPackage方法"><a href="#反射PackageManager的installPackage方法" class="headerlink" title="反射PackageManager的installPackage方法"></a>反射<em>PackageManager</em>的<em>installPackage</em>方法</h4><p>通过查看查看系统安装程序的源码，可以看到系统安装程序实际上是调用<em>PackageManager</em>的<em>installPackage</em>方法来实现安装的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">     * <span class="doctag">@deprecated</span> replaced by &#123;<span class="doctag">@link</span> PackageInstaller&#125;</span></div><div class="line"><span class="comment">     * <span class="doctag">@hide</span></span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="meta">@Deprecated</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">installPackage</span><span class="params">(</span></span></div><div class="line"><span class="function"><span class="params">            Uri packageURI, //APK地址</span></span></div><div class="line"><span class="function"><span class="params">            IPackageInstallObserver observer, //安装回调</span></span></div><div class="line"><span class="function"><span class="params">            @InstallFlags <span class="keyword">int</span> flags,</span></span></div><div class="line"><span class="function"><span class="params">            String installerPackageName)</span></span>; <span class="comment">//被安装APK的包名</span></div></pre></td></tr></table></figure>
+<ul>
+<li><p><em>installPackage</em>方法虽然是<em>public</em>修饰的，但是同时被<em>@hide</em>了，所以应用程序无法直接调用，这就需要用到反射机制了。</p>
+</li>
+<li><p>调用这个方法需要系统权限，所以需要用系统签名对apk打包，具体操作可以参考<a href="http://connorlin.github.io/2016/04/27/%E8%AE%A9Android-Studio%E6%94%AF%E6%8C%81%E7%B3%BB%E7%BB%9F%E7%AD%BE%E5%90%8D(%E8%AF%81%E4%B9%A6" target="_blank" rel="external">这篇文章</a>/)</p>
+</li>
+<li><p><em>IPackageInstallObserver</em>是一个<em>AIDL</em>接口，所以我们需要用到<em>IPackageInstallObserver.aidl</em> 这个文件。你可以</p>
+<ul>
+<li><p>直接从系统源码拷贝，该文件位于<code>/frameworks/base/core/java/android/content/pm</code></p>
+</li>
+<li><p>或者拷贝我的，在你的项目下创建<code>app/src/main/aidl/android/content/pm/IPackageInstallObserver.aidl</code>文件，然后将下面的代码复制进去</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">package</span> android.content.pm;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * API for installation callbacks from the Package Manager.</span></div><div class="line"><span class="comment"> * <span class="doctag">@hide</span></span></div><div class="line"><span class="comment"> */</span></div><div class="line">oneway <span class="class"><span class="keyword">interface</span> <span class="title">IPackageInstallObserver</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">packageInstalled</span><span class="params">(in String packageName, <span class="keyword">int</span> returnCode)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当上述都做好了之后。</p>
+<ul>
+<li>调用安装的方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//installPackage方法名</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String INSTALL_METHOD = <span class="string">"installPackage"</span>;</div><div class="line"></div><div class="line"><span class="comment">//InstallFlags</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FORWARD_LOCK = <span class="number">0x00000001</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_REPLACE_EXISTING = <span class="number">0x00000002</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_ALLOW_TEST = <span class="number">0x0000000</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_EXTERNAL = <span class="number">0x00000008</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_INTERNAL = <span class="number">0x00000010</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FROM_ADB = <span class="number">0x00000020</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_ALL_USERS = <span class="number">0x00000040</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_ALLOW_DOWNGRADE = <span class="number">0x00000080</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_GRANT_RUNTIME_PERMISSIONS = <span class="number">0x00000100</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FORCE_VOLUME_UUID = <span class="number">0x00000200</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FORCE_PERMISSION_PROMPT = <span class="number">0x00000400</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_EPHEMERAL = <span class="number">0x00000800</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_DONT_KILL_APP = <span class="number">0x00001000</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FORCE_SDK = <span class="number">0x00002000</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> DONT_KILL_APP = <span class="number">0x00000001</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">installPackage</span><span class="params">(Context context, File file, IPackageInstallObserver observer)</span></span></div><div class="line"><span class="function">        <span class="keyword">throws</span> NoSuchMethodException, InvocationTargetException, IllegalAccessException </span>&#123;</div><div class="line">    PackageManager packageManager = context.getPackageManager();</div><div class="line">    Method method = PackageManager.class.getDeclaredMethod(INSTALL_METHOD, Uri.class,</div><div class="line">            IPackageInstallObserver.class, <span class="keyword">int</span>.class, String.class);</div><div class="line">    method.invoke(packageManager, Uri.fromFile(file), observer, INSTALL_REPLACE_EXISTING | INSTALL_DONT_KILL_APP, GetAppInfo.getAPKPackageName(context, file.getAbsolutePath()));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>监听安装回调</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//安装回调</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">PackageInstallObserver</span> <span class="keyword">extends</span> <span class="title">IPackageInstallObserver</span>.<span class="title">Stub</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">packageInstalled</span><span class="params">(String packageName, <span class="keyword">int</span> returnCode)</span> <span class="keyword">throws</span> RemoteException </span>&#123;</div><div class="line">        <span class="keyword">if</span>(returnCode == INSTALL_SUCCEEDED)&#123;</div><div class="line">            <span class="comment">//安装成功</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//returnCode的取值</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_SUCCEEDED = <span class="number">1</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_ALREADY_EXISTS = -<span class="number">1</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_INVALID_APK = -<span class="number">2</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_INVALID_URI = -<span class="number">3</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_INSUFFICIENT_STORAGE = -<span class="number">4</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_DUPLICATE_PACKAGE = -<span class="number">5</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_NO_SHARED_USER = -<span class="number">6</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_UPDATE_INCOMPATIBLE = -<span class="number">7</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_SHARED_USER_INCOMPATIBLE = -<span class="number">8</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_MISSING_SHARED_LIBRARY = -<span class="number">9</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_REPLACE_COULDNT_DELETE = -<span class="number">10</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_DEXOPT = -<span class="number">11</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_OLDER_SDK = -<span class="number">12</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_CONFLICTING_PROVIDER = -<span class="number">13</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_NEWER_SDK = -<span class="number">14</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_TEST_ONLY = -<span class="number">15</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_CPU_ABI_INCOMPATIBLE = -<span class="number">16</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_MISSING_FEATURE = -<span class="number">17</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_CONTAINER_ERROR = -<span class="number">18</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_INVALID_INSTALL_LOCATION = -<span class="number">19</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_MEDIA_UNAVAILABLE = -<span class="number">20</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_VERIFICATION_TIMEOUT = -<span class="number">21</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_VERIFICATION_FAILURE = -<span class="number">22</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_PACKAGE_CHANGED = -<span class="number">23</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_UID_CHANGED = -<span class="number">24</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_VERSION_DOWNGRADE = -<span class="number">25</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_PERMISSION_MODEL_DOWNGRADE = -<span class="number">26</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_PARSE_FAILED_NOT_APK = -<span class="number">100</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_PARSE_FAILED_BAD_MANIFEST = -<span class="number">101</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_PARSE_FAILED_UNEXPECTED_EXCEPTION = -<span class="number">102</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_PARSE_FAILED_NO_CERTIFICATES = -<span class="number">103</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES = -<span class="number">104</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_PARSE_FAILED_CERTIFICATE_ENCODING = -<span class="number">105</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_PARSE_FAILED_BAD_PACKAGE_NAME = -<span class="number">106</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_PARSE_FAILED_BAD_SHARED_USER_ID = -<span class="number">107</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_PARSE_FAILED_MANIFEST_MALFORMED = -<span class="number">108</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_PARSE_FAILED_MANIFEST_EMPTY = -<span class="number">109</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_INTERNAL_ERROR = -<span class="number">110</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_USER_RESTRICTED = -<span class="number">111</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_DUPLICATE_PERMISSION = -<span class="number">112</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_NO_MATCHING_ABIS = -<span class="number">113</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> NO_NATIVE_LIBRARIES = -<span class="number">114</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INSTALL_FAILED_ABORTED = -<span class="number">115</span>;</div></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -200,107 +246,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=https://liyuanbiao100.github.io/2017/10/27/Android应用内安装App的几种姿势/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/27/如何理解Kotlin中属性/" class="archive-article-date">
-  	<time datetime="2017-10-27T07:59:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/27/如何理解Kotlin中属性/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">如何理解Kotlin中属性</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/27/如何理解Kotlin中属性/">如何理解Kotlin中属性</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kotlin</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/10/27/Java转Kotlin-boolean属性的坑/" class="archive-article-date">
-  	<time datetime="2017-10-27T03:59:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/10/27/Java转Kotlin-boolean属性的坑/">Java转Kotlin boolean属性的坑</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">android</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kotlin</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -323,9 +368,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
