@@ -78,5 +78,27 @@
       <comments>https://liyuanbiao100.github.io/2017/10/27/Java%E8%BD%ACKotlin-boolean%E5%B1%9E%E6%80%A7%E7%9A%84%E5%9D%91/#disqus_thread</comments>
     </item>
     
+    <item>
+      <title>Android Studio 自动检查依赖库是否有新版本</title>
+      <link>https://liyuanbiao100.github.io/2017/09/12/Android-Studio-%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5%E4%BE%9D%E8%B5%96%E5%BA%93%E6%98%AF%E5%90%A6%E6%9C%89%E6%96%B0%E7%89%88%E6%9C%AC/</link>
+      <guid>https://liyuanbiao100.github.io/2017/09/12/Android-Studio-%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5%E4%BE%9D%E8%B5%96%E5%BA%93%E6%98%AF%E5%90%A6%E6%9C%89%E6%96%B0%E7%89%88%E6%9C%AC/</guid>
+      <pubDate>Tue, 12 Sep 2017 07:45:32 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+          
+            &lt;p&gt;&lt;strong&gt;Preferences&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Editor&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Inspections&lt;/strong&gt; -&amp;gt; “&lt;strong&gt;Android &amp;gt; Lint &amp;gt;
+          
+        
+      
+      </description>
+      
+      <content:encoded><![CDATA[<p><strong>Preferences</strong> -&gt; <strong>Editor</strong> -&gt; <strong>Inspections</strong> -&gt; “<strong>Android &gt; Lint &gt; Correctness</strong>” -&gt; <strong>Newer Library Versions Available (available for Analyze|Inspect Code)</strong>    <font color="red"><strong>这一项打上勾</strong></font>。<br><img src="/media/15051956933872/15051957572874.png" alt=""></p><p>如果想要检查的话，同时按住 <strong>shift+alt+command+i</strong> ，会弹出 <strong>Enter Inspect name</strong> 窗口。输入 <strong>Newer Library Versions Available</strong> ，一般不用输入全部的，输入 <strong>Newer</strong> 就好了，包含 <strong>Newer</strong> 的选项就会全部搜索出来。<br><img src="/media/15051956933872/15051957698386.png" alt=""></p><p>选择 <strong>Newer Library Versions Available</strong> 这一项<br><img src="/media/15051956933872/15051957934804.png" alt=""></p><p>选择你需要检查的模块</p><ul><li><strong>Whole project</strong>  -&gt;完整的模块。 </li><li><strong>Module</strong> -&gt; 单独的一个模块</li><li><strong>File</strong> -&gt; 单独的一个文件</li><li><strong>Custom scope</strong> -&gt; 自定义范围</li></ul><p>我这里选择 <strong>Whole project</strong> ，点击 <strong>OK</strong> 就可以开始检查了。<br><img src="/media/15051956933872/15051958715001.jpg" alt=""></p><p>点击 <strong>Update to [VersionName]</strong> 就可以把版本号替换到最新版本。<br>最后点击 <strong>Sync Now</strong> 同步一下项目<br><img src="/media/15051956933872/15051961312946.jpg" alt=""></p><p>需要注意升级版本后，新版本可能不兼容旧版本，需要仔细检查代码，防止出错。</p>]]></content:encoded>
+      
+      <comments>https://liyuanbiao100.github.io/2017/09/12/Android-Studio-%E8%87%AA%E5%8A%A8%E6%A3%80%E6%9F%A5%E4%BE%9D%E8%B5%96%E5%BA%93%E6%98%AF%E5%90%A6%E6%9C%89%E6%96%B0%E7%89%88%E6%9C%AC/#disqus_thread</comments>
+    </item>
+    
   </channel>
 </rss>
