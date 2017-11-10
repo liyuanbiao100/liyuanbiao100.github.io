@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="JavaScript," />
 
 
 
@@ -81,16 +81,18 @@
 
 
 
-<meta name="description" content="知识整理">
-<meta property="og:type" content="website">
-<meta property="og:title" content="我的个人博客">
-<meta property="og:url" content="https://liyuanbiao100.github.io/index.html">
+<meta name="description" content="原文:https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain  对于有基于类的语言经验的开发人员来说，JavaScript 有点令人困惑 (如Java或C ++) ，因为它是动态的，并且本身不提供一个class实现。（在ES2015/ES6中引入了class关键字，但只">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="继承与原型链">
+<meta property="og:url" content="https://liyuanbiao100.github.io/2017/11/10/继承与原型链/index.html">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="知识整理">
+<meta property="og:description" content="原文:https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain  对于有基于类的语言经验的开发人员来说，JavaScript 有点令人困惑 (如Java或C ++) ，因为它是动态的，并且本身不提供一个class实现。（在ES2015/ES6中引入了class关键字，但只">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-10T06:55:02.437Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的个人博客">
-<meta name="twitter:description" content="知识整理">
+<meta name="twitter:title" content="继承与原型链">
+<meta name="twitter:description" content="原文:https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain  对于有基于类的语言经验的开发人员来说，JavaScript 有点令人困惑 (如Java或C ++) ，因为它是动态的，并且本身不提供一个class实现。（在ES2015/ES6中引入了class关键字，但只">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://liyuanbiao100.github.io/"/>
+  <link rel="canonical" href="https://liyuanbiao100.github.io/2017/11/10/继承与原型链/"/>
 
 
 
 
 
-  <title>我的个人博客</title>
+  <title>继承与原型链 | 我的个人博客</title>
   
 
 
@@ -145,8 +147,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,9 +240,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -271,9 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/10/继承与原型链/" itemprop="url">继承与原型链</a></h1>
+          <h1 class="post-title" itemprop="name headline">继承与原型链</h1>
         
 
         <div class="post-meta">
@@ -323,9 +322,7 @@
       
 
       
-        
-          
-            <blockquote>
+        <blockquote>
 <p>原文:<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain</a></p>
 </blockquote>
 <p>对于有基于类的语言经验的开发人员来说，JavaScript 有点令人困惑 (如Java或C ++) ，因为它是动态的，并且本身不提供一个<code>class</code>实现。（在ES2015/ES6中引入了<code>class</code>关键字，但只是语法糖，JavaScript 仍然是基于原型的）。</p>
@@ -379,8 +376,6 @@
 <p>它检查o是否具有<code>someProp</code>属性。如果没有，它会查找 <code>Object.getPrototypeOf(o).someProp</code>，如果仍旧没有，它会继续查找 <code>Object.getPrototypeOf(Object.getPrototypeOf(o)).someProp</code>。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在用原型继承编写复杂代码之前，了解原型继承模型非常<strong>重要</strong>。同时，要注意代码中的原型链的长度，并在必要时将其分解，以避免潜在的性能问题。此外，永远<strong>不要</strong>扩展原生对象的原型，除非是为了兼容新的JavaScript特性。</p>
 
-          
-        
       
     </div>
     
@@ -395,349 +390,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/27/如何理解Kotlin中属性/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liyuanbiao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/27/如何理解Kotlin中属性/" itemprop="url">如何理解Kotlin中属性</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-27T15:59:12+08:00">
-                2017-10-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
           
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="属性的定义"><a href="#属性的定义" class="headerlink" title="属性的定义"></a>属性的定义</h2><p>在<strong>kotlin</strong>中，<strong>var</strong>和<strong>val</strong>是用来声明属性的两个关键字，在<strong>kotlin</strong>官方参考文档上是这么说的。</p>
-<blockquote>
-<p><strong>Kotlin</strong>的类可以有属性。 属性可以用关键字 <strong>var</strong>声明为可变的，否则使用只读关键字<strong>val</strong>。</p>
-</blockquote>
-<p>那什么是可变属性，什么又是可读属性呢？我们在问这个问题前可以先回顾一下java对属性的定义。</p>
-<blockquote>
-<p>属性可以通过<strong>get</strong>、<strong>set</strong>、<strong>is</strong>（可以替代<strong>get</strong>，用在布尔型属性上）方法或遵循特定命名规范的其他方法访问。</p>
-</blockquote>
-<p>在这里我们可以理解为，在<strong>java</strong>中，对一个字段生成<strong>public</strong>的<strong>set get</strong>方法，那么他就是一个可变（可读可写）属性，仅提供<strong>public get</strong>或者<strong>set</strong>被<strong>private</strong>修饰的就是一个只读属性。</p>
-<p>在kotlin中我们是如何定义属性的呢</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="comment">//定义一个String类型的属性name</span></div><div class="line">    var name: String? = <span class="keyword">null</span></div><div class="line">    <span class="comment">//定义一个Boolean类型的属性deceased</span></div><div class="line">    var deceased: Boolean? = <span class="keyword">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>kotlin和java同属于jvm语言，编译后会生成class文件。我将上面的kotlin代码生成的class再次反编译成java代码，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">   <span class="meta">@Nullable</span></div><div class="line">   <span class="keyword">private</span> String name;</div><div class="line">   <span class="meta">@Nullable</span></div><div class="line">   <span class="keyword">private</span> Boolean deceased = <span class="keyword">false</span>;</div><div class="line"></div><div class="line">   <span class="meta">@Nullable</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(@Nullable String var1)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.name = var1;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="meta">@Nullable</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Boolean <span class="title">getDeceased</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.deceased;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setDeceased</span><span class="params">(@Nullable Boolean var1)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.deceased = var1;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>看到这里你会发现，反编译后代码和java属性的定义是一毛一样有木有。所以<strong>kotlin</strong>的属性，在<strong>java</strong>代码中可以通过<strong>set get</strong>方法来调用。</p>
-<h2 id="只读属性和常量"><a href="#只读属性和常量" class="headerlink" title="只读属性和常量"></a>只读属性和常量</h2><p>有的地方说，<strong>var</strong>是声明变量的，<strong>val</strong>是声明常量的。这个其实不是完全正确，至少<strong>val</strong>在官方参考文档上说的是只读属性，而不是常量。比方说温度，我们可以获取温度的变化，但是不能人为直接改变温度，那么温度就是只读属性，而不是常量。<br>再比如说list的isEmpty属性</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> isEmpty <span class="keyword">get</span>() = <span class="keyword">this</span>.size == <span class="number">0</span></div></pre></td></tr></table></figure>
-<p>isEmpty属性受到size的改变而改变，但是无法主动去设置isEmpty的值。那么isEmpty就是个只读属性。</p>
-<p>在这里要分为几种情况来理解<strong>val</strong>。</p>
-<ul>
-<li><strong>val</strong>声明的属性被字面量或者表达式赋值的时候</li>
-<li><strong>val</strong>声明的属性实现了自定义的<strong>get</strong>方法</li>
-</ul>
-<p>看下面的例子</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="comment">//这里的name属性被字面量“zhangsan”赋值了</span></div><div class="line">    <span class="keyword">val</span> name: String? = <span class="string">"zhangsan"</span></div><div class="line">     <span class="comment">//age属性的值受birthday的影响</span></div><div class="line">    <span class="keyword">val</span> age: <span class="built_in">Int</span> <span class="keyword">get</span>() &#123;</div><div class="line">        <span class="keyword">return</span> Calendar.getInstance().<span class="keyword">get</span>(Calendar.YEAR) - birthday</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> birthday: <span class="built_in">Int</span> = <span class="number">0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p> 反编译成<strong>java</strong>代码是这样的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="comment">//name属性被字面量赋值，编译后会加上final关键字，成为真正的常量</span></div><div class="line">   <span class="meta">@Nullable</span></div><div class="line">   <span class="keyword">private</span> <span class="keyword">final</span> String name = <span class="string">"zhangsan"</span>;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">int</span> birthday;</div><div class="line"></div><div class="line">   <span class="meta">@Nullable</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">   &#125;</div><div class="line">    </div><div class="line">    <span class="comment">//age属性只实现了get方法，无法通过set方法来改变值，是个只读属性</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> Calendar.getInstance().get(<span class="number">1</span>) - <span class="keyword">this</span>.birthday;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.birthday;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(<span class="keyword">int</span> var1)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.birthday = var1;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="什么是变量的幕后字段"><a href="#什么是变量的幕后字段" class="headerlink" title="什么是变量的幕后字段"></a>什么是变量的幕后字段</h2><p>在<strong>kotlin</strong>中可以通过关键字声明属性，那可不可以声明字段呢？它有没有字段呢？<br>答：<strong>kotlin</strong>中不能声明字段，但是<strong>kotlin</strong>中是有字段的，他有一个幕后字段的概念，每一个属性可以有一个幕后字段，也可以没有。</p>
-<p>拿上面的例子再讲一遍</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> isEmpty <span class="keyword">get</span>() = <span class="keyword">this</span>.size == <span class="number">0</span></div></pre></td></tr></table></figure>
-<p>isEmpty的值只和size有关，那么在反编译之后，不会出现如下代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> isEmpty = <span class="keyword">false</span>;</div></pre></td></tr></table></figure>
-<p>这里可以得出一个结论，属性不一定非得有字段。对<strong>java</strong>属性定义的后半句是这么说的，“<em>或遵循特定命名规范的其他方法访问</em>”，所以关键看方法的定义，比如说在一个类里面有<strong>setWidth()</strong>,<strong>getWidth()</strong>这两个方法。就可以认定为这个类有<strong>width</strong>属性，但是不一定有<strong>width</strong>这个字段。</p>
-<p>也就是说这个属性没有幕后字段。</p>
-<p>再看下面这个例子</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//name属性没有实现自定义的set get方法</span></div><div class="line"><span class="keyword">var</span> name:String? = <span class="literal">null</span>;</div><div class="line">......</div><div class="line"></div><div class="line">name = <span class="string">"zhangsan"</span></div><div class="line"></div><div class="line"><span class="keyword">val</span> len = name.length()</div></pre></td></tr></table></figure>
-<p><strong>name</strong>没有实现自定义的<strong>set get</strong>方法，字面值”zhangsan”需要一个字段来赋值。那么在class里面会生成 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//这个就是name属性的幕后字段</span></div><div class="line"><span class="keyword">private</span> String name = <span class="keyword">null</span>;</div></pre></td></tr></table></figure>
-<p>那么幕后字段可以用代码访问到么，这个是可以的，使用 <strong>field</strong> 关键字</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> name: String? = <span class="literal">null</span></div><div class="line"></div><div class="line"><span class="comment">//上面这句代码其实和下面的代码是等价的，没有区别。</span></div><div class="line"><span class="keyword">var</span> name: String? = <span class="literal">null</span></div><div class="line">   <span class="keyword">set</span>(value) &#123;</div><div class="line">       field = value</div><div class="line">   &#125;</div><div class="line">   <span class="keyword">get</span>() &#123;</div><div class="line">       <span class="keyword">return</span> field</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>讲到这里我相信大家对幕后字段已经有了一定的了解。</p>
-<h2 id="扩展属性"><a href="#扩展属性" class="headerlink" title="扩展属性"></a>扩展属性</h2><p>在kotlin声明一个扩展属性的方法如下。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> Person.city:String <span class="keyword">get</span>() &#123; <span class="keyword">return</span> <span class="string">"city"</span> &#125;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>注：扩展属性只能用生成自定义set get方法来实现，不能直接用字面量来赋值。所以下面的代码是错的</p>
-</blockquote>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> Person.city:String = <span class="string">"city"</span></div></pre></td></tr></table></figure>
-<p>第二句代码是无法编译通过的，那是因为</p>
-<blockquote>
-<p>扩展是静态解析的.扩展不能真正的修改他们所扩展的类。通过定义一个扩展，你并没有在一个类中插入新成 员， 仅仅是可以通过该类型的变量用点表达式去调用这个新函数,或者属性。由于扩展没有实际的将成员插入类中，因此对扩展属性来说幕后字段是无效的。这就 是为什么扩展属性不能有初始化器。他们的行为只能由显式提供的 <strong>get/set</strong> 定义。</p>
-</blockquote>
-<p>静态解析的结果是</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@NotNull</span></div><div class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String <span class="title">getCity</span><span class="params">(@NotNull Person $receiver)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"city"</span>;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
-<p>所以扩展仅仅是可以通过点语法来调用，并不是真正插入类里面，也不存在幕后字段。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>属性可以通过<strong>get</strong>、<strong>set</strong>、<strong>is</strong>（可以替代<strong>get</strong>，用在布尔型属性上）方法或遵循特定命名规范的其他方法访问。</li>
-<li>只读属性和常量不是同一个概念，具体看上头。</li>
-<li>属性可以有一个幕后字段，也可以没有</li>
-<li>扩展是静态解析的，扩展属性是没有幕后字段的</li>
-<li>扩展只是能通过点语法调用而已。</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
       
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/27/Java转Kotlin-boolean属性的坑/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liyuanbiao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/27/Java转Kotlin-boolean属性的坑/" itemprop="url">Java转Kotlin boolean属性的坑</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-27T11:59:22+08:00">
-                2017-10-27
-              </time>
+              <a href="/2017/10/27/如何理解Kotlin中属性/" rel="next" title="如何理解Kotlin中属性">
+                <i class="fa fa-chevron-left"></i> 如何理解Kotlin中属性
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h3 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h3><p>假设一个 <code>JavaBean</code> 类中有 <code>boolean</code> 类型的字段叫做 <code>enabled</code><br>它生成的<code>setter</code>/<code>getter</code> 方法将是</p>
-<ul>
-<li>setter: <code>setEnabled(boolean enabled)</code></li>
-<li>getter: <code>isEnabled()</code></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span></span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">boolean</span> enabled;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEnabled</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> enabled;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEnabled</span><span class="params">(<span class="keyword">boolean</span> enabled)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.enabled = enabled;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>使用 <code>Android Studio</code> 的 <code>kotlin</code> 插件转换后将生成 <code>isEnabled</code> 属性，而不是 <code>enabled</code> 属性。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> isEnabled: <span class="built_in">Boolean</span> = <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们知道<code>kotlin</code>编译后也是生成<code>class</code>文件，所以也是可以转成<code>java</code>文件的，通过查看反编译后的结果来学习<code>kotlin</code>不失为一种好方法。</p>
-<p>可以在 <code>Android Studio</code> 执行下面的操作将 <code>kotlin</code> 代码重新转成<code>java</code>代码。<br>Tools / Kotlin / Show Kotlin Bytecode / Decompile. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">boolean</span> isEnabled;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">isEnabled</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.isEnabled;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setEnabled</span><span class="params">(<span class="keyword">boolean</span> var1)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.isEnabled = var1;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>可以看到是 <code>isEnabled</code> ，不是 <code>enabled</code>。</p>
-<h4 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h4><ul>
-<li><p>我在项目中使用的是<strong>Gson</strong>来解析后台返回来的数据。<strong>Gson</strong>是通过反射字段的名称来赋值的，然而数据中是 <code>enbaled</code> ，代码里是 <code>isEnabled</code> ，它将永远不能被赋值，永远为<code>false</code>，解决方法可以是</p>
-<ul>
-<li>给字段添加 <code>@SerializedName(value = &quot;enbaled&quot;)</code></li>
-<li>直接将 <code>isEnabled</code> 改成 <code>enbaled</code>，保证kotlin的幕后字段与后台返回数据一致即可.</li>
-</ul>
-</li>
-<li><p>如果你项目中用的是<strong>fastjson</strong>，那么需要为每个字段添加<code>setter</code>/<code>getter</code> 方法。<strong>fastjson</strong>是根据<strong>Javabean</strong>属性来赋值的，所以必须保证属性名正确。由于之前<strong>fastjson</strong>出现过序列化成功，但是反序列化失败的bug，致使我放弃使用<strong>fastjson</strong>。虽然<strong>fastjson</strong>以快著称，但是快不是唯一的需求，它只在数据量大的时候有明显差异，数据量小的时候差异几乎可是忽略不计，所以我选择<strong>Gson</strong>。</p>
-</li>
-</ul>
-<h3 id="细谈Java属性"><a href="#细谈Java属性" class="headerlink" title="细谈Java属性"></a>细谈Java属性</h3><p>在Java里面生成 <code>setter</code>/<code>getter</code> 方法是有一定规则的。</p>
-<ul>
-<li>如果类的成员变量的名字是xxx，那么为了更改或获取成员变量的值，即更改或获取属性，在类中可以使用两个方法：<ul>
-<li>getXxx()，用来获取属性xxx。</li>
-<li>setXxx()，用来修改属性xxx.。</li>
-</ul>
-</li>
-<li>对于boolean类型的成员变量，即布尔逻辑类型的属性，允许使用”is”代替上面的”get”。</li>
-<li>类中访问属性的方法都必须是public的，一般属性是private的。</li>
-<li>类中如果有构造方法，那么这个构造方法也是public的并且是无参数的。</li>
-</ul>
-<p>因为Java属性是由 <code>setter</code>/<code>getter</code> 方法决定的，而不是字段。在一个Java类里面，如果有<code>void setName(String name)</code>和<code>String getName()</code>方法，那么可以认为这个类有<code>name</code>这个属性（<strong>可读可写</strong>），如果仅有get，那么这个<code>name</code>属性就是个<strong>只读属性</strong>。即使没有<code>name</code>这个字段也是一样成立的。</p>
-<p>也就是说，对于 <code>boolean</code> 类型，<code>enabled</code> 和 <code>isEnabled</code> 这两个字段生成的<code>setter</code>/<code>getter</code> 方法是一致的。当这两个字段同时存在时，只能针对其中一个生成<code>setter</code>/<code>getter</code> 方法。看下图你就明白了</p>
-<p><img src="/images/15057241768106.jpg" alt=""></p>
-<p><code>isEnabled</code> 已经无法再生成了，因为已经存在了。在项目当中应该避免则这样的命名，选择其一即可。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -747,10 +429,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -758,6 +441,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -778,8 +465,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -843,6 +539,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于原型链的继承"><span class="nav-number">1.</span> <span class="nav-text">基于原型链的继承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承属性"><span class="nav-number">1.1.</span> <span class="nav-text">继承属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#继承方法"><span class="nav-number">1.2.</span> <span class="nav-text">继承方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用不同的方法来创建对象和生成原型链"><span class="nav-number">2.</span> <span class="nav-text">使用不同的方法来创建对象和生成原型链</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用普通语法创建对象"><span class="nav-number">2.1.</span> <span class="nav-text">使用普通语法创建对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用构造器"><span class="nav-number">2.2.</span> <span class="nav-text">使用构造器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Object-create"><span class="nav-number">2.3.</span> <span class="nav-text">使用 Object.create</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-class-关键字"><span class="nav-number">2.4.</span> <span class="nav-text">使用 class 关键字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能"><span class="nav-number">3.</span> <span class="nav-text">性能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#错误实践：扩展原生对象的原型"><span class="nav-number">3.1.</span> <span class="nav-text">错误实践：扩展原生对象的原型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例"><span class="nav-number">4.</span> <span class="nav-text">示例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#prototype和Object-getPrototypeOf"><span class="nav-number">5.</span> <span class="nav-text">prototype和Object.getPrototypeOf</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">6.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -983,6 +695,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
