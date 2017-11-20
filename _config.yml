@@ -44,7 +44,9 @@ pagination_dir: page
 theme: next
 deploy:
   type: git
-  repo: 'git@github.com:liyuanbiao100/liyuanbiao100.github.io.git'
+  repo: 
+    gitee: 'git@gitee.com:liyuanbiao/liyuanbiao.git'
+    github: 'git@github.com:liyuanbiao100/liyuanbiao100.github.io.git'
   branch: master
 feed:
   type: rss2
