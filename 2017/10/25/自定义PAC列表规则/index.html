@@ -81,16 +81,17 @@
 
 
 
-<meta name="description" content="知识整理">
-<meta property="og:type" content="website">
-<meta property="og:title" content="我的个人博客">
-<meta property="og:url" content="https://liyuanbiao100.github.io/archives/2017/10/index.html">
+<meta name="description" content="规则大概描述如下 通配符支持，如 .example.com/ 实际书写时可省略  如 .example.com/ 意即 .example.com/* 正则表达式支持，以\开始和结束， 如 [\w]+://example.com\ 例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理匹配地址开始和结尾 |，如 |http://example.com、example.co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自定义PAC列表规则">
+<meta property="og:url" content="https://liyuanbiao100.github.io/2017/10/25/自定义PAC列表规则/index.html">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="知识整理">
+<meta property="og:description" content="规则大概描述如下 通配符支持，如 .example.com/ 实际书写时可省略  如 .example.com/ 意即 .example.com/* 正则表达式支持，以\开始和结束， 如 [\w]+://example.com\ 例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理匹配地址开始和结尾 |，如 |http://example.com、example.co">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-22T07:56:12.440Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我的个人博客">
-<meta name="twitter:description" content="知识整理">
+<meta name="twitter:title" content="自定义PAC列表规则">
+<meta name="twitter:description" content="规则大概描述如下 通配符支持，如 .example.com/ 实际书写时可省略  如 .example.com/ 意即 .example.com/* 正则表达式支持，以\开始和结束， 如 [\w]+://example.com\ 例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理匹配地址开始和结尾 |，如 |http://example.com、example.co">
 
 
 
@@ -120,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://liyuanbiao100.github.io/archives/2017/10/"/>
+  <link rel="canonical" href="https://liyuanbiao100.github.io/2017/10/25/自定义PAC列表规则/"/>
 
 
 
 
 
-  <title>归档 | 我的个人博客</title>
+  <title>自定义PAC列表规则 | 我的个人博客</title>
   
 
 
@@ -145,7 +146,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -239,296 +240,180 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/25/自定义PAC列表规则/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liyuanbiao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">自定义PAC列表规则</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T10:35:05+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 8 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/杂货铺/" itemprop="url" rel="index">
+                    <span itemprop="name">杂货铺</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/27/Android应用内安装App的几种姿势/" itemprop="url">
-              
-                <span itemprop="name">Android应用内安装App的几种姿势</span>
-              
-            </a>
-        
-      </h2>
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">浏览</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-27T17:16:58+08:00"
-              content="2017-10-27" >
-          10-27
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+          
 
+        </div>
+      </header>
+    
 
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/27/如何理解Kotlin中属性/" itemprop="url">
-              
-                <span itemprop="name">如何理解Kotlin中属性</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-27T15:59:12+08:00"
-              content="2017-10-27" >
-          10-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/27/Java转Kotlin-boolean属性的坑/" itemprop="url">
-              
-                <span itemprop="name">Java转Kotlin boolean属性的坑</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-27T11:59:22+08:00"
-              content="2017-10-27" >
-          10-27
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h4 id="规则大概描述如下"><a href="#规则大概描述如下" class="headerlink" title="规则大概描述如下"></a>规则大概描述如下</h4><ul>
+<li>通配符支持，如 <em>.example.com/</em> 实际书写时可省略 <em> 如 .example.com/ 意即 </em>.example.com/*</li>
+<li>正则表达式支持，以\开始和结束， 如 [\w]+://example.com\</li>
+<li>例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理<br>匹配地址开始和结尾 |，如 |<a href="http://example.com、example.com|" target="_blank" rel="external">http://example.com、example.com|</a> 分别表示以 <a href="http://example.com" target="_blank" rel="external">http://example.com</a> 开始和以 example.com 结束的地址</li>
+<li>|| 标记，如 ||example.com 则 <a href="http://example.com" target="_blank" rel="external">http://example.com</a> 、<a href="https://example.com" target="_blank" rel="external">https://example.com</a> 、ftp://example.com 等地址均满足条件，只用于匹配地址开头</li>
+<li>注释 ! 如 ! Comment</li>
+<li>分隔符^，表示除了字母、数字或者 _ - . % 之外的任何字符。如 <a href="http://example.com^" target="_blank" rel="external">http://example.com^</a> ，<a href="http://example.com/" target="_blank" rel="external">http://example.com/</a> 和 <a href="http://example.com:8000/" target="_blank" rel="external">http://example.com:8000/</a> 均满足条件，而 <a href="http://example.com.ar/" target="_blank" rel="external">http://example.com.ar/</a> 不满足条件</li>
+</ul>
+<h4 id="如何使用自定义规则"><a href="#如何使用自定义规则" class="headerlink" title="如何使用自定义规则"></a>如何使用自定义规则</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">! Put user rules line by line in this file.</div><div class="line">! See https://adblockplus.org/en/filter-cheatsheet</div><div class="line">||amazonaws.com</div><div class="line">||atom.io</div><div class="line">||github.com^</div></pre></td></tr></table></figure>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/25/自定义PAC列表规则/" itemprop="url">
-              
-                <span itemprop="name">自定义PAC列表规则</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-25T10:35:05+08:00"
-              content="2017-10-25" >
-          10-25
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/10/继承与原型链/" itemprop="url">
-              
-                <span itemprop="name">JavaScript 继承与原型链</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-10T14:38:04+08:00"
-              content="2017-10-10" >
-          10-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/10/Android-Handler机制详解-ThreadLocal/" itemprop="url">
-              
-                <span itemprop="name">Android Handler机制详解 - ThreadLocal</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-10T12:59:59+08:00"
-              content="2017-10-10" >
-          10-10
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/09/JavaScript-模板字符串/" itemprop="url">
-              
-                <span itemprop="name">JavaScript 模板字符串</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-09T14:44:25+08:00"
-              content="2017-10-09" >
-          10-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/10/继承与原型链/" rel="next" title="JavaScript 继承与原型链">
+                <i class="fa fa-chevron-left"></i> JavaScript 继承与原型链
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/27/Java转Kotlin-boolean属性的坑/" rel="prev" title="Java转Kotlin boolean属性的坑">
+                Java转Kotlin boolean属性的坑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -536,6 +421,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -556,8 +445,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -630,6 +528,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#规则大概描述如下"><span class="nav-number">1.</span> <span class="nav-text">规则大概描述如下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何使用自定义规则"><span class="nav-number">2.</span> <span class="nav-text">如何使用自定义规则</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -790,6 +704,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
