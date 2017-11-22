@@ -1,8 +1,8 @@
 ---
 title: Android应用内安装App的几种姿势
 date: 2017-10-27 17:16:58
-tags: android
-categories: android
+tags: Android
+categories: Android
 ---
 
 #### 调用系统安装程序

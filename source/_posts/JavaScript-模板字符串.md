@@ -2,6 +2,7 @@
 title: JavaScript 模板字符串
 date: 2017-10-09 14:44:25
 tags: JavaScript
+categories: JavaScript
 ---
 
 模板字面量/Template literals 是允许嵌入表达式的字符串字面量。你可以使用多行字符串和字符串插值功能。它们在ES2015规范的先前版本中被称为“模板字符串/template strings”。

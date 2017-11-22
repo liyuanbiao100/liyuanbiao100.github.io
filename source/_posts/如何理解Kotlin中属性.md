@@ -2,8 +2,9 @@
 title: 如何理解Kotlin中属性
 date: 2017-10-27 15:59:12
 tags:
-    - android
+    - Android
     - kotlin
+categories: Android
 ---
 
 ## 属性的定义
