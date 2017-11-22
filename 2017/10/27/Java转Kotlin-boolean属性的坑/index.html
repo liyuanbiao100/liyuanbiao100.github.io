@@ -89,12 +89,12 @@
 <meta property="og:site_name" content="我的个人博客">
 <meta property="og:description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://liyuanbiao100.github.io/images/15057241768106.jpg">
-<meta property="og:updated_time" content="2017-10-27T10:18:44.819Z">
+<meta property="og:image" content="https://liyuanbiao100.github.io/media/15057241768106.jpg">
+<meta property="og:updated_time" content="2017-11-22T05:37:14.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java转Kotlin boolean属性的坑">
 <meta name="twitter:description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
-<meta name="twitter:image" content="https://liyuanbiao100.github.io/images/15057241768106.jpg">
+<meta name="twitter:image" content="https://liyuanbiao100.github.io/media/15057241768106.jpg">
 
 
 
@@ -364,7 +364,7 @@
 </ul>
 <p>因为Java属性是由 <code>setter</code>/<code>getter</code> 方法决定的，而不是字段。在一个Java类里面，如果有<code>void setName(String name)</code>和<code>String getName()</code>方法，那么可以认为这个类有<code>name</code>这个属性（<strong>可读可写</strong>），如果仅有get，那么这个<code>name</code>属性就是个<strong>只读属性</strong>。即使没有<code>name</code>这个字段也是一样成立的。</p>
 <p>也就是说，对于 <code>boolean</code> 类型，<code>enabled</code> 和 <code>isEnabled</code> 这两个字段生成的<code>setter</code>/<code>getter</code> 方法是一致的。当这两个字段同时存在时，只能针对其中一个生成<code>setter</code>/<code>getter</code> 方法。看下图你就明白了</p>
-<p><img src="/images/15057241768106.jpg" alt=""></p>
+<p><img src="/media/15057241768106.jpg" alt=""></p>
 <p><code>isEnabled</code> 已经无法再生成了，因为已经存在了。在项目当中应该避免则这样的命名，选择其一即可。</p>
 
       
@@ -400,8 +400,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/10/Android-Handler机制详解-ThreadLocal/" rel="next" title="Android Handler机制详解 - ThreadLocal">
-                <i class="fa fa-chevron-left"></i> Android Handler机制详解 - ThreadLocal
+              <a href="/2017/10/10/继承与原型链/" rel="next" title="JavaScript 继承与原型链">
+                <i class="fa fa-chevron-left"></i> JavaScript 继承与原型链
               </a>
             
           </div>
@@ -493,7 +493,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

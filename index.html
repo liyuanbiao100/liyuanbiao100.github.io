@@ -254,178 +254,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/11/10/继承与原型链/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="liyuanbiao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="我的个人博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/10/继承与原型链/" itemprop="url">继承与原型链</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-10T14:38:04+08:00">
-                2017-11-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>原文:<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain</a></p>
-</blockquote>
-<p>对于有基于类的语言经验的开发人员来说，JavaScript 有点令人困惑 (如Java或C ++) ，因为它是动态的，并且本身不提供一个<code>class</code>实现。（在ES2015/ES6中引入了<code>class</code>关键字，但只是语法糖，JavaScript 仍然是基于原型的）。</p>
-<p>当谈到继承时，JavaScript 只有一种结构：对象。每个对象都有一个私有属性（称之为 [[Prototype]]），它持有一个连接到另一个称为其 <strong>prototype</strong> 对象（原型对象）的链接。该 prototype 对象又具有一个自己的原型，层层向上直到一个对象的原型为 <code>null</code>。（译者注：<code>Object.getPrototypeOf(Object.prototype) === null; // true</code>）根据定义，<code>null</code> 没有原型，并作为这个原型链中的最后一个环节。</p>
-<p>JavaScript 中几乎所有的对象都是位于原型链顶端的<code>Object</code>的实例。</p>
-<p>原型继承经常被视为 JavaScript 的一个弱点，但事实上，原型继承模型比经典的继承模型更加强大。例如，在一个原型模型之上构建一个经典模型是相当容易的。</p>
-<h2 id="基于原型链的继承"><a href="#基于原型链的继承" class="headerlink" title="基于原型链的继承"></a>基于原型链的继承</h2><h3 id="继承属性"><a href="#继承属性" class="headerlink" title="继承属性"></a>继承属性</h3><p>JavaScript 对象是动态的属性“包”（指其自己的属性）。JavaScript 对象有一个指向一个原型对象的链。当试图访问一个对象的属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象的原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或到达原型链的末尾。</p>
-<blockquote>
-<p>遵循ECMAScript标准，someObject.[[Prototype]] 符号是用于指向 someObject的原型。从 ECMAScript 6 开始，[[Prototype]] 可以用Object.getPrototypeOf()和Object.setPrototypeOf()访问器来访问。这个等同于 JavaScript 的非标准但许多浏览器实现的属性 <strong>proto</strong>。</p>
-<p>它不应该与函数(function)的func.prototype属性相混淆，func.prototype的作用是使用 new func() 创建的对象的实例的 [[Prototype]]。Object.prototype属性表示Object的原型对象。</p>
-</blockquote>
-<p>这里演示当尝试访问属性时会发生什么：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 让我们假设我们有一个对象 o, 其有自己的属性 a 和 b：</span></div><div class="line"><span class="comment">// &#123;a: 1, b: 2&#125;</span></div><div class="line"><span class="comment">// o 的原型 o.__proto__有属性 b 和 c：</span></div><div class="line"><span class="comment">// &#123;b: 3, c: 4&#125;</span></div><div class="line"><span class="comment">// 最后, o.__proto__.__proto__ 是 null.</span></div><div class="line"><span class="comment">// 这就是原型链的末尾，即 null，</span></div><div class="line"><span class="comment">// 根据定义，null 没有__proto__.</span></div><div class="line"><span class="comment">// 综上，整个原型链如下: </span></div><div class="line"><span class="comment">// &#123;a:1, b:2&#125; ---&gt; &#123;b:3, c:4&#125; ---&gt; null</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(o.a); <span class="comment">// 1</span></div><div class="line"><span class="comment">// a是o的自身属性吗？是的，该属性的值为1</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(o.b); <span class="comment">// 2</span></div><div class="line"><span class="comment">// b是o的自身属性吗？是的，该属性的值为2</span></div><div class="line"><span class="comment">// o.__proto__上还有一个'b'属性,但是它不会被访问到.这种情况称为"属性遮蔽 (property shadowing)".</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(o.c); <span class="comment">// 4</span></div><div class="line"><span class="comment">// c是o的自身属性吗？不是，那看看o.__proto__上有没有.</span></div><div class="line"><span class="comment">// c是o.__proto__的自身属性吗？是的,该属性的值为4</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(o.d); <span class="comment">// undefined</span></div><div class="line"><span class="comment">// d是o的自身属性吗？不是,那看看o.__proto__上有没有.</span></div><div class="line"><span class="comment">// d是o.__proto__的自身属性吗？不是，那看看o.__proto__.__proto__上有没有.</span></div><div class="line"><span class="comment">// o.__proto__.__proto__为null，停止搜索，</span></div><div class="line"><span class="comment">// 没有d属性，返回undefined</span></div></pre></td></tr></table></figure>
-<p>将属性设置为对象将创建自己的属性。获取和设置属性的唯一限制是内置 getter 或 setter 的属性。</p>
-<h3 id="继承方法"><a href="#继承方法" class="headerlink" title="继承方法"></a>继承方法</h3><p>JavaScript 并没有其他基于类的语言所定义的“方法”。在 <strong>JavaScript</strong> 里，任何函数都可以添加到对象上作为对象的属性。函数的继承与其他的属性继承没有差别，包括上面的“属性覆盖”（这种情况相当于其他语言的方法重写）。</p>
-<p>当继承的函数被调用时，<code>this</code> 指向的是当前继承的对象，而不是继承的函数所在的原型对象。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">  a: <span class="number">2</span>,</div><div class="line">  m: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="number">1</span>;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(o.m()); <span class="comment">// 3</span></div><div class="line"><span class="comment">// 当调用 o.m 时,'this'指向了o.</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> p = <span class="built_in">Object</span>.create(o);</div><div class="line"><span class="comment">// p是一个对象, p.__proto__是o.</span></div><div class="line"></div><div class="line">p.a = <span class="number">4</span>; <span class="comment">// 创建 p 的自身属性a.</span></div><div class="line"><span class="built_in">console</span>.log(p.m()); <span class="comment">// 5</span></div><div class="line"><span class="comment">// 调用 p.m 时, 'this'指向 p. </span></div><div class="line"><span class="comment">// 又因为 p 继承 o 的 m 函数</span></div><div class="line"><span class="comment">// 此时的'this.a' 即 p.a，即 p 的自身属性 'a'</span></div></pre></td></tr></table></figure>
-<h2 id="使用不同的方法来创建对象和生成原型链"><a href="#使用不同的方法来创建对象和生成原型链" class="headerlink" title="使用不同的方法来创建对象和生成原型链"></a>使用不同的方法来创建对象和生成原型链</h2><h3 id="使用普通语法创建对象"><a href="#使用普通语法创建对象" class="headerlink" title="使用普通语法创建对象"></a>使用普通语法创建对象</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;<span class="attr">a</span>: <span class="number">1</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">// o这个对象继承了Object.prototype上面的所有属性</span></div><div class="line"><span class="comment">// 所以可以这样使用 o.hasOwnProperty('a').</span></div><div class="line"><span class="comment">// hasOwnProperty 是Object.prototype的自身属性。</span></div><div class="line"><span class="comment">// Object.prototype的原型为null。</span></div><div class="line"><span class="comment">// 原型链如下:</span></div><div class="line"><span class="comment">// o ---&gt; Object.prototype ---&gt; null</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> a = [<span class="string">"yo"</span>, <span class="string">"whadup"</span>, <span class="string">"?"</span>];</div><div class="line"></div><div class="line"><span class="comment">// 数组都继承于Array.prototype </span></div><div class="line"><span class="comment">// (indexOf, forEach等方法都是从它继承而来).</span></div><div class="line"><span class="comment">// 原型链如下:</span></div><div class="line"><span class="comment">// a ---&gt; Array.prototype ---&gt; Object.prototype ---&gt; null</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 函数都继承于Function.prototype</span></div><div class="line"><span class="comment">// (call, bind等方法都是从它继承而来):</span></div><div class="line"><span class="comment">// f ---&gt; Function.prototype ---&gt; Object.prototype ---&gt; null</span></div></pre></td></tr></table></figure>
-<h3 id="使用构造器"><a href="#使用构造器" class="headerlink" title="使用构造器"></a>使用构造器</h3><p>在 JavaScript 中，构造器其实就是一个普通的函数。当使用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new" target="_blank" rel="external">new 操作符</a> 来作用这个函数时，它就可以被称为构造方法（构造函数）。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Graph</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.vertices = [];</div><div class="line">  <span class="keyword">this</span>.edges = [];</div><div class="line">&#125;</div><div class="line"></div><div class="line">Graph.prototype = &#123;</div><div class="line">  addVertex: <span class="function"><span class="keyword">function</span>(<span class="params">v</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.vertices.push(v);</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> g = <span class="keyword">new</span> Graph();</div><div class="line"><span class="comment">// g是生成的对象,他的自身属性有'vertices'和'edges'.</span></div><div class="line"><span class="comment">// 在g被实例化时,g.__proto__指向了Graph.prototype.</span></div></pre></td></tr></table></figure>
-<h3 id="使用-Object-create"><a href="#使用-Object-create" class="headerlink" title="使用 Object.create"></a>使用 <code>Object.create</code></h3><p>ECMAScript 5 中引入了一个新方法：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="external"><code>Object.create()</code></a>。可以调用这个方法来创建一个新对象。新对象的原型就是调用 <code>create</code> 方法时传入的第一个参数：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = &#123;<span class="attr">a</span>: <span class="number">1</span>&#125;; </div><div class="line"><span class="comment">// a ---&gt; Object.prototype ---&gt; null</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> b = <span class="built_in">Object</span>.create(a);</div><div class="line"><span class="comment">// b ---&gt; a ---&gt; Object.prototype ---&gt; null</span></div><div class="line"><span class="built_in">console</span>.log(b.a); <span class="comment">// 1 (继承而来)</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> c = <span class="built_in">Object</span>.create(b);</div><div class="line"><span class="comment">// c ---&gt; b ---&gt; a ---&gt; Object.prototype ---&gt; null</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> d = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</div><div class="line"><span class="comment">// d ---&gt; null</span></div><div class="line"><span class="built_in">console</span>.log(d.hasOwnProperty); <span class="comment">// undefined, 因为d没有继承Object.prototype</span></div></pre></td></tr></table></figure>
-<h3 id="使用-class-关键字"><a href="#使用-class-关键字" class="headerlink" title="使用 class 关键字"></a>使用 <code>class</code> 关键字</h3><p>ECMAScript6 引入了一套新的关键字用来实现 <code>class</code>。使用基于类语言的开发人员会对这些结构感到熟悉，但它们是不同的。JavaScript 仍然基于原型。这些新的关键字包括 <code>class</code>, <code>constructor</code>，<code>static</code>，<code>extends</code> 和 <code>super</code>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Polygon</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(height, width) &#123;</div><div class="line">    <span class="keyword">this</span>.height = height;</div><div class="line">    <span class="keyword">this</span>.width = width;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Square</span> <span class="keyword">extends</span> <span class="title">Polygon</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(sideLength) &#123;</div><div class="line">    <span class="keyword">super</span>(sideLength, sideLength);</div><div class="line">  &#125;</div><div class="line">  get area() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.height * <span class="keyword">this</span>.width;</div><div class="line">  &#125;</div><div class="line">  set sideLength(newLength) &#123;</div><div class="line">    <span class="keyword">this</span>.height = newLength;</div><div class="line">    <span class="keyword">this</span>.width = newLength;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> square = <span class="keyword">new</span> Square(<span class="number">2</span>);</div></pre></td></tr></table></figure>
-<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>在原型链上查找属性比较耗时，对性能有副作用，这在性能要求苛刻的情况下很重要。另外，试图访问不存在的属性时会遍历整个原型链。</p>
-<p>遍历对象的属性时，原型链上的<strong>每个</strong>可枚举属性都会被枚举出来。要检查对象是否具有自己定义的属性，而不是其原型链上的某个属性，则必须使用所有对象从<code>Object.prototype</code>继承的 <a href="https://developer.mozilla.org/zh-CN/docs/JavaScript/Reference/Global_Objects/Object/hasOwnProperty" target="_blank" rel="external"><font color="red">hasOwnProperty</font></a> 方法。下面给出一个具体的例子来说明它：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(g.hasOwnProperty(<span class="string">'vertices'</span>));</div><div class="line"><span class="comment">// true</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(g.hasOwnProperty(<span class="string">'nope'</span>));</div><div class="line"><span class="comment">// false</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(g.hasOwnProperty(<span class="string">'addVertex'</span>));</div><div class="line"><span class="comment">// false</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(g.__proto__.hasOwnProperty(<span class="string">'addVertex'</span>));</div><div class="line"><span class="comment">// true</span></div></pre></td></tr></table></figure>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/JavaScript/Reference/Global_Objects/Object/hasOwnProperty" target="_blank" rel="external"><font color="red">hasOwnProperty</font></a>是JavaScript中唯一处理属性的东西，并且不支持原型链。</p>
-<p>注意：检查属性是否<code>undefined</code>还不够。该属性可能存在，但其值恰好设置为<code>undefined</code>。</p>
-<h3 id="错误实践：扩展原生对象的原型"><a href="#错误实践：扩展原生对象的原型" class="headerlink" title="错误实践：扩展原生对象的原型"></a>错误实践：扩展原生对象的原型</h3><p>经常使用的一个错误实践是扩展<code>Object.prototype</code>或其他内置原型。</p>
-<p>这种技术被称为猴子补丁并且会破坏封装。尽管一些流行的框架（如 Prototype.js）在使用该技术，但仍然没有足够好的理由使用附加的非标准方法来混入内置原型。</p>
-<p>扩展内置原型的唯一理由是支持JavaScript 引擎的新特性，如<code>Array.forEach</code>。</p>
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p><code>B</code> 继承自 <code>A</code>：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.varA = a;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 以上函数 A 的定义中，既然 A.prototype.varA 总是会被 this.varA 遮蔽，</span></div><div class="line"><span class="comment">// 那么将 varA 加入到原型（prototype）中的目的是什么？</span></div><div class="line">A.prototype = &#123;</div><div class="line">  varA : <span class="literal">null</span>,  </div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">既然它没有任何作用，干嘛不将 varA 从原型（prototype）去掉 ? </span></div><div class="line"><span class="comment">也许作为一种在隐藏类中优化分配空间的考虑 ?</span></div><div class="line"><span class="comment">https://developers.google.com/speed/articles/optimizing-javascript </span></div><div class="line"><span class="comment">如果varA并不是在每个实例中都被初始化，那这样做将是有效果的。</span></div><div class="line"><span class="comment">*/</span></div><div class="line">  doSomething : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params">a, b</span>)</span>&#123;</div><div class="line">  A.call(<span class="keyword">this</span>, a);</div><div class="line">  <span class="keyword">this</span>.varB = b;</div><div class="line">&#125;</div><div class="line">B.prototype = <span class="built_in">Object</span>.create(A.prototype, &#123;</div><div class="line">  varB : &#123;</div><div class="line">    value: <span class="literal">null</span>, </div><div class="line">    enumerable: <span class="literal">true</span>, </div><div class="line">    configurable: <span class="literal">true</span>, </div><div class="line">    writable: <span class="literal">true</span> </div><div class="line">  &#125;,</div><div class="line">  doSomething : &#123; </div><div class="line">    value: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// override</span></div><div class="line">      A.prototype.doSomething.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>); </div><div class="line">      <span class="comment">// call super</span></div><div class="line">      <span class="comment">// ...</span></div><div class="line">    &#125;,</div><div class="line">    enumerable: <span class="literal">true</span>,</div><div class="line">    configurable: <span class="literal">true</span>, </div><div class="line">    writable: <span class="literal">true</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">B.prototype.constructor = B;</div><div class="line"></div><div class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B();</div><div class="line">b.doSomething();</div></pre></td></tr></table></figure>
-<p>最重要的部分是：</p>
-<ul>
-<li>类型被定义在 <code>.prototype</code> 中</li>
-<li>用 <code>Object.create()</code> 来继承</li>
-</ul>
-<h2 id="prototype和Object-getPrototypeOf"><a href="#prototype和Object-getPrototypeOf" class="headerlink" title="prototype和Object.getPrototypeOf"></a><code>prototype</code>和<code>Object.getPrototypeOf</code></h2><p>对于从 Java 或 C++ 转过来的开发人员来说 JavaScript 会有点让人困惑，因为它全部都是动态的，都是运行时，而且不存在类（classes）。所有的都是实例（对象）。即使我们模拟出的 “类（classes）”，也只是一个函数对象。</p>
-<p>你可能已经注意到我们的<code>function A</code>有一个叫做<code>prototype</code>的特殊属性。该特殊属性可与 JavaScript 的 new 操作符一起使用。对原型对象的引用被复制到新实例的内部<code>[[Prototype]]</code>属性。例如，当执行<code>var a1 = new A()</code>时，JavaScript（在内存中创建对象之前，并且在运行函数A()之前）定义了它）设置a1.<code>[[Prototype]] = A.prototype</code>。然后当您访问实例的属性时，JavaScript首先会检查它们是否直接存在于该对象上，如果不存在，则会<code>[[Prototype]]</code>中查找。这意味着你在<code>prototype</code>中定义的所有内容都可以由所有实例有效共享，你甚至可以稍后更改部分<code>prototype</code>，并在所有现有实例中显示更改（如果需要）。</p>
-<p>像上面的例子中，如果你执行<code>var a1 = new A(); var a2 = new A();</code> 那么 <code>a1.doSomething</code>事实上会指向<code>Object.getPrototypeOf(a1).doSomething</code>，它就是你在 <code>A.prototype.doSomething</code> 中定义的内容。比如：<code>Object.getPrototypeOf(a1).doSomething == Object.getPrototypeOf(a2).doSomething == A.prototype.doSomething</code>。</p>
-<p>简而言之， <code>prototype</code>是用于类型的，而 <code>Object.getPrototypeOf()</code> 是用于实例的（instances），两者功能一致。</p>
-<p><code>[[Prototype]]</code> 看起来就像递归引用， 如<code>a1.doSomething，Object.getPrototypeOf(a1).doSomething，Object.getPrototypeOf(Object.getPrototypeOf(a1)).doSomething</code> 等等等， 直到它被找到或<code>Object.getPrototypeOf</code>返回 <code>null</code>。</p>
-<p>因此，当你执行：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> Foo();</div></pre></td></tr></table></figure>
-<p>JavaScript 实际上执行的是：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">o.__proto__ = Foo.prototype;</div><div class="line">Foo.call(o);</div></pre></td></tr></table></figure>
-<p>（或者类似上面这样的），然后当你执行：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">o.someProp;</div></pre></td></tr></table></figure>
-<p>它检查o是否具有<code>someProp</code>属性。如果没有，它会查找 <code>Object.getPrototypeOf(o).someProp</code>，如果仍旧没有，它会继续查找 <code>Object.getPrototypeOf(Object.getPrototypeOf(o)).someProp</code>。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在用原型继承编写复杂代码之前，了解原型继承模型非常<strong>重要</strong>。同时，要注意代码中的原型链的长度，并在必要时将其分解，以避免潜在的性能问题。此外，永远<strong>不要</strong>扩展原生对象的原型，除非是为了兼容新的JavaScript特性。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/27/Android应用内安装App的几种姿势/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -898,8 +726,180 @@
 </ul>
 <p>因为Java属性是由 <code>setter</code>/<code>getter</code> 方法决定的，而不是字段。在一个Java类里面，如果有<code>void setName(String name)</code>和<code>String getName()</code>方法，那么可以认为这个类有<code>name</code>这个属性（<strong>可读可写</strong>），如果仅有get，那么这个<code>name</code>属性就是个<strong>只读属性</strong>。即使没有<code>name</code>这个字段也是一样成立的。</p>
 <p>也就是说，对于 <code>boolean</code> 类型，<code>enabled</code> 和 <code>isEnabled</code> 这两个字段生成的<code>setter</code>/<code>getter</code> 方法是一致的。当这两个字段同时存在时，只能针对其中一个生成<code>setter</code>/<code>getter</code> 方法。看下图你就明白了</p>
-<p><img src="/images/15057241768106.jpg" alt=""></p>
+<p><img src="/media/15057241768106.jpg" alt=""></p>
 <p><code>isEnabled</code> 已经无法再生成了，因为已经存在了。在项目当中应该避免则这样的命名，选择其一即可。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/10/继承与原型链/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liyuanbiao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/10/继承与原型链/" itemprop="url">JavaScript 继承与原型链</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-10T14:38:04+08:00">
+                2017-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>原文:<br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Inheritance_and_the_prototype_chain</a></p>
+</blockquote>
+<p>对于有基于类的语言经验的开发人员来说，JavaScript 有点令人困惑 (如Java或C ++) ，因为它是动态的，并且本身不提供一个<code>class</code>实现。（在ES2015/ES6中引入了<code>class</code>关键字，但只是语法糖，JavaScript 仍然是基于原型的）。</p>
+<p>当谈到继承时，JavaScript 只有一种结构：对象。每个对象都有一个私有属性（称之为 [[Prototype]]），它持有一个连接到另一个称为其 <strong>prototype</strong> 对象（原型对象）的链接。该 prototype 对象又具有一个自己的原型，层层向上直到一个对象的原型为 <code>null</code>。（译者注：<code>Object.getPrototypeOf(Object.prototype) === null; // true</code>）根据定义，<code>null</code> 没有原型，并作为这个原型链中的最后一个环节。</p>
+<p>JavaScript 中几乎所有的对象都是位于原型链顶端的<code>Object</code>的实例。</p>
+<p>原型继承经常被视为 JavaScript 的一个弱点，但事实上，原型继承模型比经典的继承模型更加强大。例如，在一个原型模型之上构建一个经典模型是相当容易的。</p>
+<h2 id="基于原型链的继承"><a href="#基于原型链的继承" class="headerlink" title="基于原型链的继承"></a>基于原型链的继承</h2><h3 id="继承属性"><a href="#继承属性" class="headerlink" title="继承属性"></a>继承属性</h3><p>JavaScript 对象是动态的属性“包”（指其自己的属性）。JavaScript 对象有一个指向一个原型对象的链。当试图访问一个对象的属性时，它不仅仅在该对象上搜寻，还会搜寻该对象的原型，以及该对象的原型的原型，依次层层向上搜索，直到找到一个名字匹配的属性或到达原型链的末尾。</p>
+<blockquote>
+<p>遵循ECMAScript标准，someObject.[[Prototype]] 符号是用于指向 someObject的原型。从 ECMAScript 6 开始，[[Prototype]] 可以用Object.getPrototypeOf()和Object.setPrototypeOf()访问器来访问。这个等同于 JavaScript 的非标准但许多浏览器实现的属性 <strong>proto</strong>。</p>
+<p>它不应该与函数(function)的func.prototype属性相混淆，func.prototype的作用是使用 new func() 创建的对象的实例的 [[Prototype]]。Object.prototype属性表示Object的原型对象。</p>
+</blockquote>
+<p>这里演示当尝试访问属性时会发生什么：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 让我们假设我们有一个对象 o, 其有自己的属性 a 和 b：</span></div><div class="line"><span class="comment">// &#123;a: 1, b: 2&#125;</span></div><div class="line"><span class="comment">// o 的原型 o.__proto__有属性 b 和 c：</span></div><div class="line"><span class="comment">// &#123;b: 3, c: 4&#125;</span></div><div class="line"><span class="comment">// 最后, o.__proto__.__proto__ 是 null.</span></div><div class="line"><span class="comment">// 这就是原型链的末尾，即 null，</span></div><div class="line"><span class="comment">// 根据定义，null 没有__proto__.</span></div><div class="line"><span class="comment">// 综上，整个原型链如下: </span></div><div class="line"><span class="comment">// &#123;a:1, b:2&#125; ---&gt; &#123;b:3, c:4&#125; ---&gt; null</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(o.a); <span class="comment">// 1</span></div><div class="line"><span class="comment">// a是o的自身属性吗？是的，该属性的值为1</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(o.b); <span class="comment">// 2</span></div><div class="line"><span class="comment">// b是o的自身属性吗？是的，该属性的值为2</span></div><div class="line"><span class="comment">// o.__proto__上还有一个'b'属性,但是它不会被访问到.这种情况称为"属性遮蔽 (property shadowing)".</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(o.c); <span class="comment">// 4</span></div><div class="line"><span class="comment">// c是o的自身属性吗？不是，那看看o.__proto__上有没有.</span></div><div class="line"><span class="comment">// c是o.__proto__的自身属性吗？是的,该属性的值为4</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(o.d); <span class="comment">// undefined</span></div><div class="line"><span class="comment">// d是o的自身属性吗？不是,那看看o.__proto__上有没有.</span></div><div class="line"><span class="comment">// d是o.__proto__的自身属性吗？不是，那看看o.__proto__.__proto__上有没有.</span></div><div class="line"><span class="comment">// o.__proto__.__proto__为null，停止搜索，</span></div><div class="line"><span class="comment">// 没有d属性，返回undefined</span></div></pre></td></tr></table></figure>
+<p>将属性设置为对象将创建自己的属性。获取和设置属性的唯一限制是内置 getter 或 setter 的属性。</p>
+<h3 id="继承方法"><a href="#继承方法" class="headerlink" title="继承方法"></a>继承方法</h3><p>JavaScript 并没有其他基于类的语言所定义的“方法”。在 <strong>JavaScript</strong> 里，任何函数都可以添加到对象上作为对象的属性。函数的继承与其他的属性继承没有差别，包括上面的“属性覆盖”（这种情况相当于其他语言的方法重写）。</p>
+<p>当继承的函数被调用时，<code>this</code> 指向的是当前继承的对象，而不是继承的函数所在的原型对象。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">  a: <span class="number">2</span>,</div><div class="line">  m: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.a + <span class="number">1</span>;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(o.m()); <span class="comment">// 3</span></div><div class="line"><span class="comment">// 当调用 o.m 时,'this'指向了o.</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> p = <span class="built_in">Object</span>.create(o);</div><div class="line"><span class="comment">// p是一个对象, p.__proto__是o.</span></div><div class="line"></div><div class="line">p.a = <span class="number">4</span>; <span class="comment">// 创建 p 的自身属性a.</span></div><div class="line"><span class="built_in">console</span>.log(p.m()); <span class="comment">// 5</span></div><div class="line"><span class="comment">// 调用 p.m 时, 'this'指向 p. </span></div><div class="line"><span class="comment">// 又因为 p 继承 o 的 m 函数</span></div><div class="line"><span class="comment">// 此时的'this.a' 即 p.a，即 p 的自身属性 'a'</span></div></pre></td></tr></table></figure>
+<h2 id="使用不同的方法来创建对象和生成原型链"><a href="#使用不同的方法来创建对象和生成原型链" class="headerlink" title="使用不同的方法来创建对象和生成原型链"></a>使用不同的方法来创建对象和生成原型链</h2><h3 id="使用普通语法创建对象"><a href="#使用普通语法创建对象" class="headerlink" title="使用普通语法创建对象"></a>使用普通语法创建对象</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;<span class="attr">a</span>: <span class="number">1</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">// o这个对象继承了Object.prototype上面的所有属性</span></div><div class="line"><span class="comment">// 所以可以这样使用 o.hasOwnProperty('a').</span></div><div class="line"><span class="comment">// hasOwnProperty 是Object.prototype的自身属性。</span></div><div class="line"><span class="comment">// Object.prototype的原型为null。</span></div><div class="line"><span class="comment">// 原型链如下:</span></div><div class="line"><span class="comment">// o ---&gt; Object.prototype ---&gt; null</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> a = [<span class="string">"yo"</span>, <span class="string">"whadup"</span>, <span class="string">"?"</span>];</div><div class="line"></div><div class="line"><span class="comment">// 数组都继承于Array.prototype </span></div><div class="line"><span class="comment">// (indexOf, forEach等方法都是从它继承而来).</span></div><div class="line"><span class="comment">// 原型链如下:</span></div><div class="line"><span class="comment">// a ---&gt; Array.prototype ---&gt; Object.prototype ---&gt; null</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 函数都继承于Function.prototype</span></div><div class="line"><span class="comment">// (call, bind等方法都是从它继承而来):</span></div><div class="line"><span class="comment">// f ---&gt; Function.prototype ---&gt; Object.prototype ---&gt; null</span></div></pre></td></tr></table></figure>
+<h3 id="使用构造器"><a href="#使用构造器" class="headerlink" title="使用构造器"></a>使用构造器</h3><p>在 JavaScript 中，构造器其实就是一个普通的函数。当使用 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new" target="_blank" rel="external">new 操作符</a> 来作用这个函数时，它就可以被称为构造方法（构造函数）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Graph</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">this</span>.vertices = [];</div><div class="line">  <span class="keyword">this</span>.edges = [];</div><div class="line">&#125;</div><div class="line"></div><div class="line">Graph.prototype = &#123;</div><div class="line">  addVertex: <span class="function"><span class="keyword">function</span>(<span class="params">v</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.vertices.push(v);</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">var</span> g = <span class="keyword">new</span> Graph();</div><div class="line"><span class="comment">// g是生成的对象,他的自身属性有'vertices'和'edges'.</span></div><div class="line"><span class="comment">// 在g被实例化时,g.__proto__指向了Graph.prototype.</span></div></pre></td></tr></table></figure>
+<h3 id="使用-Object-create"><a href="#使用-Object-create" class="headerlink" title="使用 Object.create"></a>使用 <code>Object.create</code></h3><p>ECMAScript 5 中引入了一个新方法：<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="external"><code>Object.create()</code></a>。可以调用这个方法来创建一个新对象。新对象的原型就是调用 <code>create</code> 方法时传入的第一个参数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = &#123;<span class="attr">a</span>: <span class="number">1</span>&#125;; </div><div class="line"><span class="comment">// a ---&gt; Object.prototype ---&gt; null</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> b = <span class="built_in">Object</span>.create(a);</div><div class="line"><span class="comment">// b ---&gt; a ---&gt; Object.prototype ---&gt; null</span></div><div class="line"><span class="built_in">console</span>.log(b.a); <span class="comment">// 1 (继承而来)</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> c = <span class="built_in">Object</span>.create(b);</div><div class="line"><span class="comment">// c ---&gt; b ---&gt; a ---&gt; Object.prototype ---&gt; null</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> d = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</div><div class="line"><span class="comment">// d ---&gt; null</span></div><div class="line"><span class="built_in">console</span>.log(d.hasOwnProperty); <span class="comment">// undefined, 因为d没有继承Object.prototype</span></div></pre></td></tr></table></figure>
+<h3 id="使用-class-关键字"><a href="#使用-class-关键字" class="headerlink" title="使用 class 关键字"></a>使用 <code>class</code> 关键字</h3><p>ECMAScript6 引入了一套新的关键字用来实现 <code>class</code>。使用基于类语言的开发人员会对这些结构感到熟悉，但它们是不同的。JavaScript 仍然基于原型。这些新的关键字包括 <code>class</code>, <code>constructor</code>，<code>static</code>，<code>extends</code> 和 <code>super</code>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">"use strict"</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Polygon</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(height, width) &#123;</div><div class="line">    <span class="keyword">this</span>.height = height;</div><div class="line">    <span class="keyword">this</span>.width = width;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Square</span> <span class="keyword">extends</span> <span class="title">Polygon</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(sideLength) &#123;</div><div class="line">    <span class="keyword">super</span>(sideLength, sideLength);</div><div class="line">  &#125;</div><div class="line">  get area() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.height * <span class="keyword">this</span>.width;</div><div class="line">  &#125;</div><div class="line">  set sideLength(newLength) &#123;</div><div class="line">    <span class="keyword">this</span>.height = newLength;</div><div class="line">    <span class="keyword">this</span>.width = newLength;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> square = <span class="keyword">new</span> Square(<span class="number">2</span>);</div></pre></td></tr></table></figure>
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>在原型链上查找属性比较耗时，对性能有副作用，这在性能要求苛刻的情况下很重要。另外，试图访问不存在的属性时会遍历整个原型链。</p>
+<p>遍历对象的属性时，原型链上的<strong>每个</strong>可枚举属性都会被枚举出来。要检查对象是否具有自己定义的属性，而不是其原型链上的某个属性，则必须使用所有对象从<code>Object.prototype</code>继承的 <a href="https://developer.mozilla.org/zh-CN/docs/JavaScript/Reference/Global_Objects/Object/hasOwnProperty" target="_blank" rel="external"><font color="red">hasOwnProperty</font></a> 方法。下面给出一个具体的例子来说明它：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(g.hasOwnProperty(<span class="string">'vertices'</span>));</div><div class="line"><span class="comment">// true</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(g.hasOwnProperty(<span class="string">'nope'</span>));</div><div class="line"><span class="comment">// false</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(g.hasOwnProperty(<span class="string">'addVertex'</span>));</div><div class="line"><span class="comment">// false</span></div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(g.__proto__.hasOwnProperty(<span class="string">'addVertex'</span>));</div><div class="line"><span class="comment">// true</span></div></pre></td></tr></table></figure>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/JavaScript/Reference/Global_Objects/Object/hasOwnProperty" target="_blank" rel="external"><font color="red">hasOwnProperty</font></a>是JavaScript中唯一处理属性的东西，并且不支持原型链。</p>
+<p>注意：检查属性是否<code>undefined</code>还不够。该属性可能存在，但其值恰好设置为<code>undefined</code>。</p>
+<h3 id="错误实践：扩展原生对象的原型"><a href="#错误实践：扩展原生对象的原型" class="headerlink" title="错误实践：扩展原生对象的原型"></a>错误实践：扩展原生对象的原型</h3><p>经常使用的一个错误实践是扩展<code>Object.prototype</code>或其他内置原型。</p>
+<p>这种技术被称为猴子补丁并且会破坏封装。尽管一些流行的框架（如 Prototype.js）在使用该技术，但仍然没有足够好的理由使用附加的非标准方法来混入内置原型。</p>
+<p>扩展内置原型的唯一理由是支持JavaScript 引擎的新特性，如<code>Array.forEach</code>。</p>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p><code>B</code> 继承自 <code>A</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">  <span class="keyword">this</span>.varA = a;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 以上函数 A 的定义中，既然 A.prototype.varA 总是会被 this.varA 遮蔽，</span></div><div class="line"><span class="comment">// 那么将 varA 加入到原型（prototype）中的目的是什么？</span></div><div class="line">A.prototype = &#123;</div><div class="line">  varA : <span class="literal">null</span>,  </div><div class="line"><span class="comment">/*</span></div><div class="line"><span class="comment">既然它没有任何作用，干嘛不将 varA 从原型（prototype）去掉 ? </span></div><div class="line"><span class="comment">也许作为一种在隐藏类中优化分配空间的考虑 ?</span></div><div class="line"><span class="comment">https://developers.google.com/speed/articles/optimizing-javascript </span></div><div class="line"><span class="comment">如果varA并不是在每个实例中都被初始化，那这样做将是有效果的。</span></div><div class="line"><span class="comment">*/</span></div><div class="line">  doSomething : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params">a, b</span>)</span>&#123;</div><div class="line">  A.call(<span class="keyword">this</span>, a);</div><div class="line">  <span class="keyword">this</span>.varB = b;</div><div class="line">&#125;</div><div class="line">B.prototype = <span class="built_in">Object</span>.create(A.prototype, &#123;</div><div class="line">  varB : &#123;</div><div class="line">    value: <span class="literal">null</span>, </div><div class="line">    enumerable: <span class="literal">true</span>, </div><div class="line">    configurable: <span class="literal">true</span>, </div><div class="line">    writable: <span class="literal">true</span> </div><div class="line">  &#125;,</div><div class="line">  doSomething : &#123; </div><div class="line">    value: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="comment">// override</span></div><div class="line">      A.prototype.doSomething.apply(<span class="keyword">this</span>, <span class="built_in">arguments</span>); </div><div class="line">      <span class="comment">// call super</span></div><div class="line">      <span class="comment">// ...</span></div><div class="line">    &#125;,</div><div class="line">    enumerable: <span class="literal">true</span>,</div><div class="line">    configurable: <span class="literal">true</span>, </div><div class="line">    writable: <span class="literal">true</span></div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line">B.prototype.constructor = B;</div><div class="line"></div><div class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B();</div><div class="line">b.doSomething();</div></pre></td></tr></table></figure>
+<p>最重要的部分是：</p>
+<ul>
+<li>类型被定义在 <code>.prototype</code> 中</li>
+<li>用 <code>Object.create()</code> 来继承</li>
+</ul>
+<h2 id="prototype和Object-getPrototypeOf"><a href="#prototype和Object-getPrototypeOf" class="headerlink" title="prototype和Object.getPrototypeOf"></a><code>prototype</code>和<code>Object.getPrototypeOf</code></h2><p>对于从 Java 或 C++ 转过来的开发人员来说 JavaScript 会有点让人困惑，因为它全部都是动态的，都是运行时，而且不存在类（classes）。所有的都是实例（对象）。即使我们模拟出的 “类（classes）”，也只是一个函数对象。</p>
+<p>你可能已经注意到我们的<code>function A</code>有一个叫做<code>prototype</code>的特殊属性。该特殊属性可与 JavaScript 的 new 操作符一起使用。对原型对象的引用被复制到新实例的内部<code>[[Prototype]]</code>属性。例如，当执行<code>var a1 = new A()</code>时，JavaScript（在内存中创建对象之前，并且在运行函数A()之前）定义了它）设置a1.<code>[[Prototype]] = A.prototype</code>。然后当您访问实例的属性时，JavaScript首先会检查它们是否直接存在于该对象上，如果不存在，则会<code>[[Prototype]]</code>中查找。这意味着你在<code>prototype</code>中定义的所有内容都可以由所有实例有效共享，你甚至可以稍后更改部分<code>prototype</code>，并在所有现有实例中显示更改（如果需要）。</p>
+<p>像上面的例子中，如果你执行<code>var a1 = new A(); var a2 = new A();</code> 那么 <code>a1.doSomething</code>事实上会指向<code>Object.getPrototypeOf(a1).doSomething</code>，它就是你在 <code>A.prototype.doSomething</code> 中定义的内容。比如：<code>Object.getPrototypeOf(a1).doSomething == Object.getPrototypeOf(a2).doSomething == A.prototype.doSomething</code>。</p>
+<p>简而言之， <code>prototype</code>是用于类型的，而 <code>Object.getPrototypeOf()</code> 是用于实例的（instances），两者功能一致。</p>
+<p><code>[[Prototype]]</code> 看起来就像递归引用， 如<code>a1.doSomething，Object.getPrototypeOf(a1).doSomething，Object.getPrototypeOf(Object.getPrototypeOf(a1)).doSomething</code> 等等等， 直到它被找到或<code>Object.getPrototypeOf</code>返回 <code>null</code>。</p>
+<p>因此，当你执行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> Foo();</div></pre></td></tr></table></figure>
+<p>JavaScript 实际上执行的是：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</div><div class="line">o.__proto__ = Foo.prototype;</div><div class="line">Foo.call(o);</div></pre></td></tr></table></figure>
+<p>（或者类似上面这样的），然后当你执行：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">o.someProp;</div></pre></td></tr></table></figure>
+<p>它检查o是否具有<code>someProp</code>属性。如果没有，它会查找 <code>Object.getPrototypeOf(o).someProp</code>，如果仍旧没有，它会继续查找 <code>Object.getPrototypeOf(Object.getPrototypeOf(o)).someProp</code>。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在用原型继承编写复杂代码之前，了解原型继承模型非常<strong>重要</strong>。同时，要注意代码中的原型链的长度，并在必要时将其分解，以避免潜在的性能问题。此外，永远<strong>不要</strong>扩展原生对象的原型，除非是为了兼容新的JavaScript特性。</p>
 
           
         
@@ -1036,6 +1036,148 @@
 <p>上面的代码可以很容易看出<strong>ThreadLocal</strong>的原理，但是由于<strong>ThreadLocal</strong>的代码太多，这只是很小的一部分，为了便于大家理解问题，我写了一个类模拟<strong>ThreadLocal</strong>的实现。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocal</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//每个线程有单独的Map来保证变量在不同线程之间互不影响</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map&lt;Thread, Map&lt;ThreadLocal, Object&gt;&gt; tMap = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123;</div><div class="line">        Thread thread = Thread.currentThread();</div><div class="line">        Map&lt;ThreadLocal, Object&gt; map = tMap.get(thread);</div><div class="line">        <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</div><div class="line">            map.put(<span class="keyword">this</span>, value);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            map = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</div><div class="line">            tMap.put(thread, map);</div><div class="line">            map.put(<span class="keyword">this</span>, value);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</div><div class="line">        Thread thread = Thread.currentThread();</div><div class="line">        Map&lt;ThreadLocal, Object&gt; map = tMap.get(thread);</div><div class="line">        <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> (T) map.get(<span class="keyword">this</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</div><div class="line">        Thread thread = Thread.currentThread();</div><div class="line">        Map&lt;ThreadLocal, Object&gt; map = tMap.get(thread);</div><div class="line">        <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</div><div class="line">            map.remove(<span class="keyword">this</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>每个<strong>Thread</strong>都有自己的<strong>ThreadLocalMap</strong>，存储<strong>value</strong>的时候会存储到自己的<strong>ThreadLocalMap</strong>，所以在哪个线程设置的<strong>value</strong>就只能在哪个线程获取到，其他<strong>Thread</strong>是获取不到的。因为<strong>ThreadLocal</strong>类用<code>this</code>当做<strong>key</strong>，所以每个<strong>ThreadLocal</strong>最多存储一个<strong>value</strong>。如果想要存储几个值可以多用几个<strong>ThreadLocal</strong>。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/09/JavaScript-模板字符串/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liyuanbiao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/09/JavaScript-模板字符串/" itemprop="url">JavaScript 模板字符串</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T14:44:25+08:00">
+                2017-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>模板字面量/Template literals 是允许嵌入表达式的字符串字面量。你可以使用多行字符串和字符串插值功能。它们在ES2015规范的先前版本中被称为“模板字符串/template strings”。</p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="string">`string text`</span></div><div class="line"></div><div class="line"><span class="string">`string text line 1</span></div><div class="line"><span class="string"> string text line 2`</span></div><div class="line"></div><div class="line"><span class="string">`string text <span class="subst">$&#123;expression&#125;</span> string text`</span></div><div class="line"></div><div class="line">tag <span class="string">`string text <span class="subst">$&#123;expression&#125;</span> string text`</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>Note: 模板字面量也可以使用三元运算符( condition ?  true : false ) 和  嵌套 nested！</p>
+</blockquote>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>模板字符串使用反引号 (` `) 来代替普通字符串中的用双引号和单引号。模板字符串可以包含特定语法(<code>${expression}</code>)的占位符。占位符中的表达式和周围的文本会一起传递给一个默认函数，该函数负责将所有的部分连接起来，如果一个模板字符串由表达式开头，则该字符串被称为带标签的模板字符串，该表达式通常是一个函数，它会在模板字符串处理后被调用，在输出最终结果前，你都可以通过该函数来对模板字符串进行操作处理。在模版字符串内使用反引号（`）时，需要在它前面加转义符（\）。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">`\``</span> === <span class="string">"`"</span> <span class="comment">// --&gt; true</span></div></pre></td></tr></table></figure>
+<h3 id="多行字符串"><a href="#多行字符串" class="headerlink" title="多行字符串"></a>多行字符串</h3><p>在新行中插入的任何字符都是模板字符串中的一部分，使用普通字符串，你可以通过以下的方式获得多行字符串：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="string">"string text line 1\n\</span></div><div class="line"><span class="string">string text line 2"</span>);</div><div class="line"><span class="comment">// "string text line 1</span></div><div class="line"><span class="comment">// string text line 2"</span></div></pre></td></tr></table></figure>
+<p>要获得同样效果的多行字符串，只需使用如下代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">console</span>.log(<span class="string">`string text line 1</span></div><div class="line"><span class="string">string text line 2`</span>);</div><div class="line"><span class="comment">// "string text line 1</span></div><div class="line"><span class="comment">// string text line 2"</span></div></pre></td></tr></table></figure>
+<h3 id="表达式插补"><a href="#表达式插补" class="headerlink" title="表达式插补"></a>表达式插补</h3><p>在普通字符串中嵌入表达式，必须使用如下语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">5</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="number">10</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">"Fifteen is "</span> + (a + b) + <span class="string">" and\nnot "</span> + (<span class="number">2</span> * a + b) + <span class="string">"."</span>);</div><div class="line"><span class="comment">// "Fifteen is 15 and</span></div><div class="line"><span class="comment">// not 20."</span></div></pre></td></tr></table></figure>
+<p>现在通过模板字符串，我们可以使用一种更优雅的方式来表示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">5</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="number">10</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="string">`Fifteen is <span class="subst">$&#123;a + b&#125;</span> and\nnot <span class="subst">$&#123;<span class="number">2</span> * a + b&#125;</span>.`</span>);</div><div class="line"><span class="comment">// "Fifteen is 15 and</span></div><div class="line"><span class="comment">// not 20."</span></div></pre></td></tr></table></figure>
+<h3 id="带标签的模板字符串"><a href="#带标签的模板字符串" class="headerlink" title="带标签的模板字符串"></a>带标签的模板字符串</h3><p>模板字符串的一种更高级的形式称为带标签的模板字符串。它允许您通过标签函数修改模板字符串的输出。标签函数的第一个参数是一个包含了字符串字面值的数组（在本例中分别为“Hello”,“world”和””）；第二个参数，在第一个参数后的每一个参数，都是已经被处理好的替换表达式（在这里分别为“15”和“50”）。 最后，标签函数返回处理好的字符串。在下面的例子中，命名这个标签并没有什么特殊的地方，这个函数的名字可以是任何你想要的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">5</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="number">10</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">tag</span>(<span class="params">strings, ...values</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(strings[<span class="number">0</span>]); <span class="comment">// "Hello "</span></div><div class="line">  <span class="built_in">console</span>.log(strings[<span class="number">1</span>]); <span class="comment">// " world "</span></div><div class="line">  <span class="built_in">console</span>.log(strings[<span class="number">2</span>]); <span class="comment">// ""</span></div><div class="line">  <span class="built_in">console</span>.log(values[<span class="number">0</span>]);  <span class="comment">// 15</span></div><div class="line">  <span class="built_in">console</span>.log(values[<span class="number">1</span>]);  <span class="comment">// 50</span></div><div class="line"></div><div class="line">  <span class="keyword">return</span> <span class="string">"Bazinga!"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">tag<span class="string">`Hello <span class="subst">$&#123; a + b &#125;</span> world <span class="subst">$&#123; a * b&#125;</span>`</span>;</div><div class="line"><span class="comment">// "Bazinga!"</span></div></pre></td></tr></table></figure>
+<p>正如下面例子所展示的，标签函数并不一定需要返回一个字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">template</span>(<span class="params">strings, ...keys</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> (<span class="function"><span class="keyword">function</span>(<span class="params">...values</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> dict = values[values.length - <span class="number">1</span>] || &#123;&#125;;</div><div class="line">    <span class="keyword">var</span> result = [strings[<span class="number">0</span>]];</div><div class="line">    keys.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">key, i</span>) </span>&#123;</div><div class="line">      <span class="keyword">var</span> value = <span class="built_in">Number</span>.isInteger(key) ? values[key] : dict[key];</div><div class="line">      result.push(value, strings[i + <span class="number">1</span>]);</div><div class="line">    &#125;);</div><div class="line">    <span class="keyword">return</span> result.join(<span class="string">''</span>);</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> t1Closure = template<span class="string">`<span class="subst">$&#123;<span class="number">0</span>&#125;</span><span class="subst">$&#123;<span class="number">1</span>&#125;</span><span class="subst">$&#123;<span class="number">0</span>&#125;</span>!`</span>;</div><div class="line">t1Closure(<span class="string">'Y'</span>, <span class="string">'A'</span>);  <span class="comment">// "YAY!" </span></div><div class="line"><span class="keyword">var</span> t2Closure = template<span class="string">`<span class="subst">$&#123;<span class="number">0</span>&#125;</span> <span class="subst">$&#123;<span class="string">'foo'</span>&#125;</span>!`</span>;</div><div class="line">t2Closure(<span class="string">'Hello'</span>, &#123;<span class="attr">foo</span>: <span class="string">'World'</span>&#125;);  <span class="comment">// "Hello World!"</span></div></pre></td></tr></table></figure>
+<h3 id="原始字符串"><a href="#原始字符串" class="headerlink" title="原始字符串"></a>原始字符串</h3><p>在标签函数的第一个参数中，存在一个特殊的属性raw ，我们可以通过它来访问模板字符串的原始字符串。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">tag</span>(<span class="params">strings, ...values</span>) </span>&#123;</div><div class="line">  <span class="built_in">console</span>.log(strings.raw[<span class="number">0</span>]); </div><div class="line">  <span class="comment">// "string text line 1 \\n string text line 2"</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">tag<span class="string">`string text line 1 \n string text line 2`</span>;</div></pre></td></tr></table></figure>
+<p>另外，使用<code>String.raw()</code>方法创建原始字符串和使用默认模板函数和字符串连接创建是一样的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span>.raw<span class="string">`Hi\n<span class="subst">$&#123;<span class="number">2</span>+<span class="number">3</span>&#125;</span>!`</span>;</div><div class="line"><span class="comment">// "Hi\\n5!"</span></div></pre></td></tr></table></figure>
 
           
         
@@ -1253,7 +1395,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
