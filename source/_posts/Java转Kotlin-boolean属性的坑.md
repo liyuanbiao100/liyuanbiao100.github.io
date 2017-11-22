@@ -81,7 +81,7 @@ public final class JavaBean {
 
 也就是说，对于 `boolean` 类型，`enabled` 和 `isEnabled` 这两个字段生成的`setter`/`getter` 方法是一致的。当这两个字段同时存在时，只能针对其中一个生成`setter`/`getter` 方法。看下图你就明白了
 
-![](/images/15057241768106.jpg)
+![](/media/15057241768106.jpg)
 
 `isEnabled` 已经无法再生成了，因为已经存在了。在项目当中应该避免则这样的命名，选择其一即可。
 
