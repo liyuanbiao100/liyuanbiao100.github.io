@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Android,Handler," />
+  <meta name="keywords" content="Android,Java," />
 
 
 
@@ -82,16 +82,16 @@
 
 
 <meta name="description" content="前言ThreadLocal类位于java.lang包下，jdk1.2开始引入。ThreadLocal为每个使用该类变量的线程提供单独的副本，线程之间不会互相影响。就是说在A线程设置的值只能在A线程读取到，在B线程是读取不到的。 在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁。但是局部变量">
-<meta name="keywords" content="Android,Handler">
+<meta name="keywords" content="Android,Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android Handler机制详解 - ThreadLocal">
-<meta property="og:url" content="https://liyuanbiao100.github.io/2017/10/10/Android-Handler机制详解-ThreadLocal/index.html">
+<meta property="og:title" content="ThreadLocal详解">
+<meta property="og:url" content="https://liyuanbiao100.github.io/2017/10/10/ThreadLocal详解/index.html">
 <meta property="og:site_name" content="我的个人博客">
 <meta property="og:description" content="前言ThreadLocal类位于java.lang包下，jdk1.2开始引入。ThreadLocal为每个使用该类变量的线程提供单独的副本，线程之间不会互相影响。就是说在A线程设置的值只能在A线程读取到，在B线程是读取不到的。 在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁。但是局部变量">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-22T07:56:42.074Z">
+<meta property="og:updated_time" content="2017-11-23T08:20:20.574Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Handler机制详解 - ThreadLocal">
+<meta name="twitter:title" content="ThreadLocal详解">
 <meta name="twitter:description" content="前言ThreadLocal类位于java.lang包下，jdk1.2开始引入。ThreadLocal为每个使用该类变量的线程提供单独的副本，线程之间不会互相影响。就是说在A线程设置的值只能在A线程读取到，在B线程是读取不到的。 在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁。但是局部变量">
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://liyuanbiao100.github.io/2017/10/10/Android-Handler机制详解-ThreadLocal/"/>
+  <link rel="canonical" href="https://liyuanbiao100.github.io/2017/10/10/ThreadLocal详解/"/>
 
 
 
 
 
-  <title>Android Handler机制详解 - ThreadLocal | 我的个人博客</title>
+  <title>ThreadLocal详解 | 我的个人博客</title>
   
 
 
@@ -255,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/10/Android-Handler机制详解-ThreadLocal/">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/10/ThreadLocal详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liyuanbiao">
@@ -272,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Android Handler机制详解 - ThreadLocal</h1>
+          <h1 class="post-title" itemprop="name headline">ThreadLocal详解</h1>
         
 
         <div class="post-meta">
@@ -385,7 +385,7 @@
           
             <a href="/tags/Android/" rel="tag"># Android</a>
           
-            <a href="/tags/Handler/" rel="tag"># Handler</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -491,7 +491,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
