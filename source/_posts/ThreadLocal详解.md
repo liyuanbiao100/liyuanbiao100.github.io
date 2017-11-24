@@ -1,10 +1,10 @@
 ---
-title: Android Handler机制详解 - ThreadLocal
+title: ThreadLocal详解
 date: 2017-10-10 12:59:59
 categories: Android
 tags: 
     - Android
-    - Handler
+    - Java
 ---
 
 ### 前言

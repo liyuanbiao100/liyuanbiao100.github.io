@@ -3,8 +3,8 @@ title: Java转Kotlin boolean属性的坑
 date: 2017-10-27 11:59:22
 categories: Android
 tags: 
-    - java 
-    - kotlin 
+    - Java 
+    - Kotlin 
     - Android
 ---
 

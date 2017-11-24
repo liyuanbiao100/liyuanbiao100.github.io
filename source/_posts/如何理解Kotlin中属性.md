@@ -3,7 +3,7 @@ title: 如何理解Kotlin中属性
 date: 2017-10-27 15:59:12
 tags:
     - Android
-    - kotlin
+    - Kotlin
 categories: Android
 ---
 
