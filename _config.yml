@@ -6,7 +6,7 @@ language: zh-Hans
 timezone: null
 url: 'https://liyuanbiao100.github.io/'
 root: /
-permalink: ':year/:month/:day/:title/'
+permalink: ':category/:title/'
 permalink_defaults: null
 source_dir: source
 public_dir: public
@@ -44,7 +44,7 @@ pagination_dir: page
 theme: next
 deploy:
   type: git
-  repo: 
+  repo:
     gitee: 'git@gitee.com:liyuanbiao/liyuanbiao.git'
     github: 'git@github.com:liyuanbiao100/liyuanbiao100.github.io.git'
   branch: master
