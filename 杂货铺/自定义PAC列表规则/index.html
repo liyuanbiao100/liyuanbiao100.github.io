@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Android,Java,Kotlin," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -81,20 +81,17 @@
 
 
 
-<meta name="description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
-<meta name="keywords" content="Android,Java,Kotlin">
+<meta name="description" content="规则大概描述如下 通配符支持，如 .example.com/ 实际书写时可省略  如 .example.com/ 意即 .example.com/* 正则表达式支持，以\开始和结束， 如 [\w]+://example.com\ 例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理匹配地址开始和结尾 |，如 |http://example.com、example.co">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java转Kotlin boolean属性的坑">
-<meta property="og:url" content="https://liyuanbiao100.github.io/2017/10/27/Java转Kotlin-boolean属性的坑/index.html">
+<meta property="og:title" content="自定义PAC列表规则">
+<meta property="og:url" content="https://liyuanbiao100.github.io/杂货铺/自定义PAC列表规则/index.html">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
+<meta property="og:description" content="规则大概描述如下 通配符支持，如 .example.com/ 实际书写时可省略  如 .example.com/ 意即 .example.com/* 正则表达式支持，以\开始和结束， 如 [\w]+://example.com\ 例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理匹配地址开始和结尾 |，如 |http://example.com、example.co">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://liyuanbiao100.github.io/media/15057241768106.jpg">
-<meta property="og:updated_time" content="2017-11-23T08:20:42.376Z">
+<meta property="og:updated_time" content="2017-12-05T07:13:20.844Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java转Kotlin boolean属性的坑">
-<meta name="twitter:description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
-<meta name="twitter:image" content="https://liyuanbiao100.github.io/media/15057241768106.jpg">
+<meta name="twitter:title" content="自定义PAC列表规则">
+<meta name="twitter:description" content="规则大概描述如下 通配符支持，如 .example.com/ 实际书写时可省略  如 .example.com/ 意即 .example.com/* 正则表达式支持，以\开始和结束， 如 [\w]+://example.com\ 例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理匹配地址开始和结尾 |，如 |http://example.com、example.co">
 
 
 
@@ -124,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="https://liyuanbiao100.github.io/2017/10/27/Java转Kotlin-boolean属性的坑/"/>
+  <link rel="canonical" href="https://liyuanbiao100.github.io/杂货铺/自定义PAC列表规则/"/>
 
 
 
 
 
-  <title>Java转Kotlin boolean属性的坑 | 我的个人博客</title>
+  <title>自定义PAC列表规则 | 我的个人博客</title>
   
 
 
@@ -257,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/27/Java转Kotlin-boolean属性的坑/">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/杂货铺/自定义PAC列表规则/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liyuanbiao">
@@ -274,7 +271,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java转Kotlin boolean属性的坑</h1>
+          <h1 class="post-title" itemprop="name headline">自定义PAC列表规则</h1>
         
 
         <div class="post-meta">
@@ -286,8 +283,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-27T11:59:22+08:00">
-                2017-10-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T10:35:05+08:00">
+                2017-10-25
               </time>
             
 
@@ -309,8 +306,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Android/" itemprop="url" rel="index">
-                    <span itemprop="name">Android</span>
+                  <a href="/categories/杂货铺/" itemprop="url" rel="index">
+                    <span itemprop="name">杂货铺</span>
                   </a>
                 </span>
 
@@ -351,43 +348,15 @@
       
 
       
-        <h3 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h3><p>假设一个 <code>JavaBean</code> 类中有 <code>boolean</code> 类型的字段叫做 <code>enabled</code><br>它生成的<code>setter</code>/<code>getter</code> 方法将是</p>
-<ul>
-<li>setter: <code>setEnabled(boolean enabled)</code></li>
-<li>getter: <code>isEnabled()</code></li>
+        <h4 id="规则大概描述如下"><a href="#规则大概描述如下" class="headerlink" title="规则大概描述如下"></a>规则大概描述如下</h4><ul>
+<li>通配符支持，如 <em>.example.com/</em> 实际书写时可省略 <em> 如 .example.com/ 意即 </em>.example.com/*</li>
+<li>正则表达式支持，以\开始和结束， 如 [\w]+://example.com\</li>
+<li>例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理<br>匹配地址开始和结尾 |，如 |<a href="http://example.com、example.com|" target="_blank" rel="external">http://example.com、example.com|</a> 分别表示以 <a href="http://example.com" target="_blank" rel="external">http://example.com</a> 开始和以 example.com 结束的地址</li>
+<li>|| 标记，如 ||example.com 则 <a href="http://example.com" target="_blank" rel="external">http://example.com</a> 、<a href="https://example.com" target="_blank" rel="external">https://example.com</a> 、ftp://example.com 等地址均满足条件，只用于匹配地址开头</li>
+<li>注释 ! 如 ! Comment</li>
+<li>分隔符^，表示除了字母、数字或者 _ - . % 之外的任何字符。如 <a href="http://example.com^" target="_blank" rel="external">http://example.com^</a> ，<a href="http://example.com/" target="_blank" rel="external">http://example.com/</a> 和 <a href="http://example.com:8000/" target="_blank" rel="external">http://example.com:8000/</a> 均满足条件，而 <a href="http://example.com.ar/" target="_blank" rel="external">http://example.com.ar/</a> 不满足条件</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span></span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">boolean</span> enabled;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEnabled</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> enabled;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEnabled</span><span class="params">(<span class="keyword">boolean</span> enabled)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.enabled = enabled;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>使用 <code>Android Studio</code> 的 <code>kotlin</code> 插件转换后将生成 <code>isEnabled</code> 属性，而不是 <code>enabled</code> 属性。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> isEnabled: <span class="built_in">Boolean</span> = <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们知道<code>kotlin</code>编译后也是生成<code>class</code>文件，所以也是可以转成<code>java</code>文件的，通过查看反编译后的结果来学习<code>kotlin</code>不失为一种好方法。</p>
-<p>可以在 <code>Android Studio</code> 执行下面的操作将 <code>kotlin</code> 代码重新转成<code>java</code>代码。<br>Tools / Kotlin / Show Kotlin Bytecode / Decompile. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">boolean</span> isEnabled;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">isEnabled</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.isEnabled;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setEnabled</span><span class="params">(<span class="keyword">boolean</span> var1)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.isEnabled = var1;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>可以看到是 <code>isEnabled</code> ，不是 <code>enabled</code>。</p>
-<h4 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h4><ul>
-<li><p>我在项目中使用的是<strong>Gson</strong>来解析后台返回来的数据。<strong>Gson</strong>是通过反射字段的名称来赋值的，然而数据中是 <code>enbaled</code> ，代码里是 <code>isEnabled</code> ，它将永远不能被赋值，永远为<code>false</code>，解决方法可以是</p>
-<ul>
-<li>给字段添加 <code>@SerializedName(value = &quot;enbaled&quot;)</code></li>
-<li>直接将 <code>isEnabled</code> 改成 <code>enbaled</code>，保证kotlin的幕后字段与后台返回数据一致即可.</li>
-</ul>
-</li>
-<li><p>如果你项目中用的是<strong>fastjson</strong>，那么需要为每个字段添加<code>setter</code>/<code>getter</code> 方法。<strong>fastjson</strong>是根据<strong>Javabean</strong>属性来赋值的，所以必须保证属性名正确。由于之前<strong>fastjson</strong>出现过序列化成功，但是反序列化失败的bug，致使我放弃使用<strong>fastjson</strong>。虽然<strong>fastjson</strong>以快著称，但是快不是唯一的需求，它只在数据量大的时候有明显差异，数据量小的时候差异几乎可是忽略不计，所以我选择<strong>Gson</strong>。</p>
-</li>
-</ul>
-<h3 id="细谈Java属性"><a href="#细谈Java属性" class="headerlink" title="细谈Java属性"></a>细谈Java属性</h3><p>在Java里面生成 <code>setter</code>/<code>getter</code> 方法是有一定规则的。</p>
-<ul>
-<li>如果类的成员变量的名字是xxx，那么为了更改或获取成员变量的值，即更改或获取属性，在类中可以使用两个方法：<ul>
-<li>getXxx()，用来获取属性xxx。</li>
-<li>setXxx()，用来修改属性xxx.。</li>
-</ul>
-</li>
-<li>对于boolean类型的成员变量，即布尔逻辑类型的属性，允许使用”is”代替上面的”get”。</li>
-<li>类中访问属性的方法都必须是public的，一般属性是private的。</li>
-<li>类中如果有构造方法，那么这个构造方法也是public的并且是无参数的。</li>
-</ul>
-<p>因为Java属性是由 <code>setter</code>/<code>getter</code> 方法决定的，而不是字段。在一个Java类里面，如果有<code>void setName(String name)</code>和<code>String getName()</code>方法，那么可以认为这个类有<code>name</code>这个属性（<strong>可读可写</strong>），如果仅有get，那么这个<code>name</code>属性就是个<strong>只读属性</strong>。即使没有<code>name</code>这个字段也是一样成立的。</p>
-<p>也就是说，对于 <code>boolean</code> 类型，<code>enabled</code> 和 <code>isEnabled</code> 这两个字段生成的<code>setter</code>/<code>getter</code> 方法是一致的。当这两个字段同时存在时，只能针对其中一个生成<code>setter</code>/<code>getter</code> 方法。看下图你就明白了</p>
-<p><img src="/media/15057241768106.jpg" alt=""></p>
-<p><code>isEnabled</code> 已经无法再生成了，因为已经存在了。在项目当中应该避免则这样的命名，选择其一即可。</p>
+<h4 id="如何使用自定义规则"><a href="#如何使用自定义规则" class="headerlink" title="如何使用自定义规则"></a>如何使用自定义规则</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">! Put user rules line by line in this file.</div><div class="line">! See https://adblockplus.org/en/filter-cheatsheet</div><div class="line">||amazonaws.com</div><div class="line">||atom.io</div><div class="line">||github.com^</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -403,16 +372,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag"># Android</a>
-          
-            <a href="/tags/Java/" rel="tag"># Java</a>
-          
-            <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
-          
-        </div>
-      
 
       
       
@@ -422,8 +381,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/25/自定义PAC列表规则/" rel="next" title="自定义PAC列表规则">
-                <i class="fa fa-chevron-left"></i> 自定义PAC列表规则
+              <a href="/JavaScript/继承与原型链/" rel="next" title="JavaScript 继承与原型链">
+                <i class="fa fa-chevron-left"></i> JavaScript 继承与原型链
               </a>
             
           </div>
@@ -432,8 +391,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/27/如何理解Kotlin中属性/" rel="prev" title="如何理解Kotlin中属性">
-                如何理解Kotlin中属性 <i class="fa fa-chevron-right"></i>
+              <a href="/Android/Java转Kotlin-boolean属性的坑/" rel="prev" title="Java转Kotlin boolean属性的坑">
+                Java转Kotlin boolean属性的坑 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -515,7 +474,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -526,7 +485,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -537,7 +496,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -579,7 +538,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#踩坑"><span class="nav-number">1.</span> <span class="nav-text">踩坑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可能遇到的问题"><span class="nav-number">1.1.</span> <span class="nav-text">可能遇到的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#细谈Java属性"><span class="nav-number">2.</span> <span class="nav-text">细谈Java属性</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#规则大概描述如下"><span class="nav-number">1.</span> <span class="nav-text">规则大概描述如下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何使用自定义规则"><span class="nav-number">2.</span> <span class="nav-text">如何使用自定义规则</span></a></li></ol></div>
             
 
           </div>

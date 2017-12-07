@@ -254,7 +254,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/11/23/Android-Handler机制详解/">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/Android/android-windowSoftInputMode详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liyuanbiao">
@@ -273,7 +273,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/23/Android-Handler机制详解/" itemprop="url">Android Handler机制详解</a></h1>
+                <a class="post-title-link" href="/Android/android-windowSoftInputMode详解/" itemprop="url">android:windowSoftInputMode详解</a></h1>
         
 
         <div class="post-meta">
@@ -285,8 +285,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T16:05:12+08:00">
-                2017-11-23
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T11:25:56+08:00">
+                2017-12-07
               </time>
             
 
@@ -295,6 +295,193 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Activity 的主窗口与包含屏幕软键盘的窗口的交互方式。 该属性的设置影响两个方面：</p>
+<ul>
+<li>当 Activity 成为用户注意的焦点时软键盘的状态 — 隐藏还是可见。</li>
+<li>对 Activity 主窗口所做的调整 — 是否将其尺寸调小以为软键盘腾出空间，或者当窗口部分被软键盘遮挡时是否平移其内容以使当前焦点可见。</li>
+</ul>
+<p>该设置必须是下表所列的值之一，或者是一个“state…”值加上一个“adjust…”值的组合。 在任一组中设置多个值（例如，多个“state…”值）都会产生未定义结果。各值之间使用垂直条 (|) 分隔。 例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;activity android:windowSoftInputMode=&quot;stateVisible|adjustResize&quot; . . . &gt;</div></pre></td></tr></table></figure>
+<p>此处设置的值（<code>stateUnspecified</code>和<code>adjustUnspecified</code>除外）替换主题中设置的值。</p>
+<ul>
+<li><p><code>stateUnspecified</code><br>  不指定软键盘的状态（隐藏还是可见）。<br>将由系统选择合适的状态，或依赖主题中的设置。这是对软键盘行为的默认设置。</p>
+</li>
+<li><p><code>stateUnchanged</code><br>  当 Activity 转至前台时保留软键盘最后所处的任何状态，无论是可见还是隐藏。</p>
+</li>
+<li><code>stateHidden</code><br>  当用户选择 Activity 时 — 也就是说，当用户确实是向前导航到 Activity，而不是因离开另一 Activity 而返回时 — 隐藏软键盘。</li>
+<li><code>stateAlwaysHidden</code><br>  当 Activity 的主窗口有输入焦点时始终隐藏软键盘。</li>
+<li><code>stateVisible</code><br>  在正常的适宜情况下（当用户向前导航到 Activity 的主窗口时）显示软键盘。</li>
+<li><code>stateAlwaysVisible</code><br>  当用户选择 Activity 时 — 也就是说，当用户确实是向前导航到 Activity，而不是因离开另一 Activity 而返回时 — 显示软键盘。</li>
+<li><code>adjustUnspecified</code><pre><code>不指定 Activity 的主窗口是否调整尺寸以为软键盘腾出空间，或者窗口内容是否进行平移以在屏幕上显露当前焦点。 系统会根据窗口的内容是否存在任何可滚动其内容的布局视图来自动选择其中一种模式。 如果存在这样的视图，窗口将进行尺寸调整，前提是可通过滚动在较小区域内看到窗口的所有内容。这是对主窗口行为的默认设置。
+</code></pre></li>
+<li><code>adjustResize</code><br>  始终调整 Activity 主窗口的尺寸来为屏幕上的软键盘腾出空间。</li>
+<li><code>adjustPan</code><br>  不调整 Activity 主窗口的尺寸来为软键盘腾出空间， 而是自动平移窗口的内容，使当前焦点永远不被键盘遮盖，让用户始终都能看到其输入的内容。 这通常不如尺寸调正可取，因为用户可能需要关闭软键盘以到达被遮盖的窗口部分或与这些部分进行交互。</li>
+</ul>
+<p>该属性是在 API 级别 3 引入的。</p>
+<h3 id="引入的版本："><a href="#引入的版本：" class="headerlink" title="引入的版本："></a>引入的版本：</h3><p>API 级别 1，为 <code>noHistory</code> 和 <code>windowSoftInputMode</code> 之外的所有属性引入，这两个属性则是在 API 级别 3 中增加。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/Android/Android-Handler机制详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liyuanbiao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Android/Android-Handler机制详解/" itemprop="url">Android Handler机制详解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-05T12:51:08+08:00">
+                2017-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -417,7 +604,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/27/Android应用内安装App的几种姿势/">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/Android/Android应用内安装App的几种姿势/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liyuanbiao">
@@ -436,7 +623,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/27/Android应用内安装App的几种姿势/" itemprop="url">Android应用内安装App的几种姿势</a></h1>
+                <a class="post-title-link" href="/Android/Android应用内安装App的几种姿势/" itemprop="url">Android应用内安装App的几种姿势</a></h1>
         
 
         <div class="post-meta">
@@ -604,7 +791,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/27/如何理解Kotlin中属性/">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/Android/如何理解Kotlin中属性/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liyuanbiao">
@@ -623,7 +810,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/27/如何理解Kotlin中属性/" itemprop="url">如何理解Kotlin中属性</a></h1>
+                <a class="post-title-link" href="/Android/如何理解Kotlin中属性/" itemprop="url">如何理解Kotlin中属性</a></h1>
         
 
         <div class="post-meta">
@@ -805,7 +992,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/27/Java转Kotlin-boolean属性的坑/">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/Android/Java转Kotlin-boolean属性的坑/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liyuanbiao">
@@ -824,7 +1011,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/27/Java转Kotlin-boolean属性的坑/" itemprop="url">Java转Kotlin boolean属性的坑</a></h1>
+                <a class="post-title-link" href="/Android/Java转Kotlin-boolean属性的坑/" itemprop="url">Java转Kotlin boolean属性的坑</a></h1>
         
 
         <div class="post-meta">
@@ -983,7 +1170,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/25/自定义PAC列表规则/">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/杂货铺/自定义PAC列表规则/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liyuanbiao">
@@ -1002,7 +1189,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/25/自定义PAC列表规则/" itemprop="url">自定义PAC列表规则</a></h1>
+                <a class="post-title-link" href="/杂货铺/自定义PAC列表规则/" itemprop="url">自定义PAC列表规则</a></h1>
         
 
         <div class="post-meta">
@@ -1133,7 +1320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/10/继承与原型链/">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/JavaScript/继承与原型链/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liyuanbiao">
@@ -1152,7 +1339,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/10/继承与原型链/" itemprop="url">JavaScript 继承与原型链</a></h1>
+                <a class="post-title-link" href="/JavaScript/继承与原型链/" itemprop="url">JavaScript 继承与原型链</a></h1>
         
 
         <div class="post-meta">
@@ -1327,7 +1514,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/10/ThreadLocal详解/">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/Android/ThreadLocal详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liyuanbiao">
@@ -1346,7 +1533,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/10/ThreadLocal详解/" itemprop="url">ThreadLocal详解</a></h1>
+                <a class="post-title-link" href="/Android/ThreadLocal详解/" itemprop="url">ThreadLocal详解</a></h1>
         
 
         <div class="post-meta">
@@ -1485,7 +1672,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/09/JavaScript-模板字符串/">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/javascript/JavaScript-模板字符串/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liyuanbiao">
@@ -1504,7 +1691,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/09/JavaScript-模板字符串/" itemprop="url">JavaScript 模板字符串</a></h1>
+                <a class="post-title-link" href="/javascript/JavaScript-模板字符串/" itemprop="url">javascript 模板字符串</a></h1>
         
 
         <div class="post-meta">
@@ -1539,8 +1726,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
-                    <span itemprop="name">JavaScript</span>
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
                   </a>
                 </span>
 
@@ -1649,7 +1836,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/09/12/Android-Studio-自动检查依赖库是否有新版本/">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/Android/Android-Studio-自动检查依赖库是否有新版本/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liyuanbiao">
@@ -1668,7 +1855,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/09/12/Android-Studio-自动检查依赖库是否有新版本/" itemprop="url">Android Studio 自动检查依赖库是否有新版本</a></h1>
+                <a class="post-title-link" href="/Android/Android-Studio-自动检查依赖库是否有新版本/" itemprop="url">Android Studio 自动检查依赖库是否有新版本</a></h1>
         
 
         <div class="post-meta">
@@ -1840,7 +2027,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1851,7 +2038,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1862,7 +2049,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

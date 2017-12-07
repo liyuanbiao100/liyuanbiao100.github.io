@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -81,17 +81,18 @@
 
 
 
-<meta name="description" content="规则大概描述如下 通配符支持，如 .example.com/ 实际书写时可省略  如 .example.com/ 意即 .example.com/* 正则表达式支持，以\开始和结束， 如 [\w]+://example.com\ 例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理匹配地址开始和结尾 |，如 |http://example.com、example.co">
+<meta name="description" content="Activity 的主窗口与包含屏幕软键盘的窗口的交互方式。 该属性的设置影响两个方面：  当 Activity 成为用户注意的焦点时软键盘的状态 — 隐藏还是可见。 对 Activity 主窗口所做的调整 — 是否将其尺寸调小以为软键盘腾出空间，或者当窗口部分被软键盘遮挡时是否平移其内容以使当前焦点可见。  该设置必须是下表所列的值之一，或者是一个“state…”值加上一个“adjust…”值的">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自定义PAC列表规则">
-<meta property="og:url" content="https://liyuanbiao100.github.io/2017/10/25/自定义PAC列表规则/index.html">
+<meta property="og:title" content="android:windowSoftInputMode详解">
+<meta property="og:url" content="https://liyuanbiao100.github.io/Android/android-windowSoftInputMode详解/index.html">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="规则大概描述如下 通配符支持，如 .example.com/ 实际书写时可省略  如 .example.com/ 意即 .example.com/* 正则表达式支持，以\开始和结束， 如 [\w]+://example.com\ 例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理匹配地址开始和结尾 |，如 |http://example.com、example.co">
+<meta property="og:description" content="Activity 的主窗口与包含屏幕软键盘的窗口的交互方式。 该属性的设置影响两个方面：  当 Activity 成为用户注意的焦点时软键盘的状态 — 隐藏还是可见。 对 Activity 主窗口所做的调整 — 是否将其尺寸调小以为软键盘腾出空间，或者当窗口部分被软键盘遮挡时是否平移其内容以使当前焦点可见。  该设置必须是下表所列的值之一，或者是一个“state…”值加上一个“adjust…”值的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-22T07:56:12.440Z">
+<meta property="og:updated_time" content="2017-12-07T03:28:54.795Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自定义PAC列表规则">
-<meta name="twitter:description" content="规则大概描述如下 通配符支持，如 .example.com/ 实际书写时可省略  如 .example.com/ 意即 .example.com/* 正则表达式支持，以\开始和结束， 如 [\w]+://example.com\ 例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理匹配地址开始和结尾 |，如 |http://example.com、example.co">
+<meta name="twitter:title" content="android:windowSoftInputMode详解">
+<meta name="twitter:description" content="Activity 的主窗口与包含屏幕软键盘的窗口的交互方式。 该属性的设置影响两个方面：  当 Activity 成为用户注意的焦点时软键盘的状态 — 隐藏还是可见。 对 Activity 主窗口所做的调整 — 是否将其尺寸调小以为软键盘腾出空间，或者当窗口部分被软键盘遮挡时是否平移其内容以使当前焦点可见。  该设置必须是下表所列的值之一，或者是一个“state…”值加上一个“adjust…”值的">
 
 
 
@@ -121,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="https://liyuanbiao100.github.io/2017/10/25/自定义PAC列表规则/"/>
+  <link rel="canonical" href="https://liyuanbiao100.github.io/Android/android-windowSoftInputMode详解/"/>
 
 
 
 
 
-  <title>自定义PAC列表规则 | 我的个人博客</title>
+  <title>android:windowSoftInputMode详解 | 我的个人博客</title>
   
 
 
@@ -254,7 +255,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/2017/10/25/自定义PAC列表规则/">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/Android/android-windowSoftInputMode详解/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="liyuanbiao">
@@ -271,7 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">自定义PAC列表规则</h1>
+          <h1 class="post-title" itemprop="name headline">android:windowSoftInputMode详解</h1>
         
 
         <div class="post-meta">
@@ -283,8 +284,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T10:35:05+08:00">
-                2017-10-25
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T11:25:56+08:00">
+                2017-12-07
               </time>
             
 
@@ -306,8 +307,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂货铺/" itemprop="url" rel="index">
-                    <span itemprop="name">杂货铺</span>
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
                   </a>
                 </span>
 
@@ -348,15 +349,30 @@
       
 
       
-        <h4 id="规则大概描述如下"><a href="#规则大概描述如下" class="headerlink" title="规则大概描述如下"></a>规则大概描述如下</h4><ul>
-<li>通配符支持，如 <em>.example.com/</em> 实际书写时可省略 <em> 如 .example.com/ 意即 </em>.example.com/*</li>
-<li>正则表达式支持，以\开始和结束， 如 [\w]+://example.com\</li>
-<li>例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理<br>匹配地址开始和结尾 |，如 |<a href="http://example.com、example.com|" target="_blank" rel="external">http://example.com、example.com|</a> 分别表示以 <a href="http://example.com" target="_blank" rel="external">http://example.com</a> 开始和以 example.com 结束的地址</li>
-<li>|| 标记，如 ||example.com 则 <a href="http://example.com" target="_blank" rel="external">http://example.com</a> 、<a href="https://example.com" target="_blank" rel="external">https://example.com</a> 、ftp://example.com 等地址均满足条件，只用于匹配地址开头</li>
-<li>注释 ! 如 ! Comment</li>
-<li>分隔符^，表示除了字母、数字或者 _ - . % 之外的任何字符。如 <a href="http://example.com^" target="_blank" rel="external">http://example.com^</a> ，<a href="http://example.com/" target="_blank" rel="external">http://example.com/</a> 和 <a href="http://example.com:8000/" target="_blank" rel="external">http://example.com:8000/</a> 均满足条件，而 <a href="http://example.com.ar/" target="_blank" rel="external">http://example.com.ar/</a> 不满足条件</li>
+        <p>Activity 的主窗口与包含屏幕软键盘的窗口的交互方式。 该属性的设置影响两个方面：</p>
+<ul>
+<li>当 Activity 成为用户注意的焦点时软键盘的状态 — 隐藏还是可见。</li>
+<li>对 Activity 主窗口所做的调整 — 是否将其尺寸调小以为软键盘腾出空间，或者当窗口部分被软键盘遮挡时是否平移其内容以使当前焦点可见。</li>
 </ul>
-<h4 id="如何使用自定义规则"><a href="#如何使用自定义规则" class="headerlink" title="如何使用自定义规则"></a>如何使用自定义规则</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">! Put user rules line by line in this file.</div><div class="line">! See https://adblockplus.org/en/filter-cheatsheet</div><div class="line">||amazonaws.com</div><div class="line">||atom.io</div><div class="line">||github.com^</div></pre></td></tr></table></figure>
+<p>该设置必须是下表所列的值之一，或者是一个“state…”值加上一个“adjust…”值的组合。 在任一组中设置多个值（例如，多个“state…”值）都会产生未定义结果。各值之间使用垂直条 (|) 分隔。 例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;activity android:windowSoftInputMode=&quot;stateVisible|adjustResize&quot; . . . &gt;</div></pre></td></tr></table></figure>
+<p>此处设置的值（<code>stateUnspecified</code>和<code>adjustUnspecified</code>除外）替换主题中设置的值。</p>
+<ul>
+<li><p><code>stateUnspecified</code><br>  不指定软键盘的状态（隐藏还是可见）。<br>将由系统选择合适的状态，或依赖主题中的设置。这是对软键盘行为的默认设置。</p>
+</li>
+<li><p><code>stateUnchanged</code><br>  当 Activity 转至前台时保留软键盘最后所处的任何状态，无论是可见还是隐藏。</p>
+</li>
+<li><code>stateHidden</code><br>  当用户选择 Activity 时 — 也就是说，当用户确实是向前导航到 Activity，而不是因离开另一 Activity 而返回时 — 隐藏软键盘。</li>
+<li><code>stateAlwaysHidden</code><br>  当 Activity 的主窗口有输入焦点时始终隐藏软键盘。</li>
+<li><code>stateVisible</code><br>  在正常的适宜情况下（当用户向前导航到 Activity 的主窗口时）显示软键盘。</li>
+<li><code>stateAlwaysVisible</code><br>  当用户选择 Activity 时 — 也就是说，当用户确实是向前导航到 Activity，而不是因离开另一 Activity 而返回时 — 显示软键盘。</li>
+<li><code>adjustUnspecified</code><pre><code>不指定 Activity 的主窗口是否调整尺寸以为软键盘腾出空间，或者窗口内容是否进行平移以在屏幕上显露当前焦点。 系统会根据窗口的内容是否存在任何可滚动其内容的布局视图来自动选择其中一种模式。 如果存在这样的视图，窗口将进行尺寸调整，前提是可通过滚动在较小区域内看到窗口的所有内容。这是对主窗口行为的默认设置。
+</code></pre></li>
+<li><code>adjustResize</code><br>  始终调整 Activity 主窗口的尺寸来为屏幕上的软键盘腾出空间。</li>
+<li><code>adjustPan</code><br>  不调整 Activity 主窗口的尺寸来为软键盘腾出空间， 而是自动平移窗口的内容，使当前焦点永远不被键盘遮盖，让用户始终都能看到其输入的内容。 这通常不如尺寸调正可取，因为用户可能需要关闭软键盘以到达被遮盖的窗口部分或与这些部分进行交互。</li>
+</ul>
+<p>该属性是在 API 级别 3 引入的。</p>
+<h3 id="引入的版本："><a href="#引入的版本：" class="headerlink" title="引入的版本："></a>引入的版本：</h3><p>API 级别 1，为 <code>noHistory</code> 和 <code>windowSoftInputMode</code> 之外的所有属性引入，这两个属性则是在 API 级别 3 中增加。</p>
 
       
     </div>
@@ -372,6 +388,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
 
       
       
@@ -381,8 +403,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/10/继承与原型链/" rel="next" title="JavaScript 继承与原型链">
-                <i class="fa fa-chevron-left"></i> JavaScript 继承与原型链
+              <a href="/Android/Android-Handler机制详解/" rel="next" title="Android Handler机制详解">
+                <i class="fa fa-chevron-left"></i> Android Handler机制详解
               </a>
             
           </div>
@@ -390,10 +412,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/27/Java转Kotlin-boolean属性的坑/" rel="prev" title="Java转Kotlin boolean属性的坑">
-                Java转Kotlin boolean属性的坑 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -474,7 +492,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -485,7 +503,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -496,7 +514,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -538,7 +556,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#规则大概描述如下"><span class="nav-number">1.</span> <span class="nav-text">规则大概描述如下</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何使用自定义规则"><span class="nav-number">2.</span> <span class="nav-text">如何使用自定义规则</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入的版本："><span class="nav-number">1.</span> <span class="nav-text">引入的版本：</span></a></li></ol></div>
             
 
           </div>

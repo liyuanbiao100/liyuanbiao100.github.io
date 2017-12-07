@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,Java,Kotlin," />
+
+
+
+
+
+  <link rel="alternate" href="https://liyuanbiao100.github.io/rss2" title="我的个人博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
+<meta name="keywords" content="Android,Java,Kotlin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java转Kotlin boolean属性的坑">
+<meta property="og:url" content="https://liyuanbiao100.github.io/Android/Java转Kotlin-boolean属性的坑/index.html">
+<meta property="og:site_name" content="我的个人博客">
+<meta property="og:description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://liyuanbiao100.github.io/media/15057241768106.jpg">
+<meta property="og:updated_time" content="2017-11-23T08:20:42.376Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java转Kotlin boolean属性的坑">
+<meta name="twitter:description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
+<meta name="twitter:image" content="https://liyuanbiao100.github.io/media/15057241768106.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liyuanbiao100.github.io/Android/Java转Kotlin-boolean属性的坑/"/>
+
+
+
+
+
+  <title>Java转Kotlin boolean属性的坑 | 我的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">我的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/Android/Java转Kotlin-boolean属性的坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liyuanbiao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java转Kotlin boolean属性的坑</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-27T11:59:22+08:00">
+                2017-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">浏览</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h3><p>假设一个 <code>JavaBean</code> 类中有 <code>boolean</code> 类型的字段叫做 <code>enabled</code><br>它生成的<code>setter</code>/<code>getter</code> 方法将是</p>
+<ul>
+<li>setter: <code>setEnabled(boolean enabled)</code></li>
+<li>getter: <code>isEnabled()</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span></span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">boolean</span> enabled;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEnabled</span><span class="params">()</span> </span>&#123;</div><div class="line">            <span class="keyword">return</span> enabled;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEnabled</span><span class="params">(<span class="keyword">boolean</span> enabled)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.enabled = enabled;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>使用 <code>Android Studio</code> 的 <code>kotlin</code> 插件转换后将生成 <code>isEnabled</code> 属性，而不是 <code>enabled</code> 属性。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> isEnabled: <span class="built_in">Boolean</span> = <span class="literal">false</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们知道<code>kotlin</code>编译后也是生成<code>class</code>文件，所以也是可以转成<code>java</code>文件的，通过查看反编译后的结果来学习<code>kotlin</code>不失为一种好方法。</p>
+<p>可以在 <code>Android Studio</code> 执行下面的操作将 <code>kotlin</code> 代码重新转成<code>java</code>代码。<br>Tools / Kotlin / Show Kotlin Bytecode / Decompile. </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span> </span>&#123;</div><div class="line">   <span class="keyword">private</span> <span class="keyword">boolean</span> isEnabled;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">isEnabled</span><span class="params">()</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.isEnabled;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setEnabled</span><span class="params">(<span class="keyword">boolean</span> var1)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.isEnabled = var1;</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以看到是 <code>isEnabled</code> ，不是 <code>enabled</code>。</p>
+<h4 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h4><ul>
+<li><p>我在项目中使用的是<strong>Gson</strong>来解析后台返回来的数据。<strong>Gson</strong>是通过反射字段的名称来赋值的，然而数据中是 <code>enbaled</code> ，代码里是 <code>isEnabled</code> ，它将永远不能被赋值，永远为<code>false</code>，解决方法可以是</p>
+<ul>
+<li>给字段添加 <code>@SerializedName(value = &quot;enbaled&quot;)</code></li>
+<li>直接将 <code>isEnabled</code> 改成 <code>enbaled</code>，保证kotlin的幕后字段与后台返回数据一致即可.</li>
+</ul>
+</li>
+<li><p>如果你项目中用的是<strong>fastjson</strong>，那么需要为每个字段添加<code>setter</code>/<code>getter</code> 方法。<strong>fastjson</strong>是根据<strong>Javabean</strong>属性来赋值的，所以必须保证属性名正确。由于之前<strong>fastjson</strong>出现过序列化成功，但是反序列化失败的bug，致使我放弃使用<strong>fastjson</strong>。虽然<strong>fastjson</strong>以快著称，但是快不是唯一的需求，它只在数据量大的时候有明显差异，数据量小的时候差异几乎可是忽略不计，所以我选择<strong>Gson</strong>。</p>
+</li>
+</ul>
+<h3 id="细谈Java属性"><a href="#细谈Java属性" class="headerlink" title="细谈Java属性"></a>细谈Java属性</h3><p>在Java里面生成 <code>setter</code>/<code>getter</code> 方法是有一定规则的。</p>
+<ul>
+<li>如果类的成员变量的名字是xxx，那么为了更改或获取成员变量的值，即更改或获取属性，在类中可以使用两个方法：<ul>
+<li>getXxx()，用来获取属性xxx。</li>
+<li>setXxx()，用来修改属性xxx.。</li>
+</ul>
+</li>
+<li>对于boolean类型的成员变量，即布尔逻辑类型的属性，允许使用”is”代替上面的”get”。</li>
+<li>类中访问属性的方法都必须是public的，一般属性是private的。</li>
+<li>类中如果有构造方法，那么这个构造方法也是public的并且是无参数的。</li>
+</ul>
+<p>因为Java属性是由 <code>setter</code>/<code>getter</code> 方法决定的，而不是字段。在一个Java类里面，如果有<code>void setName(String name)</code>和<code>String getName()</code>方法，那么可以认为这个类有<code>name</code>这个属性（<strong>可读可写</strong>），如果仅有get，那么这个<code>name</code>属性就是个<strong>只读属性</strong>。即使没有<code>name</code>这个字段也是一样成立的。</p>
+<p>也就是说，对于 <code>boolean</code> 类型，<code>enabled</code> 和 <code>isEnabled</code> 这两个字段生成的<code>setter</code>/<code>getter</code> 方法是一致的。当这两个字段同时存在时，只能针对其中一个生成<code>setter</code>/<code>getter</code> 方法。看下图你就明白了</p>
+<p><img src="/media/15057241768106.jpg" alt=""></p>
+<p><code>isEnabled</code> 已经无法再生成了，因为已经存在了。在项目当中应该避免则这样的命名，选择其一即可。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/杂货铺/自定义PAC列表规则/" rel="next" title="自定义PAC列表规则">
+                <i class="fa fa-chevron-left"></i> 自定义PAC列表规则
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Android/如何理解Kotlin中属性/" rel="prev" title="如何理解Kotlin中属性">
+                如何理解Kotlin中属性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="liyuanbiao" />
+            
+              <p class="site-author-name" itemprop="name">liyuanbiao</p>
+              <p class="site-description motion-element" itemprop="description">知识整理</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="https://liyuanbiao100.github.io/rss2" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#踩坑"><span class="nav-number">1.</span> <span class="nav-text">踩坑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可能遇到的问题"><span class="nav-number">1.1.</span> <span class="nav-text">可能遇到的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#细谈Java属性"><span class="nav-number">2.</span> <span class="nav-text">细谈Java属性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liyuanbiao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">访问人数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">访问总量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
