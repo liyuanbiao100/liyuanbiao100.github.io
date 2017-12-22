@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,bluetooth," />
+
+
+
+
+
+  <link rel="alternate" href="https://liyuanbiao100.github.io/rss2" title="我的个人博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="关键术语和概念下面是一些BLE关键术语和概念的摘要 Generic Attribute Profile（GATT）：GATT profile是一种关于发送和接收简短数据片段的一般规范，这种简短数据片段例如在BLE的连接上众所周知的“attribute（属性）”等。当前所有低功耗应用程序的profile都基于GATT。另外，蓝牙技术联盟（Bluetooth SIG）已经为很多BLE设备定义了prof">
+<meta name="keywords" content="Android,bluetooth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android低功耗蓝牙">
+<meta property="og:url" content="https://liyuanbiao100.github.io/Android/Android低功耗蓝牙/index.html">
+<meta property="og:site_name" content="我的个人博客">
+<meta property="og:description" content="关键术语和概念下面是一些BLE关键术语和概念的摘要 Generic Attribute Profile（GATT）：GATT profile是一种关于发送和接收简短数据片段的一般规范，这种简短数据片段例如在BLE的连接上众所周知的“attribute（属性）”等。当前所有低功耗应用程序的profile都基于GATT。另外，蓝牙技术联盟（Bluetooth SIG）已经为很多BLE设备定义了prof">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-21T08:15:44.715Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android低功耗蓝牙">
+<meta name="twitter:description" content="关键术语和概念下面是一些BLE关键术语和概念的摘要 Generic Attribute Profile（GATT）：GATT profile是一种关于发送和接收简短数据片段的一般规范，这种简短数据片段例如在BLE的连接上众所周知的“attribute（属性）”等。当前所有低功耗应用程序的profile都基于GATT。另外，蓝牙技术联盟（Bluetooth SIG）已经为很多BLE设备定义了prof">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liyuanbiao100.github.io/Android/Android低功耗蓝牙/"/>
+
+
+
+
+
+  <title>Android低功耗蓝牙 | 我的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">我的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/Android/Android低功耗蓝牙/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liyuanbiao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android低功耗蓝牙</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T14:58:17+08:00">
+                2017-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">浏览</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="关键术语和概念"><a href="#关键术语和概念" class="headerlink" title="关键术语和概念"></a>关键术语和概念</h1><h2 id="下面是一些BLE关键术语和概念的摘要"><a href="#下面是一些BLE关键术语和概念的摘要" class="headerlink" title="下面是一些BLE关键术语和概念的摘要"></a>下面是一些BLE关键术语和概念的摘要</h2><ul>
+<li>Generic Attribute Profile（GATT）：GATT profile是一种关于发送和接收简短数据片段的一般规范，这种简短数据片段例如在BLE的连接上众所周知的“attribute（属性）”等。当前所有低功耗应用程序的profile都基于GATT。另外，蓝牙技术联盟（Bluetooth SIG）已经为很多BLE设备定义了profile。profile就是一种在指定的应用程序中定义设备如何工作的规范。注意，一台设备可以实现多个profile。例如，一台设备可以包含心率监视器和电池电量探测器。</li>
+<li>Attribute Protocol（ATT，属性协议）：GATT构建在ATT的基础之上，因此也总被成为GATT/ATT。ATT针对BLE设备的运行进行了优化。为此，它会尽可能的使用更少的字节数据。每一个属性都通过UUID来唯一确定。UUID就是一个标准128位格式的字符串ID，用于唯一确定一个信息。属性通过ATT协议格式化为characteristics和services后进行传输。</li>
+<li>Characteristic：一个characteristic中包含一个值，以及0个或多个用于描述characteristic值的descriptor。可以将characteristic认为是一种类型，类似于一个类。</li>
+<li>Descriptor：Descriptor（描述符）中定义的属性用于描述一个characteristic值。例如，一个descriptor可以为一个characteristic的值指定一个在可接受范围内的可读性描述，或者为一个characteristic的值指定一个计量单位。</li>
+<li>Service：一个service是一个characteristic的集合。例如，你可以持有一个名为“心率监视器”的service，它包含的characteristic例如“心率测量”。你可以在bluetooth.org上找到一系列基于GATT的profile和service。</li>
+</ul>
+<h2 id="角色和职能"><a href="#角色和职能" class="headerlink" title="角色和职能"></a>角色和职能</h2><p>以下是一台Android设备与BLE设备交互时的一些适用角色和职能：</p>
+<ul>
+<li><p>中央设备和外围设备。这适用于BLE自身的连接。担任中央设备角色的设备负责扫描和搜索广告，担任外围设备的角色负责发送广告。</p>
+</li>
+<li><p>GATT服务端和GATT客户端。这取决于两台设备在建立连接后如何互相通信。</p>
+</li>
+</ul>
+<p>为了理解这之间的区别，想象你有一台Android手机和一台BLE设备作为活动追踪器。手机将担任中央设备角色；活动追踪器将担任外围设备角色（你需要具备两种角色才能建立一个BLE连接，两者都担任外围设备角色不能互相通信，同样两者都担任中央设备角色也不能互相通信）。</p>
+<p>一旦手机和活动追踪器建立连接，它们就可以互相传输GATT媒体数据。根据它们传输的数据，其中一方需要担任服务端的角色。例如，如果活动追踪器想要发送传感器数据给手机，活动追踪器就需要担任服务端的角色。如果活动追踪器想要接收手机的数据，手机就需要担任服务端的角色。</p>
+<p>在本片文档的例子中，Android应用程序（运行在Android设备上）是GATT客户端。应用程序从GATT服务端获取数据，这个服务端由支持Heart Rate Profile的BLE心率监视器设备担任。但是你可以交替让你的Android应用程序扮演GATT服务端的角色。具体参考<a href="http://developer.android.com/reference/android/bluetooth/BluetoothGattServer.html" target="_blank" rel="external">BluetoothGattService</a>。</p>
+<h1 id="BLE-Permissions（BLE权限）"><a href="#BLE-Permissions（BLE权限）" class="headerlink" title="BLE Permissions（BLE权限）"></a>BLE Permissions（BLE权限）</h1><p>为了在你的应用程序中使用Bluetooth的功能，你必须声明android.permission.BLUETOOTH权限。你需要这个权限来执行一些蓝牙通信的操作，例如请求链接，接受连接，还有传输数据。</p>
+<p>如果你想让你的应用程序进行设备扫描或者管理蓝牙设置，你必须同时声明android.permission.BLUETOOTH_ADMIN权限。注意，如果你使用BLUETOOTH_ADMIN权限，你必须同时声明BLUETOOTH权限。</p>
+<p>在你的应用程序manifest文件中声明蓝牙权限，例如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.BLUETOOTH"</span>/&gt;</span>  </div><div class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"android.permission.BLUETOOTH_ADMIN"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>如果你想声明你的应用程序只能在支持BLE的设备上运行，可以将下面声明包含进你的应用程序manifest文件中：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">uses-feature</span> <span class="attr">android:name</span>=<span class="string">"android.hardware.bluetooth_le"</span> <span class="attr">android:required</span>=<span class="string">"true"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>然而，如果你想让你的应用程序也能够在不支持BLE的设备上运行，你就应该将上面标签中的属性设置为<code>required=&quot;false&quot;</code>。然后在运行的过程中使用<code>PackageManager.hasSystemFeature()</code>方法来判断设备是否支持BLE：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 使用下面的方法来确定设备是否支持BLE, 然后你可以选择禁用BLE的功能  </span></div><div class="line"><span class="keyword">if</span> (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) &#123;  </div><div class="line">    Toast.makeText(<span class="keyword">this</span>, R.string.ble_not_supported, Toast.LENGTH_SHORT).show();  </div><div class="line">    finish();  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Setting-Up-BLE（设置BLE）"><a href="#Setting-Up-BLE（设置BLE）" class="headerlink" title="Setting Up BLE（设置BLE）"></a>Setting Up BLE（设置BLE）</h1><p>在你的应用程序通过BLE进行通信之前，你需要确认设备是否支持BLE。如果支持，还要再确认是否已经启用。注意这个检查步骤只有在<code>&lt;uses-festure.../&gt;</code>设置为<code>false</code>的情况下才需要执行。</p>
+<p>如果不支持BLE，你应该优雅的禁止一些使用BLE的功能。如果支持BLE，但是目前禁用了，那么你需要在不离开你的应用程序状态下，请求用户启用蓝牙用能。这个过程需要使用BluetoothAdapter，分两个步骤完成：</p>
+<h2 id="获取BluetoothAdapter"><a href="#获取BluetoothAdapter" class="headerlink" title="获取BluetoothAdapter"></a>获取BluetoothAdapter</h2><p>基本上所有使用蓝牙的activity都需要BluetoothAdapter。BluetoothAdapter代表了设备本身的蓝牙适配器（蓝牙发送接收器）。在整个系统中有一个BluetoothAdapter对象，你的应用程序可以使用这个对象进行交互。下面的代码片段展示了如果获取这个适配器。注意下面的这种方法使用getSystemService()方法来获取一个BluetoothManager实例，之后再通过BluetoothManager获取BluetoothAdapter。Android 4.3（API Level 18）才开始支持BluetoothManager：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 初始化蓝牙适配器.  </span></div><div class="line"><span class="keyword">final</span> BluetoothManager bluetoothManager =  </div><div class="line">        (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);  </div><div class="line">mBluetoothAdapter = bluetoothManager.getAdapter();</div></pre></td></tr></table></figure>
+<h2 id="启用蓝牙"><a href="#启用蓝牙" class="headerlink" title="启用蓝牙"></a>启用蓝牙</h2><p>下一步，你需要确保蓝牙已经启动。调用<code>isEnable()</code>方法来检查蓝牙当前是否已经启用。如果方法返回false，说明蓝牙被禁用了。下面的代码片段中检查蓝牙是否已经启用。如果没有启用，代码片段会显示一个错误提示用户去设置中启用蓝牙：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> BluetoothAdapter mBluetoothAdapter;  </div><div class="line">...  </div><div class="line"><span class="comment">// 确认设备支持蓝牙并且已经启用. 如果没有,  </span></div><div class="line"><span class="comment">// 显示一个对话框要求用户授权启用蓝牙.  </span></div><div class="line"><span class="keyword">if</span> (mBluetoothAdapter == <span class="keyword">null</span> || !mBluetoothAdapter.isEnabled()) &#123;  </div><div class="line">    Intent enableBtIntent = <span class="keyword">new</span> Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);  </div><div class="line">    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Finding-BLE-Devices（搜索BLE设备）"><a href="#Finding-BLE-Devices（搜索BLE设备）" class="headerlink" title="Finding BLE Devices（搜索BLE设备）"></a>Finding BLE Devices（搜索BLE设备）</h1><p>搜索BLE设备，你可以使用startLeScan()方法。这个方法需要一个BluetoothAdapter.LeScanCallback对象作为参数。你必须实现这个callback接口，因为扫描的结果会通过这个接口返回。由于搜索设备是比较耗电的操作，你应该遵循以下指南使用：</p>
+<ul>
+<li><p>一旦你找到目标设备，应该马上停止搜索。</p>
+</li>
+<li><p>不要死循环搜索，并设置搜索的最长时间。一台以前可以访问的设备可能已经移出了可检测范围，继续扫描只会消耗电量。</p>
+</li>
+</ul>
+<p>下面的代码片段展示了如何开始和停止搜索</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment"> * 扫描和显示可访问BLE设备的Activity.</span></div><div class="line"><span class="comment"> */</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeviceScanActivity</span> <span class="keyword">extends</span> <span class="title">ListActivity</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> BluetoothAdapter mBluetoothAdapter;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> mScanning;</div><div class="line">    <span class="keyword">private</span> Handler mHandler;</div><div class="line"></div><div class="line">    <span class="comment">// 10秒钟后停止扫描.</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> SCAN_PERIOD = <span class="number">10000</span>;</div><div class="line">    ...</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">scanLeDevice</span><span class="params">(<span class="keyword">final</span> <span class="keyword">boolean</span> enable)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (enable) &#123;</div><div class="line">            <span class="comment">// 在预定义的扫描时间周期后停止扫描.</span></div><div class="line">            mHandler.postDelayed(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">                <span class="meta">@Override</span></div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                    mScanning = <span class="keyword">false</span>;</div><div class="line">                    mBluetoothAdapter.stopLeScan(mLeScanCallback);</div><div class="line">                &#125;</div><div class="line">            &#125;, SCAN_PERIOD);</div><div class="line"></div><div class="line">            mScanning = <span class="keyword">true</span>;</div><div class="line">            mBluetoothAdapter.startLeScan(mLeScanCallback);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            mScanning = <span class="keyword">false</span>;</div><div class="line">            mBluetoothAdapter.stopLeScan(mLeScanCallback);</div><div class="line">        &#125;</div><div class="line">        ...</div><div class="line">    &#125;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果你只想搜索指定类型的外围设备，你可以替换成startLeScan(UUID[], BluetoothAdapter.LeScanCallback)方法，并提供一个你的应用程序所支持的GATT服务的UUID对象数组。</p>
+<p>下面是一个BluetoothAdapter.LeScanCallback的实现，它是一个用于接收BLE搜索结果的接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> LeDeviceListAdapter mLeDeviceListAdapter;</div><div class="line">...</div><div class="line"><span class="comment">// 设备搜索回调接口.</span></div><div class="line"><span class="keyword">private</span> BluetoothAdapter.LeScanCallback mLeScanCallback =</div><div class="line">        <span class="keyword">new</span> BluetoothAdapter.LeScanCallback() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLeScan</span><span class="params">(<span class="keyword">final</span> BluetoothDevice device, <span class="keyword">int</span> rssi,</span></span></div><div class="line"><span class="function"><span class="params">            <span class="keyword">byte</span>[] scanRecord)</span> </span>&#123;</div><div class="line">        runOnUiThread(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">           <span class="meta">@Override</span></div><div class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">               mLeDeviceListAdapter.addDevice(device);</div><div class="line">               mLeDeviceListAdapter.notifyDataSetChanged();</div><div class="line">           &#125;</div><div class="line">       &#125;);</div><div class="line">   &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>注意：正如Bluetooth文档中所描述的，在同一个时间你只能搜索BLE设备或者搜索传统蓝牙设备。你不能同时搜索BLE设备和传统蓝牙设备。</p>
+<h1 id="Connecting-to-a-GATT-Server（连接一个GATT服务）"><a href="#Connecting-to-a-GATT-Server（连接一个GATT服务）" class="headerlink" title="Connecting to a GATT Server（连接一个GATT服务）"></a>Connecting to a GATT Server（连接一个GATT服务）</h1><p>与BLE设备交互的第一步就是要连接上它——更准确的说，是连接设备上的GATT服务。连接BLE设备上的GATT服务，你可以使用connectGatt()方法。这个方法需要三个参数：一个Context对象，autoConnect（一个表示是否当BLE设备可访问时马上自动连接的boolean值），还有一个BluetoothGattCallback对象:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mBluetoothGatt = device.connectGatt(<span class="keyword">this</span>, <span class="keyword">false</span>, mGattCallback);</div></pre></td></tr></table></figure>
+<p>上面的代码会连接BLE设备管理的GATT服务，并返回一个BluetoothGatt实例，通过这个实例就可以执行GATT客户端的相关操作。这个调用者（Android应用程序）就是GATT客户端。里面的BluetoothGattCallback对象用于交付操作结果给客户端，例如连接状态，还有将来一些GATT客户端操作的结果。</p>
+<p>在这个例子中，BLE应用程序提供了一个activity（DeviceControlActivity）来连接、显示数据，和显示BLE设备所支持的GATT的service以及characteristic。基于用户的输入，这个activity会和一个名为BluetoothLeService的Service通信，这个service通过Android BLE的API与BLE设备进行交互。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 一个通过Android BLE API与BLE设备进行交互的service.</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BluetoothLeService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String TAG = BluetoothLeService.class.getSimpleName();</div><div class="line"></div><div class="line">    <span class="keyword">private</span> BluetoothManager mBluetoothManager;</div><div class="line">    <span class="keyword">private</span> BluetoothAdapter mBluetoothAdapter;</div><div class="line">    <span class="keyword">private</span> String mBluetoothDeviceAddress;</div><div class="line">    <span class="keyword">private</span> BluetoothGatt mBluetoothGatt;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mConnectionState = STATE_DISCONNECTED;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STATE_DISCONNECTED = <span class="number">0</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STATE_CONNECTING = <span class="number">1</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STATE_CONNECTED = <span class="number">2</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String ACTION_GATT_CONNECTED =</div><div class="line">            <span class="string">"com.example.bluetooth.le.ACTION_GATT_CONNECTED"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String ACTION_GATT_DISCONNECTED =</div><div class="line">            <span class="string">"com.example.bluetooth.le.ACTION_GATT_DISCONNECTED"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String ACTION_GATT_SERVICES_DISCOVERED =</div><div class="line">            <span class="string">"com.example.bluetooth.le.ACTION_GATT_SERVICES_DISCOVERED"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String ACTION_DATA_AVAILABLE =</div><div class="line">            <span class="string">"com.example.bluetooth.le.ACTION_DATA_AVAILABLE"</span>;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> String EXTRA_DATA =</div><div class="line">            <span class="string">"com.example.bluetooth.le.EXTRA_DATA"</span>;</div><div class="line"></div><div class="line">    <span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">static</span> UUID UUID_HEART_RATE_MEASUREMENT =</div><div class="line">            UUID.fromString(SampleGattAttributes.HEART_RATE_MEASUREMENT);</div><div class="line"></div><div class="line">    <span class="comment">// BLE API定义的各个回调方法.</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> BluetoothGattCallback mGattCallback =</div><div class="line">            <span class="keyword">new</span> BluetoothGattCallback() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onConnectionStateChange</span><span class="params">(BluetoothGatt gatt, <span class="keyword">int</span> status,</span></span></div><div class="line"><span class="function"><span class="params">                <span class="keyword">int</span> newState)</span> </span>&#123;</div><div class="line">            String intentAction;</div><div class="line">            <span class="keyword">if</span> (newState == BluetoothProfile.STATE_CONNECTED) &#123;</div><div class="line">                intentAction = ACTION_GATT_CONNECTED;</div><div class="line">                mConnectionState = STATE_CONNECTED;</div><div class="line">                broadcastUpdate(intentAction);</div><div class="line">                Log.i(TAG, <span class="string">"连接GATT服务."</span>);</div><div class="line">                Log.i(TAG, <span class="string">"尝试开始service搜索:"</span> +</div><div class="line">                        mBluetoothGatt.discoverServices());</div><div class="line"></div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (newState == BluetoothProfile.STATE_DISCONNECTED) &#123;</div><div class="line">                intentAction = ACTION_GATT_DISCONNECTED;</div><div class="line">                mConnectionState = STATE_DISCONNECTED;</div><div class="line">                Log.i(TAG, <span class="string">"断开GATT server连接."</span>);</div><div class="line">                broadcastUpdate(intentAction);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="comment">// New services discovered</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServicesDiscovered</span><span class="params">(BluetoothGatt gatt, <span class="keyword">int</span> status)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (status == BluetoothGatt.GATT_SUCCESS) &#123;</div><div class="line">                broadcastUpdate(ACTION_GATT_SERVICES_DISCOVERED);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                Log.w(TAG, <span class="string">"onServicesDiscovered received: "</span> + status);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="comment">// Result of a characteristic read operation</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCharacteristicRead</span><span class="params">(BluetoothGatt gatt,</span></span></div><div class="line"><span class="function"><span class="params">                BluetoothGattCharacteristic characteristic,</span></span></div><div class="line"><span class="function"><span class="params">                <span class="keyword">int</span> status)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (status == BluetoothGatt.GATT_SUCCESS) &#123;</div><div class="line">                broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">     ...</div><div class="line">    &#125;;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当一个特定的的回调方法被调用的时候，它就会适当调用broadcastUpdate()帮助方法并传递一个操作标识。注意本节中的数据是根据蓝牙心率测量的profile规范解析的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">broadcastUpdate</span><span class="params">(<span class="keyword">final</span> String action)</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> Intent intent = <span class="keyword">new</span> Intent(action);</div><div class="line">    sendBroadcast(intent);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">broadcastUpdate</span><span class="params">(<span class="keyword">final</span> String action,</span></span></div><div class="line"><span class="function"><span class="params">                             <span class="keyword">final</span> BluetoothGattCharacteristic characteristic)</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> Intent intent = <span class="keyword">new</span> Intent(action);</div><div class="line"></div><div class="line">    <span class="comment">// 按照心率测量的profile进行的特定处理.</span></div><div class="line">    <span class="comment">// 按照么一个profile规范进行数据解析.</span></div><div class="line">    <span class="keyword">if</span> (UUID_HEART_RATE_MEASUREMENT.equals(characteristic.getUuid())) &#123;</div><div class="line">        <span class="keyword">int</span> flag = characteristic.getProperties();</div><div class="line">        <span class="keyword">int</span> format = -<span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> ((flag &amp; <span class="number">0x01</span>) != <span class="number">0</span>) &#123;</div><div class="line">            format = BluetoothGattCharacteristic.FORMAT_UINT16;</div><div class="line">            Log.d(TAG, <span class="string">"Heart rate format UINT16."</span>);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            format = BluetoothGattCharacteristic.FORMAT_UINT8;</div><div class="line">            Log.d(TAG, <span class="string">"Heart rate format UINT8."</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">final</span> <span class="keyword">int</span> heartRate = characteristic.getIntValue(format, <span class="number">1</span>);</div><div class="line">        Log.d(TAG, String.format(<span class="string">"Received heart rate: %d"</span>, heartRate));</div><div class="line">        intent.putExtra(EXTRA_DATA, String.valueOf(heartRate));</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">// 针对其他profiles, 将数据格式化为16禁止数据.</span></div><div class="line">        <span class="keyword">final</span> <span class="keyword">byte</span>[] data = characteristic.getValue();</div><div class="line">        <span class="keyword">if</span> (data != <span class="keyword">null</span> &amp;&amp; data.length &gt; <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">final</span> StringBuilder stringBuilder = <span class="keyword">new</span> StringBuilder(data.length);</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">byte</span> byteChar : data)</div><div class="line">                stringBuilder.append(String.format(<span class="string">"%02X "</span>, byteChar));</div><div class="line">            intent.putExtra(EXTRA_DATA, <span class="keyword">new</span> String(data) + <span class="string">"\n"</span> +</div><div class="line">                    stringBuilder.toString());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    sendBroadcast(intent);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>回到DeviceControlActivity，下面的事件通过一个BroadcaseReceiver处理：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 处理Service发送过来的各种时间.</span></div><div class="line"><span class="comment">// ACTION_GATT_CONNECTED: 连接上了一个GATT服务.</span></div><div class="line"><span class="comment">// ACTION_GATT_DISCONNECTED: 断开了一个GATT服务.</span></div><div class="line"><span class="comment">// ACTION_GATT_SERVICES_DISCOVERED: 发现了GATT服务.</span></div><div class="line"><span class="comment">// ACTION_DATA_AVAILABLE: 从设备接收到数据. 这里可能是一个读取或者通知操作的结果。</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">final</span> BroadcastReceiver mGattUpdateReceiver = <span class="keyword">new</span> BroadcastReceiver() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</div><div class="line">        <span class="keyword">final</span> String action = intent.getAction();</div><div class="line">        <span class="keyword">if</span> (BluetoothLeService.ACTION_GATT_CONNECTED.equals(action)) &#123;</div><div class="line">            mConnected = <span class="keyword">true</span>;</div><div class="line">            updateConnectionState(R.string.connected);</div><div class="line">            invalidateOptionsMenu();</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) &#123;</div><div class="line">            mConnected = <span class="keyword">false</span>;</div><div class="line">            updateConnectionState(R.string.disconnected);</div><div class="line">            invalidateOptionsMenu();</div><div class="line">            clearUI();</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (BluetoothLeService.</div><div class="line">                ACTION_GATT_SERVICES_DISCOVERED.equals(action)) &#123;</div><div class="line">            <span class="comment">// 显示所有支持的service和characteristic。</span></div><div class="line">            displayGattServices(mBluetoothLeService.getSupportedGattServices());</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) &#123;</div><div class="line">            displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h1 id="Reading-BLE-Attribute（读取BLE属性）"><a href="#Reading-BLE-Attribute（读取BLE属性）" class="headerlink" title="Reading BLE Attribute（读取BLE属性）"></a>Reading BLE Attribute（读取BLE属性）</h1><p>一旦你的Android应用程序连接上了一个GATT服务并且发现了设备上的service，就可以在支持读写的地方读写属性。例如，下面的代码片段通过迭代服务的service和characteristic，并将它们显示在界面上：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DeviceControlActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line">    ...</div><div class="line">    <span class="comment">// 演示如何迭代所支持的GATT Services/Characteristics.</span></div><div class="line">    <span class="comment">// 在这个例子中，我们填充绑定到ExpandableListView的数据结构。</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">displayGattServices</span><span class="params">(List&lt;BluetoothGattService&gt; gattServices)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (gattServices == <span class="keyword">null</span>) <span class="keyword">return</span>;</div><div class="line">        String uuid = <span class="keyword">null</span>;</div><div class="line">        String unknownServiceString = getResources().</div><div class="line">                getString(R.string.unknown_service);</div><div class="line">        String unknownCharaString = getResources().</div><div class="line">                getString(R.string.unknown_characteristic);</div><div class="line">        ArrayList&lt;HashMap&lt;String, String&gt;&gt; gattServiceData =</div><div class="line">                <span class="keyword">new</span> ArrayList&lt;HashMap&lt;String, String&gt;&gt;();</div><div class="line">        ArrayList&lt;ArrayList&lt;HashMap&lt;String, String&gt;&gt;&gt; gattCharacteristicData</div><div class="line">                = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;HashMap&lt;String, String&gt;&gt;&gt;();</div><div class="line">        mGattCharacteristics =</div><div class="line">                <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;BluetoothGattCharacteristic&gt;&gt;();</div><div class="line"></div><div class="line">        <span class="comment">// 循环迭代可访问的GATT Services.</span></div><div class="line">        <span class="keyword">for</span> (BluetoothGattService gattService : gattServices) &#123;</div><div class="line">            HashMap&lt;String, String&gt; currentServiceData =</div><div class="line">                    <span class="keyword">new</span> HashMap&lt;String, String&gt;();</div><div class="line">            uuid = gattService.getUuid().toString();</div><div class="line">            currentServiceData.put(</div><div class="line">                    LIST_NAME, SampleGattAttributes.</div><div class="line">                            lookup(uuid, unknownServiceString));</div><div class="line">            currentServiceData.put(LIST_UUID, uuid);</div><div class="line">            gattServiceData.add(currentServiceData);</div><div class="line"></div><div class="line">            ArrayList&lt;HashMap&lt;String, String&gt;&gt; gattCharacteristicGroupData =</div><div class="line">                    <span class="keyword">new</span> ArrayList&lt;HashMap&lt;String, String&gt;&gt;();</div><div class="line">            List&lt;BluetoothGattCharacteristic&gt; gattCharacteristics =</div><div class="line">                    gattService.getCharacteristics();</div><div class="line">            ArrayList&lt;BluetoothGattCharacteristic&gt; charas =</div><div class="line">                    <span class="keyword">new</span> ArrayList&lt;BluetoothGattCharacteristic&gt;();</div><div class="line">           <span class="comment">// 循环迭代可访问的Characteristics.</span></div><div class="line">            <span class="keyword">for</span> (BluetoothGattCharacteristic gattCharacteristic :</div><div class="line">                    gattCharacteristics) &#123;</div><div class="line">                charas.add(gattCharacteristic);</div><div class="line">                HashMap&lt;String, String&gt; currentCharaData =</div><div class="line">                        <span class="keyword">new</span> HashMap&lt;String, String&gt;();</div><div class="line">                uuid = gattCharacteristic.getUuid().toString();</div><div class="line">                currentCharaData.put(</div><div class="line">                        LIST_NAME, SampleGattAttributes.lookup(uuid,</div><div class="line">                                unknownCharaString));</div><div class="line">                currentCharaData.put(LIST_UUID, uuid);</div><div class="line">                gattCharacteristicGroupData.add(currentCharaData);</div><div class="line">            &#125;</div><div class="line">            mGattCharacteristics.add(charas);</div><div class="line">            gattCharacteristicData.add(gattCharacteristicGroupData);</div><div class="line">         &#125;</div><div class="line">    ...</div><div class="line">    &#125;</div><div class="line">...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Receiving-GATT-Notification（接收GATT通知）"><a href="#Receiving-GATT-Notification（接收GATT通知）" class="headerlink" title="Receiving GATT Notification（接收GATT通知）"></a>Receiving GATT Notification（接收GATT通知）</h1><p>BLE应用程序要求在设备的某个指定characteristic改变的时候接收到通知是很常见。下面的代码片段展示了如何通过使用setCharacteristicNotification()为一个characteristic设置通知：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> BluetoothGatt mBluetoothGatt;</div><div class="line">BluetoothGattCharacteristic characteristic;</div><div class="line"><span class="keyword">boolean</span> enabled;</div><div class="line">...</div><div class="line">mBluetoothGatt.setCharacteristicNotification(characteristic, enabled);</div><div class="line">...</div><div class="line">BluetoothGattDescriptor descriptor = characteristic.getDescriptor(</div><div class="line">        UUID.fromString(SampleGattAttributes.CLIENT_CHARACTERISTIC_CONFIG));</div><div class="line">descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);</div><div class="line">mBluetoothGatt.writeDescriptor(descriptor);</div></pre></td></tr></table></figure>
+<p>一旦为一个characteristic启用了通知，当远程设备上的characteristic改变的时候就会触发onCharacteristicChanged()方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="comment">// Characteristic notification</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCharacteristicChanged</span><span class="params">(BluetoothGatt gatt,</span></span></div><div class="line"><span class="function"><span class="params">        BluetoothGattCharacteristic characteristic)</span> </span>&#123;</div><div class="line">    broadcastUpdate(ACTION_DATA_AVAILABLE, characteristic);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Closing-the-Client-App（关闭客户端应用程序）"><a href="#Closing-the-Client-App（关闭客户端应用程序）" class="headerlink" title="Closing the Client App（关闭客户端应用程序）"></a>Closing the Client App（关闭客户端应用程序）</h1><p>一旦你的应用程序使用完BLE设备，你应该调用close()方法，这样系统才能适当释放占用的资源：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (mBluetoothGatt == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    mBluetoothGatt.close();</div><div class="line">    mBluetoothGatt = <span class="keyword">null</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>原文地址:<a href="http://developer.android.com/guide/topics/connectivity/bluetooth-le.html" target="_blank" rel="external">http://developer.android.com/guide/topics/connectivity/bluetooth-le.html</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/bluetooth/" rel="tag"># bluetooth</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Android/android-windowSoftInputMode详解/" rel="next" title="android:windowSoftInputMode详解">
+                <i class="fa fa-chevron-left"></i> android:windowSoftInputMode详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Android/Android蓝牙/" rel="prev" title="Android蓝牙">
+                Android蓝牙 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="liyuanbiao" />
+            
+              <p class="site-author-name" itemprop="name">liyuanbiao</p>
+              <p class="site-description motion-element" itemprop="description">知识整理</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="https://liyuanbiao100.github.io/rss2" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关键术语和概念"><span class="nav-number">1.</span> <span class="nav-text">关键术语和概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下面是一些BLE关键术语和概念的摘要"><span class="nav-number">1.1.</span> <span class="nav-text">下面是一些BLE关键术语和概念的摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#角色和职能"><span class="nav-number">1.2.</span> <span class="nav-text">角色和职能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#BLE-Permissions（BLE权限）"><span class="nav-number">2.</span> <span class="nav-text">BLE Permissions（BLE权限）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Setting-Up-BLE（设置BLE）"><span class="nav-number">3.</span> <span class="nav-text">Setting Up BLE（设置BLE）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取BluetoothAdapter"><span class="nav-number">3.1.</span> <span class="nav-text">获取BluetoothAdapter</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启用蓝牙"><span class="nav-number">3.2.</span> <span class="nav-text">启用蓝牙</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Finding-BLE-Devices（搜索BLE设备）"><span class="nav-number">4.</span> <span class="nav-text">Finding BLE Devices（搜索BLE设备）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Connecting-to-a-GATT-Server（连接一个GATT服务）"><span class="nav-number">5.</span> <span class="nav-text">Connecting to a GATT Server（连接一个GATT服务）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reading-BLE-Attribute（读取BLE属性）"><span class="nav-number">6.</span> <span class="nav-text">Reading BLE Attribute（读取BLE属性）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Receiving-GATT-Notification（接收GATT通知）"><span class="nav-number">7.</span> <span class="nav-text">Receiving GATT Notification（接收GATT通知）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Closing-the-Client-App（关闭客户端应用程序）"><span class="nav-number">8.</span> <span class="nav-text">Closing the Client App（关闭客户端应用程序）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liyuanbiao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">访问人数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">访问总量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
