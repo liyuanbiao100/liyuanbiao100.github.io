@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,Java,Kotlin," />
+
+
+
+
+
+  <link rel="alternate" href="https://liyuanbiao100.github.io/rss2" title="我的个人博客" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="关于kotlin的一大段介绍我就不说了，首先我们来看看结构声明在kotlin中是如何使用的。 123456789101112//首先定义一个Person类data class Person(val name: String? = null, val age: Int = 0)fun main(args: Array&amp;lt;String&amp;gt;) &amp;#123;    val (name, age)">
+<meta name="keywords" content="Android,Java,Kotlin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="让Java类在kotlin中也支持结构声明">
+<meta property="og:url" content="https://liyuanbiao100.github.io/uncategorized/让Java类在kotlin中也支持结构声明/index.html">
+<meta property="og:site_name" content="我的个人博客">
+<meta property="og:description" content="关于kotlin的一大段介绍我就不说了，首先我们来看看结构声明在kotlin中是如何使用的。 123456789101112//首先定义一个Person类data class Person(val name: String? = null, val age: Int = 0)fun main(args: Array&amp;lt;String&amp;gt;) &amp;#123;    val (name, age)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-02-08T03:35:59.131Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="让Java类在kotlin中也支持结构声明">
+<meta name="twitter:description" content="关于kotlin的一大段介绍我就不说了，首先我们来看看结构声明在kotlin中是如何使用的。 123456789101112//首先定义一个Person类data class Person(val name: String? = null, val age: Int = 0)fun main(args: Array&amp;lt;String&amp;gt;) &amp;#123;    val (name, age)">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://liyuanbiao100.github.io/uncategorized/让Java类在kotlin中也支持结构声明/"/>
+
+
+
+
+
+  <title>让Java类在kotlin中也支持结构声明 | 我的个人博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">我的个人博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://liyuanbiao100.github.io/uncategorized/让Java类在kotlin中也支持结构声明/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="liyuanbiao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="我的个人博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">让Java类在kotlin中也支持结构声明</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-08T11:34:57+08:00">
+                2018-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o">浏览</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于<code>kotlin</code>的一大段介绍我就不说了，首先我们来看看结构声明在<code>kotlin</code>中是如何使用的。</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//首先定义一个Person类</span></div><div class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">val</span> name: String? = <span class="literal">null</span>, <span class="keyword">val</span> age: <span class="built_in">Int</span> = <span class="number">0</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</div><div class="line">    <span class="keyword">val</span> (name, age) = Person(<span class="string">"zhangsan"</span>, <span class="number">20</span>)</div><div class="line">    println(name) <span class="comment">// zhangsan</span></div><div class="line">    println(age) <span class="comment">// 20</span></div><div class="line"><span class="comment">// ===等价于===</span></div><div class="line">    <span class="keyword">val</span> p = Person(<span class="string">"zhangsan"</span>, <span class="number">20</span>)</div><div class="line">    println(p.name) <span class="comment">// zhangsan</span></div><div class="line">    println(p.age) <span class="comment">// 20</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>有时把一个对象 解构 成很多变量会很方便，我们可以同时声明多个变量<br>一个解构声明会被编译成以下代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">val</span> name = p.component1() <span class="comment">// zhangsan</span></div><div class="line"><span class="keyword">val</span> age = p.component2() <span class="comment">// 20</span></div></pre></td></tr></table></figure>
+<p>其中<code>component1()</code>,<code>component2()</code>,<code>componentN()</code>函数是由Kotlin编译器自动生成的，方法的数量取决于属性的数量，方法的顺序取决于属性的顺序。</p>
+<p>我们用Kotlin插件的<code>Show Kotlin Bytecode</code>功能将<code>Person</code>反编译可以得到如下Java代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">   <span class="meta">@Nullable</span> <span class="comment">// String?类型隐含添加上@Nullable注解，在Java调用Kotlin时能给出友好地非空提示</span></div><div class="line">   <span class="keyword">private</span> <span class="keyword">final</span> String name;</div><div class="line">   <span class="comment">// Int类型会被翻译成基本类型int，只有需要用到方法时才会转成Integer</span></div><div class="line">   <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> age;</div><div class="line"></div><div class="line">   ... setter/getter ... </div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(@Nullable String name, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">      <span class="keyword">this</span>.name = name;</div><div class="line">      <span class="keyword">this</span>.age = age;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   ......</div><div class="line">   </div><div class="line">   <span class="meta">@Nullable</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">component1</span><span class="params">()</span> </span>&#123; <span class="comment">// 第一个属性</span></div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">component2</span><span class="params">()</span> </span>&#123; <span class="comment">// 第二个属性</span></div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.age;</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   <span class="meta">@NotNull</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Person <span class="title">copy</span><span class="params">(@Nullable String name, <span class="keyword">int</span> age)</span> </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Person(name, age);</div><div class="line">   &#125;</div><div class="line"></div><div class="line">   ... toString/hashCode/equals ... </div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>从上面的代码可以看出，<code>data class</code>除了自动生成<code>setter/getter</code>，<code>toString</code>，<code>equals</code>，<code>hashCode</code>之外，还有<code>component1</code>和<code>component2</code>。但是<code>Java</code>编译器是不会自动生成的，也就无法使用结构声明。</p>
+<p>我们可以手动添加吗？？？？ 答案是可以的，你可以在<code>Person</code>类(Java)里面添加如下代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@NotNull</span></div><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">component1</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> getName();</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">component2</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> getAge();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的方法可行，但似乎不够完美，我们大部分使用的API都是无法更改其内部结构的。根本没办法手动添加。</p>
+<p>其实<code>Kotlin</code>是支持结构声明扩展的，你可以这么做</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1. operator关键字必不可少</span></div><div class="line"><span class="comment">// 2. 为什么我这里显示声明**String?**呢？</span></div><div class="line"><span class="comment">// Person是Java类，getName()返回的是Java的平台类型(String!),而不是String或者String?，可空性未知</span></div><div class="line"><span class="comment">// 你应当显示声明name是否可空，以便更好运用Kotlin空安全的特性。</span></div><div class="line"><span class="comment">// 当然你也可以不添加，因此你会得到一个波浪线和一个黄色感叹号，但是这并不会影响程序的运行</span></div><div class="line"><span class="comment">// 而int类型是基本类型，编译成Int类型是一定非空的，开发工具不会因此报出警告。</span></div><div class="line"><span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> Person.<span class="title">component1</span><span class="params">()</span></span>: String? = name </div><div class="line"><span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> Person.<span class="title">component2</span><span class="params">()</span></span> = age</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</div><div class="line">    <span class="keyword">val</span> (name, age) = Person(<span class="string">"zhangsan"</span>, <span class="number">20</span>)</div><div class="line">    println(name)</div><div class="line">    println(age)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>讲到这里，我想同学们都很清楚知道如何使用结构声明扩展让Java类也支持结构声明了，真是可以可贺。</p>
+<p>你可能见过下面一段代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> ((key, value) <span class="keyword">in</span> map) &#123;</div><div class="line"><span class="comment">// 使用该 key、value 做些事情</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这是一段遍历map的方法，实现它我们只需要这样做</p>
+<ul>
+<li>通过提供一个 <code>iterator()</code> 函数将映射表示为一个值的序列；</li>
+<li>通过提供函数component1() 和 component2() 来将每个元素呈现为一对。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">operator fun &lt;K, V&gt; Map&lt;K, V&gt;.iterator(): Iterator&lt;Map.Entry&lt;K, V&gt;&gt; = entrySet().itera</div><div class="line">tor()</div><div class="line">operator fun &lt;K, V&gt; Map.Entry&lt;K, V&gt;.component1() = getKey()</div><div class="line">operator fun &lt;K, V&gt; Map.Entry&lt;K, V&gt;.component2() = getValue()</div></pre></td></tr></table></figure>
+<p>题外话：其实kotlin标准库已经实现了一些很方便的扩展，包括上述的。<code>kotlin</code>拥有<code>java</code>所不具有的诸多优点，在谷歌大力支持下，我觉得Android开发者都应该学习并使用这门语言。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Kotlin/" rel="tag"># Kotlin</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/uncategorized/kotlin编译问题01/" rel="next" title="kotlin编译 Kotlin home does not exist or is not a directory">
+                <i class="fa fa-chevron-left"></i> kotlin编译 Kotlin home does not exist or is not a directory
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpeg"
+                alt="liyuanbiao" />
+            
+              <p class="site-author-name" itemprop="name">liyuanbiao</p>
+              <p class="site-description motion-element" itemprop="description">知识整理</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="https://liyuanbiao100.github.io/rss2" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">liyuanbiao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user">访问人数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">访问总量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
