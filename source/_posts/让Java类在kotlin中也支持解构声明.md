@@ -1,5 +1,5 @@
 ---
-title: 让Java类在kotlin中也支持结构声明
+title: 让Java类在kotlin中也支持解构声明
 date: 2018-02-08 11:34:57
 categories: Android
 tags: 
