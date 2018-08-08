@@ -1,10 +1,11 @@
 ---
 title: kotlin编译 Kotlin home does not exist or is not a directory
-date: 2018-02-04 03:19:36
 categories: Android
-tags: 
-	- Android
-	- Kotlin
+tags:
+  - Android
+  - Kotlin
+abbrlink: 1f2f4db2
+date: 2018-02-04 03:19:36
 ---
 
 虽然kotlin成为谷歌干儿子才半年之久，但是我依然早早的在项目中使用它。秉承着早入坑早脱坑的理念，我遇到了下面这个问题。代码没有报错，但是编译不通过。

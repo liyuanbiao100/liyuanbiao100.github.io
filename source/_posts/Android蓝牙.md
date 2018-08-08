@@ -1,10 +1,11 @@
 ---
 title: Android蓝牙
-date: 2017-12-21 15:15:57
-tags: 
-    - Android
-    - bluetooth
+tags:
+  - Android
+  - bluetooth
 categories: Android
+abbrlink: 639eaf27
+date: 2017-12-21 15:15:57
 ---
 
 Android 平台包含蓝牙网络堆栈支持，凭借此项支持，设备能以无线方式与其他蓝牙设备交换数据。应用框架提供了通过 Android Bluetooth API 访问蓝牙功能的途径。 这些 API 允许应用以无线方式连接到其他蓝牙设备，从而实现点到点和多点无线功能。

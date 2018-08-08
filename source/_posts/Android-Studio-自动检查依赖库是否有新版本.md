@@ -1,8 +1,9 @@
 ---
 title: Android Studio 自动检查依赖库是否有新版本
-date: 2017-09-12 15:45:32
 tags: Android
 categories: Android
+abbrlink: f7a3c6c0
+date: 2017-09-12 15:45:32
 ---
 
 **Preferences** -> **Editor** -> **Inspections** -> “**Android > Lint > Correctness**” -> **Newer Library Versions Available (available for Analyze|Inspect Code)**    <font color="red">**这一项打上勾**</font>。

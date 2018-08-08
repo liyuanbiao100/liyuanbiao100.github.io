@@ -1,11 +1,12 @@
 ---
 title: 让Java类在kotlin中也支持解构声明
-date: 2018-02-08 11:34:57
 categories: Android
-tags: 
-    - Android
-    - Kotlin
-    - Java
+tags:
+  - Android
+  - Kotlin
+  - Java
+abbrlink: dced847d
+date: 2018-02-08 11:34:57
 ---
 
 

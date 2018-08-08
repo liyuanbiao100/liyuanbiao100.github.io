@@ -1,11 +1,12 @@
 ---
 title: Java转Kotlin boolean属性的坑
-date: 2017-10-27 11:59:22
 categories: Android
-tags: 
-    - Java 
-    - Kotlin 
-    - Android
+tags:
+  - Java
+  - Kotlin
+  - Android
+abbrlink: 2d13bd4b
+date: 2017-10-27 11:59:22
 ---
 
 ### 踩坑

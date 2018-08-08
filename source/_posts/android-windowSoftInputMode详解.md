@@ -1,8 +1,9 @@
 ---
 title: 'android:windowSoftInputMode详解'
-date: 2017-12-07 11:25:56
 categories: Android
 tags: Android
+abbrlink: c84ead9
+date: 2017-12-07 11:25:56
 ---
 
 Activity 的主窗口与包含屏幕软键盘的窗口的交互方式。 该属性的设置影响两个方面：

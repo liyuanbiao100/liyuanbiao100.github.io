@@ -1,9 +1,10 @@
 ---
 title: Android Handler机制详解
 categories: Android
-tags: 
-    - Android
-    - Handler
+tags:
+  - Android
+  - Handler
+abbrlink: fecfb901
 ---
 
 ### 前言

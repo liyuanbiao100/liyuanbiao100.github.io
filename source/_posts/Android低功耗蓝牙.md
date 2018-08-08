@@ -1,9 +1,10 @@
 ---
 title: Android低功耗蓝牙
-tags: 
-    - Android
-    - bluetooth
+tags:
+  - Android
+  - bluetooth
 categories: Android
+abbrlink: 647d650a
 ---
 
 # 关键术语和概念

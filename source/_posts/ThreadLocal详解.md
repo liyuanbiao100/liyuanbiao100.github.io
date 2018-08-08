@@ -1,10 +1,11 @@
 ---
 title: ThreadLocal详解
-date: 2017-10-10 12:59:59
 categories: Android
-tags: 
-    - Android
-    - Java
+tags:
+  - Android
+  - Java
+abbrlink: 443887f3
+date: 2017-10-10 12:59:59
 ---
 
 ### 前言
