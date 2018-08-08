@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mliyuanbiao.github.io">
-  <title>如何理解Kotlin中属性 | 我的个人博客</title>
+  <title>关于 Kotlin 几篇文章的一些讨论 | 我的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="属性的定义在kotlin中，var和val是用来声明属性的两个关键字，在kotlin官方参考文档上是这么说的。  Kotlin的类可以有属性。 属性可以用关键字 var声明为可变的，否则使用只读关键字val。  那什么是可变属性，什么又是可读属性呢？我们在问这个问题前可以先回顾一下java对属性的定义。  属性可以通过get、set、is（可以替代get，用在布尔型属性上）方法或遵循特定命名规范的">
-<meta name="keywords" content="Android,Kotlin">
+  <meta name="description" content="抛弃 Java 改用 Kotlin 的六个月后，我后悔了原文地址：https://blog.csdn.net/csdnnews/article/details/80746096 这篇文章我很早之前之前就看过了，是一片批判 Kotlin 的文章，一时间在各大技术论坛疯狂转载。由于我本人很喜欢 Kotlin ，所以只是粗略的看了一眼，并觉得作者是在放屁。上面做法并不符合我认真求学的风格，今天我决定认真">
+<meta name="keywords" content="Kotlin">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何理解Kotlin中属性">
-<meta property="og:url" content="https://mliyuanbiao.github.io/Android/如何理解Kotlin中属性/index.html">
+<meta property="og:title" content="关于 Kotlin 几篇文章的一些讨论">
+<meta property="og:url" content="https://mliyuanbiao.github.io/post/95d4684d.html">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="属性的定义在kotlin中，var和val是用来声明属性的两个关键字，在kotlin官方参考文档上是这么说的。  Kotlin的类可以有属性。 属性可以用关键字 var声明为可变的，否则使用只读关键字val。  那什么是可变属性，什么又是可读属性呢？我们在问这个问题前可以先回顾一下java对属性的定义。  属性可以通过get、set、is（可以替代get，用在布尔型属性上）方法或遵循特定命名规范的">
+<meta property="og:description" content="抛弃 Java 改用 Kotlin 的六个月后，我后悔了原文地址：https://blog.csdn.net/csdnnews/article/details/80746096 这篇文章我很早之前之前就看过了，是一片批判 Kotlin 的文章，一时间在各大技术论坛疯狂转载。由于我本人很喜欢 Kotlin ，所以只是粗略的看了一眼，并觉得作者是在放屁。上面做法并不符合我认真求学的风格，今天我决定认真">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-23T08:20:46.679Z">
+<meta property="og:updated_time" content="2018-08-08T14:15:04.759Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="如何理解Kotlin中属性">
-<meta name="twitter:description" content="属性的定义在kotlin中，var和val是用来声明属性的两个关键字，在kotlin官方参考文档上是这么说的。  Kotlin的类可以有属性。 属性可以用关键字 var声明为可变的，否则使用只读关键字val。  那什么是可变属性，什么又是可读属性呢？我们在问这个问题前可以先回顾一下java对属性的定义。  属性可以通过get、set、is（可以替代get，用在布尔型属性上）方法或遵循特定命名规范的">
+<meta name="twitter:title" content="关于 Kotlin 几篇文章的一些讨论">
+<meta name="twitter:description" content="抛弃 Java 改用 Kotlin 的六个月后，我后悔了原文地址：https://blog.csdn.net/csdnnews/article/details/80746096 这篇文章我很早之前之前就看过了，是一片批判 Kotlin 的文章，一时间在各大技术论坛疯狂转载。由于我本人很喜欢 Kotlin ，所以只是粗略的看了一眼，并觉得作者是在放屁。上面做法并不符合我认真求学的风格，今天我决定认真">
   
     <link rel="alternative" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
   
@@ -161,86 +161,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-如何理解Kotlin中属性" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-关于-Kotlin-几篇文章的一些讨论" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      如何理解Kotlin中属性
+      关于 Kotlin 几篇文章的一些讨论
     </h1>
   
 
         
-        <a href="/Android/如何理解Kotlin中属性/" class="archive-article-date">
-  	<time datetime="2017-10-27T07:59:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
+        <a href="/post/95d4684d.html" class="archive-article-date">
+  	<time datetime="2018-06-26T05:25:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="属性的定义"><a href="#属性的定义" class="headerlink" title="属性的定义"></a>属性的定义</h2><p>在<strong>kotlin</strong>中，<strong>var</strong>和<strong>val</strong>是用来声明属性的两个关键字，在<strong>kotlin</strong>官方参考文档上是这么说的。</p>
-<blockquote>
-<p><strong>Kotlin</strong>的类可以有属性。 属性可以用关键字 <strong>var</strong>声明为可变的，否则使用只读关键字<strong>val</strong>。</p>
-</blockquote>
-<p>那什么是可变属性，什么又是可读属性呢？我们在问这个问题前可以先回顾一下java对属性的定义。</p>
-<blockquote>
-<p>属性可以通过<strong>get</strong>、<strong>set</strong>、<strong>is</strong>（可以替代<strong>get</strong>，用在布尔型属性上）方法或遵循特定命名规范的其他方法访问。</p>
-</blockquote>
-<p>在这里我们可以理解为，在<strong>java</strong>中，对一个字段生成<strong>public</strong>的<strong>set get</strong>方法，那么他就是一个可变（可读可写）属性，仅提供<strong>public get</strong>或者<strong>set</strong>被<strong>private</strong>修饰的就是一个只读属性。</p>
-<p>在kotlin中我们是如何定义属性的呢</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">//定义一个String类型的属性name</span></span><br><span class="line">    var name: String? = <span class="keyword">null</span></span><br><span class="line">    <span class="comment">//定义一个Boolean类型的属性deceased</span></span><br><span class="line">    var deceased: Boolean? = <span class="keyword">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>kotlin和java同属于jvm语言，编译后会生成class文件。我将上面的kotlin代码生成的class再次反编译成java代码，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">   <span class="meta">@Nullable</span></span><br><span class="line">   <span class="keyword">private</span> String name;</span><br><span class="line">   <span class="meta">@Nullable</span></span><br><span class="line">   <span class="keyword">private</span> Boolean deceased = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Nullable</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setName</span><span class="params">(@Nullable String var1)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.name = var1;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Nullable</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Boolean <span class="title">getDeceased</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.deceased;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setDeceased</span><span class="params">(@Nullable Boolean var1)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.deceased = var1;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>看到这里你会发现，反编译后代码和java属性的定义是一毛一样有木有。所以<strong>kotlin</strong>的属性，在<strong>java</strong>代码中可以通过<strong>set get</strong>方法来调用。</p>
-<h2 id="只读属性和常量"><a href="#只读属性和常量" class="headerlink" title="只读属性和常量"></a>只读属性和常量</h2><p>有的地方说，<strong>var</strong>是声明变量的，<strong>val</strong>是声明常量的。这个其实不是完全正确，至少<strong>val</strong>在官方参考文档上说的是只读属性，而不是常量。比方说温度，我们可以获取温度的变化，但是不能人为直接改变温度，那么温度就是只读属性，而不是常量。<br>再比如说list的isEmpty属性</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> isEmpty <span class="keyword">get</span>() = <span class="keyword">this</span>.size == <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<p>isEmpty属性受到size的改变而改变，但是无法主动去设置isEmpty的值。那么isEmpty就是个只读属性。</p>
-<p>在这里要分为几种情况来理解<strong>val</strong>。</p>
+        <h2 id="抛弃-Java-改用-Kotlin-的六个月后，我后悔了"><a href="#抛弃-Java-改用-Kotlin-的六个月后，我后悔了" class="headerlink" title="抛弃 Java 改用 Kotlin 的六个月后，我后悔了"></a>抛弃 Java 改用 Kotlin 的六个月后，我后悔了</h2><p>原文地址：<a href="https://blog.csdn.net/csdnnews/article/details/80746096" target="_blank" rel="noopener">https://blog.csdn.net/csdnnews/article/details/80746096</a></p>
+<p>这篇文章我很早之前之前就看过了，是一片批判 Kotlin 的文章，一时间在各大技术论坛疯狂转载。由于我本人很喜欢 Kotlin ，所以只是粗略的看了一眼，并觉得作者是在放屁。上面做法并不符合我认真求学的风格，今天我决定认真的看看，仔细分析下。</p>
+<p>文中举了很多例子说明 Kotlin 的不完美，甚至会降低工作效率。我觉得，尽管 Kotlin 不完美，因为任何一门编程语言都不可能尽善尽美，但是他是在 Java 的基础上，为了解决 Java 的一些设计缺陷而设计出来的语言，使用 Kotlin 能极大增加工作效率。</p>
+<h3 id="名称遮蔽"><a href="#名称遮蔽" class="headerlink" title="名称遮蔽"></a>名称遮蔽</h3><p>作者认为这是 Koltin 的设计缺陷，试图通过警告信息来解决这个问题。我认为这是 Kotlin 的一个功能，并不属于缺陷，名称遮蔽并不会造成编程错误，在有些地方也有名称遮蔽的应用。</p>
+<h3 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h3><p>Kotlin 的类型推断比 Java 强大不止一点点，Java 在 8 开始才对类型推断有比较好的支持，到了 10 才可以使用<code>var</code>来声明变量，通过类型推断而不需要显示声明变量类型。这一特性也只在局部作用域生效。现在<br>Java 的使用者里面有很多都是Android开发者，本人就是。Android 对 Java 新语法的支持并不是很良好，为了兼容以前的 Android 系统，开发者们不得不使用 Java7 甚至 Java6 的语法。Kotlin 的出现让这一切有了很大的改观。</p>
+<h3 id="Null-安全类型"><a href="#Null-安全类型" class="headerlink" title="Null 安全类型"></a>Null 安全类型</h3><p>作者在描述 Kotlin 与Java 互操作的过程中不可避免的会产生第三种类型，<strong>平台类型</strong>，作者认为平台类型会让代表变得糟糕，误导你，会禁用 Kotlin 的 NULL 安全机制。</p>
+<p>我觉得 Kotlin 为了要与 Java 实现100% 互操作而产生平台类型这是不可避免的，因为 Java 从一开始就没有这种安全机制，在 Java 语言中，每个类变量都有可能为 null 。正是因为这样，Kotlin 编译器才为了我们做了更多的事情，他并没有将所有的 Java 变量翻译成可空类型。</p>
 <ul>
-<li><strong>val</strong>声明的属性被字面量或者表达式赋值的时候</li>
-<li><strong>val</strong>声明的属性实现了自定义的<strong>get</strong>方法</li>
+<li>基础类型是不可能为 null 的，在 Kotlin 中会作为不可空类型的存在</li>
+<li>Kotlin编译器还支持识别<code>@Nullable</code> 和 <code>@NonNull</code> 注解，他们分别会被翻译为可空类型和非空类型，现在很多类库为了适应 Kotlin 而加上了这些注解。</li>
+<li>当平台类型不可避免的时候，可以显示为 Java 变量声明可空类型或者非空类型，避免在 Kotlin 中使用平台类型。如果你没有遵守这一规则，Kotlin 编译器则会以警告的形式提示你。</li>
+<li>Kotlin 有强大的 IDE 支持，在编辑器中会显示类型推断的实际类型。平台类型则是类型名称后面加上！。这只在编辑器中作为提示显示，语法中并不存在。</li>
 </ul>
-<p>看下面的例子</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">//这里的name属性被字面量“zhangsan”赋值了</span></span><br><span class="line">    <span class="keyword">val</span> name: String? = <span class="string">"zhangsan"</span></span><br><span class="line">     <span class="comment">//age属性的值受birthday的影响</span></span><br><span class="line">    <span class="keyword">val</span> age: <span class="built_in">Int</span> <span class="keyword">get</span>() &#123;</span><br><span class="line">        <span class="keyword">return</span> Calendar.getInstance().<span class="keyword">get</span>(Calendar.YEAR) - birthday</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> birthday: <span class="built_in">Int</span> = <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p> 反编译成<strong>java</strong>代码是这样的</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="comment">//name属性被字面量赋值，编译后会加上final关键字，成为真正的常量</span></span><br><span class="line">   <span class="meta">@Nullable</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">final</span> String name = <span class="string">"zhangsan"</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> birthday;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@Nullable</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">   &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//age属性只实现了get方法，无法通过set方法来改变值，是个只读属性</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getAge</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> Calendar.getInstance().get(<span class="number">1</span>) - <span class="keyword">this</span>.birthday;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getBirthday</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.birthday;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setBirthday</span><span class="params">(<span class="keyword">int</span> var1)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.birthday = var1;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="什么是变量的幕后字段"><a href="#什么是变量的幕后字段" class="headerlink" title="什么是变量的幕后字段"></a>什么是变量的幕后字段</h2><p>在<strong>kotlin</strong>中可以通过关键字声明属性，那可不可以声明字段呢？它有没有字段呢？<br>答：<strong>kotlin</strong>中不能声明字段，但是<strong>kotlin</strong>中是有字段的，他有一个幕后字段的概念，每一个属性可以有一个幕后字段，也可以没有。</p>
-<p>拿上面的例子再讲一遍</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> isEmpty <span class="keyword">get</span>() = <span class="keyword">this</span>.size == <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<p>isEmpty的值只和size有关，那么在反编译之后，不会出现如下代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">boolean</span> isEmpty = <span class="keyword">false</span>;</span><br></pre></td></tr></table></figure>
-<p>这里可以得出一个结论，属性不一定非得有字段。对<strong>java</strong>属性定义的后半句是这么说的，“<em>或遵循特定命名规范的其他方法访问</em>”，所以关键看方法的定义，比如说在一个类里面有<strong>setWidth()</strong>,<strong>getWidth()</strong>这两个方法。就可以认定为这个类有<strong>width</strong>属性，但是不一定有<strong>width</strong>这个字段。</p>
-<p>也就是说这个属性没有幕后字段。</p>
-<p>再看下面这个例子</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//name属性没有实现自定义的set get方法</span></span><br><span class="line"><span class="keyword">var</span> name:String? = <span class="literal">null</span>;</span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">name = <span class="string">"zhangsan"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> len = name.length()</span><br></pre></td></tr></table></figure>
-<p><strong>name</strong>没有实现自定义的<strong>set get</strong>方法，字面值”zhangsan”需要一个字段来赋值。那么在class里面会生成 </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这个就是name属性的幕后字段</span></span><br><span class="line"><span class="keyword">private</span> String name = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
-<p>那么幕后字段可以用代码访问到么，这个是可以的，使用 <strong>field</strong> 关键字</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> name: String? = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//上面这句代码其实和下面的代码是等价的，没有区别。</span></span><br><span class="line"><span class="keyword">var</span> name: String? = <span class="literal">null</span></span><br><span class="line">   <span class="keyword">set</span>(value) &#123;</span><br><span class="line">       field = value</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">get</span>() &#123;</span><br><span class="line">       <span class="keyword">return</span> field</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-<p>讲到这里我相信大家对幕后字段已经有了一定的了解。</p>
-<h2 id="扩展属性"><a href="#扩展属性" class="headerlink" title="扩展属性"></a>扩展属性</h2><p>在kotlin声明一个扩展属性的方法如下。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> Person.city:String <span class="keyword">get</span>() &#123; <span class="keyword">return</span> <span class="string">"city"</span> &#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>注：扩展属性只能用生成自定义set get方法来实现，不能直接用字面量来赋值。所以下面的代码是错的</p>
+<p>Kotlin 并不会误导你，对语言的不熟悉才是你被误导的真正原因。我觉得 Kotlin有很多吸引我的地方，其中 Null 安全机制是我最喜欢的。</p>
+<h3 id="Maybe"><a href="#Maybe" class="headerlink" title="Maybe"></a>Maybe</h3><p>在 Java8 中为了解决空安全的问题，而引入了Optional。作者称 如今，Optional 是在 API 边界处理返回类型中的空值的非常流行的方式。而我倒觉得这是非常无奈的做法，比起 Kotlin 从根源上解决查太多。</p>
+<p>为了论证 Kotlin 很差，作者举了下面的例子：<br>例如，在 Java 中： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">parseAndInc</span><span class="params">(String number)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Optional.ofNullable(number)</span><br><span class="line">                   .map(Integer::parseInt)</span><br><span class="line">                   .map(it -&gt; it + <span class="number">1</span>)</span><br><span class="line">                   .orElse(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 Kotlin 中，需要这样做</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">parseAndInc</span><span class="params">(number: <span class="type">String</span>?)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> number?.let &#123; Integer.parseInt(it) &#125;</span><br><span class="line">                 ?.let &#123; it -&gt; it + <span class="number">1</span> &#125; ?: <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后比较这两段代码的可读性。</p>
+<p>可读性对于每个人都不一样吧，而且谁会在 kotlin 使用 <code>Integer.parseInt</code> 呢？如果作者喜欢 Optional ，你可以使用它。 Kotlin 在 JVM 上运行。即使是自己实现一个类似于 Optional 的类也是很容易的。</p>
+<h3 id="类名称字面常量"><a href="#类名称字面常量" class="headerlink" title="类名称字面常量"></a>类名称字面常量</h3><p>这点我就不想多说了，作者纯粹为了找茬嘛。<br>文中说：Kotlin 把 Kotlin 类和 Java 类进行了区分，并为其提供了语法规范：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> kotlinClass : KClass&lt;LocalDate&gt; = LocalDate::<span class="class"><span class="keyword">class</span></span></span><br><span class="line"><span class="keyword">val</span> javaClass : Class&lt;LocalDate&gt; = LocalDate::<span class="class"><span class="keyword">class</span>.<span class="title">java</span></span></span><br></pre></td></tr></table></figure>
+<p>这看起来非常丑陋。</p>
+<p>丑陋，呵呵呵呵呵呵呵。。。。。<br>还有其他的一些点论证 Kotlin 无比丑陋的说法就不一一说明了。</p>
+<p>另外作为认为 Kotlin 具有陡峭的学习路线，这点我是不认同的，我只用了两天就将 Kotlin 用于生产环境了。Groovy 虽然很容易从 Java 转换过来，因为Java代码是正确的 Groovy 代码，但是想要深入学习一点都不比 Kotlin 容易，特别是没有接触过弱类型语言的开发者来说。Groovy 我也学习过，我更认为同样作为静态类型的 Kotlin 与 Java 更接近，即使他的语法与 Scala 接近。</p>
+<h3 id="关于作者最后的想法"><a href="#关于作者最后的想法" class="headerlink" title="关于作者最后的想法"></a>关于作者最后的想法</h3><blockquote>
+<p>学习新技术就像一项投资。我们投入时间，新技术让我们得到回报。但我并不是说 Kotlin 是一种糟糕的语言，只是在我们的案例中，成本远超收益。</p>
 </blockquote>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> Person.city:String = <span class="string">"city"</span></span><br></pre></td></tr></table></figure>
-<p>第二句代码是无法编译通过的，那是因为</p>
+<p>作者说的是普遍的道理，所以我不能说他错，但是就目前而言我不认为 Kotlin 是糟糕的语言。使用 Kotlin 一年多时间以来，我感受到 Kotlin 带来的诸多好处，一种学习新语言，新特性带来的心灵洗礼，我不会说 Java 和 Kotlin 谁更好，他们都很好，我都很喜欢。</p>
+<h2 id="谷歌大牛说：为什么-Kotlin-比你们用的那些垃圾语言都好"><a href="#谷歌大牛说：为什么-Kotlin-比你们用的那些垃圾语言都好" class="headerlink" title="谷歌大牛说：为什么 Kotlin 比你们用的那些垃圾语言都好"></a>谷歌大牛说：为什么 Kotlin 比你们用的那些垃圾语言都好</h2><p>原文地址：<a href="http://blog.jobbole.com/111249/" target="_blank" rel="noopener">http://blog.jobbole.com/111249/</a></p>
+<p>这篇文章在安卓团队在谷歌 I/O 2017 大会上宣布 Kotlin 成为官方头等支持语言之后发布，同样获得疯狂的转载。这篇文章的标题有点标题党，甚至有点引战的味道。要让我用一个词来形容就是跪舔。</p>
+<p>作者讲述了十年来的经历，以及为什么使用 Kotlin 。<br>比如 Android 有几个很糟糕的 API。因为这样，接下来一年半没有碰 Android 编程。来自俄罗斯的救星 Kotlin，对他第一印象是简洁，而且有一种似曾相识的感觉，和 Swift 很像，然后简述 Kotlin 和 Swift 的历史，是 Kotlin 在前，Swift 在后，所以是 Swift 和 Kotlin 很像。<br>其实谁和谁像已经无所谓了， Kotlin 和 Swift 都是现代化语言，而现在化语言都是很像的，作者花了大篇幅只为争个先后，这是跪舔。</p>
+<p>接下里说为什么要从 Java 叛逃到 Kotlin。大部分是讲和 Java8 的对比，还有在 Android开发上的便利性，这和标题有个毛关系。回到糟糕的Android API，原文说：</p>
 <blockquote>
-<p>扩展是静态解析的.扩展不能真正的修改他们所扩展的类。通过定义一个扩展，你并没有在一个类中插入新成 员， 仅仅是可以通过该类型的变量用点表达式去调用这个新函数,或者属性。由于扩展没有实际的将成员插入类中，因此对扩展属性来说幕后字段是无效的。这就 是为什么扩展属性不能有初始化器。他们的行为只能由显式提供的 <strong>get/set</strong> 定义。</p>
+<p>Kotlin 致力于让大家绕过 Android API 那些恶心的东西，并且能让你充分发挥你的经验，这一点甚至比 iOS 做得还要好。好吧，至少来说比 Objective-C 做得好，因为我觉得 Swift 肯定也不会差。知道为什么吗？因为 Swift 和 Kotlin 很像啊。</p>
 </blockquote>
-<p>静态解析的结果是</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NotNull</span></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String <span class="title">getCity</span><span class="params">(@NotNull Person $receiver)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"city"</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>所以扩展仅仅是可以通过点语法来调用，并不是真正插入类里面，也不存在幕后字段。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>属性可以通过<strong>get</strong>、<strong>set</strong>、<strong>is</strong>（可以替代<strong>get</strong>，用在布尔型属性上）方法或遵循特定命名规范的其他方法访问。</li>
-<li>只读属性和常量不是同一个概念，具体看上头。</li>
-<li>属性可以有一个幕后字段，也可以没有</li>
-<li>扩展是静态解析的，扩展属性是没有幕后字段的</li>
-<li>扩展只是能通过点语法调用而已。</li>
-</ul>
+<p>Swift 和 Objective-C 只是在互操作性没有 Kotlin 与 Java 这么好，没办法，他们都是基础JVM的（我知道有人要杠了），这个 Android API 本身没有关系吧，API就在哪里，你用与不用，他都在哪里，请问 Kotlin 是如何绕过去的。 可能作者根本不喜欢 Android 吧，不然怎么会因为 Java 拒绝 Android，语句中看不出丝毫热爱。可能是为了跪舔而扯上的Android吧，但似乎有点用力过猛了。这也是跪舔。</p>
 
       
 
@@ -254,10 +232,6 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Kotlin</a>
         		</li>
       		
@@ -265,17 +239,6 @@
 	</div>
 
       
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Android//" class="article-tag-list-link color3">Android</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
 
       
 
@@ -325,7 +288,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://mliyuanbiao.github.io/Android/如何理解Kotlin中属性/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mliyuanbiao.github.io/post/95d4684d.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -339,18 +302,9 @@
   
 <nav id="article-nav">
   
-    <a href="/Android/Android应用内安装App的几种姿势/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Android应用内安装App的几种姿势
-        
-      </div>
-    </a>
   
-  
-    <a href="/Android/Java转Kotlin-boolean属性的坑/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Java转Kotlin boolean属性的坑</div>
+    <a href="/post/dced847d.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">让Java类在kotlin中也支持解构声明</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -480,15 +434,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Kotlin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">

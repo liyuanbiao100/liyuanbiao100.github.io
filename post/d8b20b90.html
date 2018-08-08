@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mliyuanbiao.github.io">
-  <title>kotlin编译 Kotlin home does not exist or is not a directory | 我的个人博客</title>
+  <title>自定义PAC列表规则 | 我的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="虽然kotlin成为谷歌干儿子才半年之久，但是我依然早早的在项目中使用它。秉承着早入坑早脱坑的理念，我遇到了下面这个问题。代码没有报错，但是编译不通过。 1e: Kotlin home does not exist or is not a directory: 这个问题原因不明，莫名其妙出现的。代码完全没有问题，但是就是不能编译。下面是解决方法 12killall java./gradlew cl">
-<meta name="keywords" content="Android,Kotlin">
+  <meta name="description" content="规则大概描述如下 通配符支持，如 .example.com/ 实际书写时可省略  如 .example.com/ 意即 .example.com/* 正则表达式支持，以\开始和结束， 如 [\w]+://example.com\ 例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理匹配地址开始和结尾 |，如 |http://example.com、example.co">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kotlin编译 Kotlin home does not exist or is not a directory">
-<meta property="og:url" content="https://mliyuanbiao.github.io/Android/kotlin编译问题01/index.html">
+<meta property="og:title" content="自定义PAC列表规则">
+<meta property="og:url" content="https://mliyuanbiao.github.io/post/d8b20b90.html">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="虽然kotlin成为谷歌干儿子才半年之久，但是我依然早早的在项目中使用它。秉承着早入坑早脱坑的理念，我遇到了下面这个问题。代码没有报错，但是编译不通过。 1e: Kotlin home does not exist or is not a directory: 这个问题原因不明，莫名其妙出现的。代码完全没有问题，但是就是不能编译。下面是解决方法 12killall java./gradlew cl">
+<meta property="og:description" content="规则大概描述如下 通配符支持，如 .example.com/ 实际书写时可省略  如 .example.com/ 意即 .example.com/* 正则表达式支持，以\开始和结束， 如 [\w]+://example.com\ 例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理匹配地址开始和结尾 |，如 |http://example.com、example.co">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-08T03:42:13.841Z">
+<meta property="og:updated_time" content="2017-12-05T07:13:20.844Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kotlin编译 Kotlin home does not exist or is not a directory">
-<meta name="twitter:description" content="虽然kotlin成为谷歌干儿子才半年之久，但是我依然早早的在项目中使用它。秉承着早入坑早脱坑的理念，我遇到了下面这个问题。代码没有报错，但是编译不通过。 1e: Kotlin home does not exist or is not a directory: 这个问题原因不明，莫名其妙出现的。代码完全没有问题，但是就是不能编译。下面是解决方法 12killall java./gradlew cl">
+<meta name="twitter:title" content="自定义PAC列表规则">
+<meta name="twitter:description" content="规则大概描述如下 通配符支持，如 .example.com/ 实际书写时可省略  如 .example.com/ 意即 .example.com/* 正则表达式支持，以\开始和结束， 如 [\w]+://example.com\ 例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理匹配地址开始和结尾 |，如 |http://example.com、example.co">
   
     <link rel="alternative" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
   
@@ -161,32 +160,35 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-kotlin编译问题01" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-自定义PAC列表规则" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      kotlin编译 Kotlin home does not exist or is not a directory
+      自定义PAC列表规则
     </h1>
   
 
         
-        <a href="/Android/kotlin编译问题01/" class="archive-article-date">
-  	<time datetime="2018-02-03T19:19:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-04</time>
+        <a href="/post/d8b20b90.html" class="archive-article-date">
+  	<time datetime="2017-10-25T02:35:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>虽然kotlin成为谷歌干儿子才半年之久，但是我依然早早的在项目中使用它。秉承着早入坑早脱坑的理念，我遇到了下面这个问题。代码没有报错，但是编译不通过。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e: Kotlin home does not exist or is not a directory:</span><br></pre></td></tr></table></figure>
-<p>这个问题原因不明，莫名其妙出现的。代码完全没有问题，但是就是不能编译。<br>下面是解决方法</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">killall java</span><br><span class="line">./gradlew clean assemble</span><br></pre></td></tr></table></figure>
-<p>解决原理不清楚。</p>
-<p>下面是相关连接<br><a href="https://discuss.kotlinlang.org/t/task-compilekotlin2js-fails-in-gradle-4-4-kotlin-home-does-not-exist-or-is-not-a-directory/5706/3" target="_blank" rel="noopener">https://discuss.kotlinlang.org/t/task-compilekotlin2js-fails-in-gradle-4-4-kotlin-home-does-not-exist-or-is-not-a-directory/5706/3</a></p>
+        <h4 id="规则大概描述如下"><a href="#规则大概描述如下" class="headerlink" title="规则大概描述如下"></a>规则大概描述如下</h4><ul>
+<li>通配符支持，如 <em>.example.com/</em> 实际书写时可省略 <em> 如 .example.com/ 意即 </em>.example.com/*</li>
+<li>正则表达式支持，以\开始和结束， 如 [\w]+://example.com\</li>
+<li>例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理<br>匹配地址开始和结尾 |，如 |<a href="http://example.com、example.com|" target="_blank" rel="noopener">http://example.com、example.com|</a> 分别表示以 <a href="http://example.com" target="_blank" rel="noopener">http://example.com</a> 开始和以 example.com 结束的地址</li>
+<li>|| 标记，如 ||example.com 则 <a href="http://example.com" target="_blank" rel="noopener">http://example.com</a> 、<a href="https://example.com" target="_blank" rel="noopener">https://example.com</a> 、<a href="ftp://example.com" target="_blank" rel="noopener">ftp://example.com</a> 等地址均满足条件，只用于匹配地址开头</li>
+<li>注释 ! 如 ! Comment</li>
+<li>分隔符^，表示除了字母、数字或者 _ - . % 之外的任何字符。如 <a href="http://example.com^" target="_blank" rel="noopener">http://example.com^</a> ，<a href="http://example.com/" target="_blank" rel="noopener">http://example.com/</a> 和 <a href="http://example.com:8000/" target="_blank" rel="noopener">http://example.com:8000/</a> 均满足条件，而 <a href="http://example.com.ar/" target="_blank" rel="noopener">http://example.com.ar/</a> 不满足条件</li>
+</ul>
+<h4 id="如何使用自定义规则"><a href="#如何使用自定义规则" class="headerlink" title="如何使用自定义规则"></a>如何使用自定义规则</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">! Put user rules line by line in this file.</span><br><span class="line">! See https://adblockplus.org/en/filter-cheatsheet</span><br><span class="line">||amazonaws.com</span><br><span class="line">||atom.io</span><br><span class="line">||github.com^</span><br></pre></td></tr></table></figure>
 
       
 
@@ -195,28 +197,13 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Kotlin</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Android//" class="article-tag-list-link color3">Android</a>
+        			<a href="/categories/杂货铺//" class="article-tag-list-link color4">杂货铺</a>
         		</li>
       		
 		</ul>
@@ -271,7 +258,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://mliyuanbiao.github.io/Android/kotlin编译问题01/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mliyuanbiao.github.io/post/d8b20b90.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -285,18 +272,18 @@
   
 <nav id="article-nav">
   
-    <a href="/Android/让Java类在kotlin中也支持解构声明/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/post/2d13bd4b.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          让Java类在kotlin中也支持解构声明
+          Java转Kotlin boolean属性的坑
         
       </div>
     </a>
   
   
-    <a href="/Android/Android蓝牙/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Android蓝牙</div>
+    <a href="/post/d14050d0.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JavaScript 继承与原型链</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -426,15 +413,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Kotlin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">

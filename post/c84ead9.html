@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mliyuanbiao.github.io">
-  <title>让Java类在kotlin中也支持解构声明 | 我的个人博客</title>
+  <title>android:windowSoftInputMode详解 | 我的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于kotlin的一大段介绍我就不说了，首先我们来看看结构声明在kotlin中是如何使用的。 123456789101112//首先定义一个Person类data class Person(val name: String? = null, val age: Int = 0)fun main(args: Array&amp;lt;String&amp;gt;) &amp;#123;    val (name, age)">
-<meta name="keywords" content="Android,Java,Kotlin">
+  <meta name="description" content="Activity 的主窗口与包含屏幕软键盘的窗口的交互方式。 该属性的设置影响两个方面：  当 Activity 成为用户注意的焦点时软键盘的状态 — 隐藏还是可见。 对 Activity 主窗口所做的调整 — 是否将其尺寸调小以为软键盘腾出空间，或者当窗口部分被软键盘遮挡时是否平移其内容以使当前焦点可见。  该设置必须是下表所列的值之一，或者是一个“state…”值加上一个“adjust…”值的">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="让Java类在kotlin中也支持解构声明">
-<meta property="og:url" content="https://mliyuanbiao.github.io/Android/让Java类在kotlin中也支持解构声明/index.html">
+<meta property="og:title" content="android:windowSoftInputMode详解">
+<meta property="og:url" content="https://mliyuanbiao.github.io/post/c84ead9.html">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="关于kotlin的一大段介绍我就不说了，首先我们来看看结构声明在kotlin中是如何使用的。 123456789101112//首先定义一个Person类data class Person(val name: String? = null, val age: Int = 0)fun main(args: Array&amp;lt;String&amp;gt;) &amp;#123;    val (name, age)">
+<meta property="og:description" content="Activity 的主窗口与包含屏幕软键盘的窗口的交互方式。 该属性的设置影响两个方面：  当 Activity 成为用户注意的焦点时软键盘的状态 — 隐藏还是可见。 对 Activity 主窗口所做的调整 — 是否将其尺寸调小以为软键盘腾出空间，或者当窗口部分被软键盘遮挡时是否平移其内容以使当前焦点可见。  该设置必须是下表所列的值之一，或者是一个“state…”值加上一个“adjust…”值的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-10T11:09:02.332Z">
+<meta property="og:updated_time" content="2017-12-07T03:28:54.795Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="让Java类在kotlin中也支持解构声明">
-<meta name="twitter:description" content="关于kotlin的一大段介绍我就不说了，首先我们来看看结构声明在kotlin中是如何使用的。 123456789101112//首先定义一个Person类data class Person(val name: String? = null, val age: Int = 0)fun main(args: Array&amp;lt;String&amp;gt;) &amp;#123;    val (name, age)">
+<meta name="twitter:title" content="android:windowSoftInputMode详解">
+<meta name="twitter:description" content="Activity 的主窗口与包含屏幕软键盘的窗口的交互方式。 该属性的设置影响两个方面：  当 Activity 成为用户注意的焦点时软键盘的状态 — 隐藏还是可见。 对 Activity 主窗口所做的调整 — 是否将其尺寸调小以为软键盘腾出空间，或者当窗口部分被软键盘遮挡时是否平移其内容以使当前焦点可见。  该设置必须是下表所列的值之一，或者是一个“state…”值加上一个“adjust…”值的">
   
     <link rel="alternative" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
   
@@ -161,49 +161,50 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-让Java类在kotlin中也支持解构声明" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-android-windowSoftInputMode详解" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      让Java类在kotlin中也支持解构声明
+      android:windowSoftInputMode详解
     </h1>
   
 
         
-        <a href="/Android/让Java类在kotlin中也支持解构声明/" class="archive-article-date">
-  	<time datetime="2018-02-08T03:34:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-08</time>
+        <a href="/post/c84ead9.html" class="archive-article-date">
+  	<time datetime="2017-12-07T03:25:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>关于<code>kotlin</code>的一大段介绍我就不说了，首先我们来看看结构声明在<code>kotlin</code>中是如何使用的。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//首先定义一个Person类</span></span><br><span class="line"><span class="keyword">data</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>(<span class="keyword">val</span> name: String? = <span class="literal">null</span>, <span class="keyword">val</span> age: <span class="built_in">Int</span> = <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> (name, age) = Person(<span class="string">"zhangsan"</span>, <span class="number">20</span>)</span><br><span class="line">    println(name) <span class="comment">// zhangsan</span></span><br><span class="line">    println(age) <span class="comment">// 20</span></span><br><span class="line"><span class="comment">// ===等价于===</span></span><br><span class="line">    <span class="keyword">val</span> p = Person(<span class="string">"zhangsan"</span>, <span class="number">20</span>)</span><br><span class="line">    println(p.name) <span class="comment">// zhangsan</span></span><br><span class="line">    println(p.age) <span class="comment">// 20</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>有时把一个对象 解构 成很多变量会很方便，我们可以同时声明多个变量<br>一个解构声明会被编译成以下代码：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> name = p.component1() <span class="comment">// zhangsan</span></span><br><span class="line"><span class="keyword">val</span> age = p.component2() <span class="comment">// 20</span></span><br></pre></td></tr></table></figure>
-<p>其中<code>component1()</code>,<code>component2()</code>,<code>componentN()</code>函数是由Kotlin编译器自动生成的，方法的数量取决于属性的数量，方法的顺序取决于属性的顺序。</p>
-<p>我们用Kotlin插件的<code>Show Kotlin Bytecode</code>功能将<code>Person</code>反编译可以得到如下Java代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">   <span class="meta">@Nullable</span> <span class="comment">// String?类型隐含添加上@Nullable注解，在Java调用Kotlin时能给出友好地非空提示</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">final</span> String name;</span><br><span class="line">   <span class="comment">// Int类型会被翻译成基本类型int，只有需要用到方法时才会转成Integer</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> age;</span><br><span class="line"></span><br><span class="line">   ... setter/getter ... </span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">(@Nullable String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.name = name;</span><br><span class="line">      <span class="keyword">this</span>.age = age;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   ......</span><br><span class="line">   </span><br><span class="line">   <span class="meta">@Nullable</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> String <span class="title">component1</span><span class="params">()</span> </span>&#123; <span class="comment">// 第一个属性</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.name;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">component2</span><span class="params">()</span> </span>&#123; <span class="comment">// 第二个属性</span></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.age;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@NotNull</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> Person <span class="title">copy</span><span class="params">(@Nullable String name, <span class="keyword">int</span> age)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Person(name, age);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   ... toString/hashCode/equals ... </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>从上面的代码可以看出，<code>data class</code>除了自动生成<code>setter/getter</code>，<code>toString</code>，<code>equals</code>，<code>hashCode</code>之外，还有<code>component1</code>和<code>component2</code>。但是<code>Java</code>编译器是不会自动生成的，也就无法使用结构声明。</p>
-<p>我们可以手动添加吗？？？？ 答案是可以的，你可以在<code>Person</code>类(Java)里面添加如下代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@NotNull</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">component1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getName();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">component2</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getAge();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面的方法可行，但似乎不够完美，我们大部分使用的API都是无法更改其内部结构的。根本没办法手动添加。</p>
-<p>其实<code>Kotlin</code>是支持结构声明扩展的，你可以这么做</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. operator关键字必不可少</span></span><br><span class="line"><span class="comment">// 2. 为什么我这里显示声明**String?**呢？</span></span><br><span class="line"><span class="comment">// Person是Java类，getName()返回的是Java的平台类型(String!),而不是String或者String?，可空性未知</span></span><br><span class="line"><span class="comment">// 你应当显示声明name是否可空，以便更好运用Kotlin空安全的特性。</span></span><br><span class="line"><span class="comment">// 当然你也可以不添加，因此你会得到一个波浪线和一个黄色感叹号，但是这并不会影响程序的运行</span></span><br><span class="line"><span class="comment">// 而int类型是基本类型，编译成Int类型是一定非空的，开发工具不会因此报出警告。</span></span><br><span class="line"><span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> Person.<span class="title">component1</span><span class="params">()</span></span>: String? = name </span><br><span class="line"><span class="keyword">operator</span> <span class="function"><span class="keyword">fun</span> Person.<span class="title">component2</span><span class="params">()</span></span> = age</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">main</span><span class="params">(args: <span class="type">Array</span>&lt;<span class="type">String</span>&gt;)</span></span> &#123;</span><br><span class="line">    <span class="keyword">val</span> (name, age) = Person(<span class="string">"zhangsan"</span>, <span class="number">20</span>)</span><br><span class="line">    println(name)</span><br><span class="line">    println(age)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>讲到这里，我想同学们都很清楚知道如何使用结构声明扩展让Java类也支持结构声明了，真是可以可贺。</p>
-<p>你可能见过下面一段代码：</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ((key, value) <span class="keyword">in</span> map) &#123;</span><br><span class="line"><span class="comment">// 使用该 key、value 做些事情</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这是一段遍历map的方法，实现它我们只需要这样做</p>
+        <p>Activity 的主窗口与包含屏幕软键盘的窗口的交互方式。 该属性的设置影响两个方面：</p>
 <ul>
-<li>通过提供一个 <code>iterator()</code> 函数将映射表示为一个值的序列；</li>
-<li>通过提供函数component1() 和 component2() 来将每个元素呈现为一对。</li>
+<li>当 Activity 成为用户注意的焦点时软键盘的状态 — 隐藏还是可见。</li>
+<li>对 Activity 主窗口所做的调整 — 是否将其尺寸调小以为软键盘腾出空间，或者当窗口部分被软键盘遮挡时是否平移其内容以使当前焦点可见。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">operator fun &lt;K, V&gt; Map&lt;K, V&gt;.iterator(): Iterator&lt;Map.Entry&lt;K, V&gt;&gt; = entrySet().itera</span><br><span class="line">tor()</span><br><span class="line">operator fun &lt;K, V&gt; Map.Entry&lt;K, V&gt;.component1() = getKey()</span><br><span class="line">operator fun &lt;K, V&gt; Map.Entry&lt;K, V&gt;.component2() = getValue()</span><br></pre></td></tr></table></figure>
-<p>题外话：其实kotlin标准库已经实现了一些很方便的扩展，包括上述的。<code>kotlin</code>拥有<code>java</code>所不具有的诸多优点，在谷歌大力支持下，我觉得Android开发者都应该学习并使用这门语言。</p>
+<p>该设置必须是下表所列的值之一，或者是一个“state…”值加上一个“adjust…”值的组合。 在任一组中设置多个值（例如，多个“state…”值）都会产生未定义结果。各值之间使用垂直条 (|) 分隔。 例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity android:windowSoftInputMode=&quot;stateVisible|adjustResize&quot; . . . &gt;</span><br></pre></td></tr></table></figure>
+<p>此处设置的值（<code>stateUnspecified</code>和<code>adjustUnspecified</code>除外）替换主题中设置的值。</p>
+<ul>
+<li><p><code>stateUnspecified</code><br>  不指定软键盘的状态（隐藏还是可见）。<br>将由系统选择合适的状态，或依赖主题中的设置。这是对软键盘行为的默认设置。</p>
+</li>
+<li><p><code>stateUnchanged</code><br>  当 Activity 转至前台时保留软键盘最后所处的任何状态，无论是可见还是隐藏。</p>
+</li>
+<li><code>stateHidden</code><br>  当用户选择 Activity 时 — 也就是说，当用户确实是向前导航到 Activity，而不是因离开另一 Activity 而返回时 — 隐藏软键盘。</li>
+<li><code>stateAlwaysHidden</code><br>  当 Activity 的主窗口有输入焦点时始终隐藏软键盘。</li>
+<li><code>stateVisible</code><br>  在正常的适宜情况下（当用户向前导航到 Activity 的主窗口时）显示软键盘。</li>
+<li><code>stateAlwaysVisible</code><br>  当用户选择 Activity 时 — 也就是说，当用户确实是向前导航到 Activity，而不是因离开另一 Activity 而返回时 — 显示软键盘。</li>
+<li><code>adjustUnspecified</code><pre><code>不指定 Activity 的主窗口是否调整尺寸以为软键盘腾出空间，或者窗口内容是否进行平移以在屏幕上显露当前焦点。 系统会根据窗口的内容是否存在任何可滚动其内容的布局视图来自动选择其中一种模式。 如果存在这样的视图，窗口将进行尺寸调整，前提是可通过滚动在较小区域内看到窗口的所有内容。这是对主窗口行为的默认设置。
+</code></pre></li>
+<li><code>adjustResize</code><br>  始终调整 Activity 主窗口的尺寸来为屏幕上的软键盘腾出空间。</li>
+<li><code>adjustPan</code><br>  不调整 Activity 主窗口的尺寸来为软键盘腾出空间， 而是自动平移窗口的内容，使当前焦点永远不被键盘遮盖，让用户始终都能看到其输入的内容。 这通常不如尺寸调正可取，因为用户可能需要关闭软键盘以到达被遮盖的窗口部分或与这些部分进行交互。</li>
+</ul>
+<p>该属性是在 API 级别 3 引入的。</p>
+<h3 id="引入的版本："><a href="#引入的版本：" class="headerlink" title="引入的版本："></a>引入的版本：</h3><p>API 级别 1，为 <code>noHistory</code> 和 <code>windowSoftInputMode</code> 之外的所有属性引入，这两个属性则是在 API 级别 3 中增加。</p>
 
       
 
@@ -218,14 +219,6 @@
 			 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Kotlin</a>
         		</li>
       		
 		</ul>
@@ -292,7 +285,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://mliyuanbiao.github.io/Android/让Java类在kotlin中也支持解构声明/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mliyuanbiao.github.io/post/c84ead9.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -306,9 +299,18 @@
   
 <nav id="article-nav">
   
+    <a href="/post/647d650a.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Android低功耗蓝牙
+        
+      </div>
+    </a>
   
-    <a href="/Android/kotlin编译问题01/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">kotlin编译 Kotlin home does not exist or is not a directory</div>
+  
+    <a href="/post/fecfb901.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android Handler机制详解</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -438,15 +440,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Kotlin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">

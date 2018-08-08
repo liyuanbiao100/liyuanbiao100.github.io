@@ -161,6 +161,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-自定义PAC列表规则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/post/d8b20b90.html">自定义PAC列表规则</a>
+    </h1>
+  
+
+        
+        <a href="/post/d8b20b90.html" class="archive-article-date">
+  	<time datetime="2017-10-25T02:35:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="规则大概描述如下"><a href="#规则大概描述如下" class="headerlink" title="规则大概描述如下"></a>规则大概描述如下</h4><ul>
+<li>通配符支持，如 <em>.example.com/</em> 实际书写时可省略 <em> 如 .example.com/ 意即 </em>.example.com/*</li>
+<li>正则表达式支持，以\开始和结束， 如 [\w]+://example.com\</li>
+<li>例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理<br>匹配地址开始和结尾 |，如 |<a href="http://example.com、example.com|" target="_blank" rel="noopener">http://example.com、example.com|</a> 分别表示以 <a href="http://example.com" target="_blank" rel="noopener">http://example.com</a> 开始和以 example.com 结束的地址</li>
+<li>|| 标记，如 ||example.com 则 <a href="http://example.com" target="_blank" rel="noopener">http://example.com</a> 、<a href="https://example.com" target="_blank" rel="noopener">https://example.com</a> 、<a href="ftp://example.com" target="_blank" rel="noopener">ftp://example.com</a> 等地址均满足条件，只用于匹配地址开头</li>
+<li>注释 ! 如 ! Comment</li>
+<li>分隔符^，表示除了字母、数字或者 _ - . % 之外的任何字符。如 <a href="http://example.com^" target="_blank" rel="noopener">http://example.com^</a> ，<a href="http://example.com/" target="_blank" rel="noopener">http://example.com/</a> 和 <a href="http://example.com:8000/" target="_blank" rel="noopener">http://example.com:8000/</a> 均满足条件，而 <a href="http://example.com.ar/" target="_blank" rel="noopener">http://example.com.ar/</a> 不满足条件</li>
+</ul>
+<h4 id="如何使用自定义规则"><a href="#如何使用自定义规则" class="headerlink" title="如何使用自定义规则"></a>如何使用自定义规则</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">! Put user rules line by line in this file.</span><br><span class="line">! See https://adblockplus.org/en/filter-cheatsheet</span><br><span class="line">||amazonaws.com</span><br><span class="line">||atom.io</span><br><span class="line">||github.com^</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/杂货铺//" class="article-tag-list-link color4">杂货铺</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/post/d8b20b90.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-继承与原型链" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -168,12 +250,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/JavaScript/继承与原型链/">JavaScript 继承与原型链</a>
+      <a class="article-title" href="/post/d14050d0.html">JavaScript 继承与原型链</a>
     </h1>
   
 
         
-        <a href="/JavaScript/继承与原型链/" class="archive-article-date">
+        <a href="/post/d14050d0.html" class="archive-article-date">
   	<time datetime="2017-10-10T06:38:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
 </a>
         
@@ -270,7 +352,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/JavaScript/继承与原型链/">展开全文 >></a>
+          <a class="article-more-a" href="/post/d14050d0.html">展开全文 >></a>
         </p>
       
 
@@ -307,12 +389,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Android/ThreadLocal详解/">ThreadLocal详解</a>
+      <a class="article-title" href="/post/443887f3.html">ThreadLocal详解</a>
     </h1>
   
 
         
-        <a href="/Android/ThreadLocal详解/" class="archive-article-date">
+        <a href="/post/443887f3.html" class="archive-article-date">
   	<time datetime="2017-10-10T04:59:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
 </a>
         
@@ -375,7 +457,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/Android/ThreadLocal详解/">展开全文 >></a>
+          <a class="article-more-a" href="/post/443887f3.html">展开全文 >></a>
         </p>
       
 
@@ -412,12 +494,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/javascript/JavaScript-模板字符串/">javascript 模板字符串</a>
+      <a class="article-title" href="/post/7f9876e8.html">javascript 模板字符串</a>
     </h1>
   
 
         
-        <a href="/javascript/JavaScript-模板字符串/" class="archive-article-date">
+        <a href="/post/7f9876e8.html" class="archive-article-date">
   	<time datetime="2017-10-09T06:44:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-09</time>
 </a>
         
@@ -482,7 +564,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/javascript/JavaScript-模板字符串/">展开全文 >></a>
+          <a class="article-more-a" href="/post/7f9876e8.html">展开全文 >></a>
         </p>
       
 
@@ -519,12 +601,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Android/Android-Studio-自动检查依赖库是否有新版本/">Android Studio 自动检查依赖库是否有新版本</a>
+      <a class="article-title" href="/post/f7a3c6c0.html">Android Studio 自动检查依赖库是否有新版本</a>
     </h1>
   
 
         
-        <a href="/Android/Android-Studio-自动检查依赖库是否有新版本/" class="archive-article-date">
+        <a href="/post/f7a3c6c0.html" class="archive-article-date">
   	<time datetime="2017-09-12T07:45:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-12</time>
 </a>
         
@@ -579,7 +661,108 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/Android/Android-Studio-自动检查依赖库是否有新版本/">展开全文 >></a>
+          <a class="article-more-a" href="/post/f7a3c6c0.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-Android记录器Logger" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/post/de93668b.html">Android记录器Logger</a>
+    </h1>
+  
+
+        
+        <a href="/post/de93668b.html" class="archive-article-date">
+  	<time datetime="2017-09-08T14:16:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Logger"><a href="#Logger" class="headerlink" title="Logger"></a>Logger</h1><p>简单，漂亮，功能强大的Android记录器</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">implementation <span class="string">'com.orhanobut:logger:2.2.0'</span></span><br></pre></td></tr></table></figure>
+<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Logger.addLogAdapter(<span class="keyword">new</span> AndroidLogAdapter());</span><br></pre></td></tr></table></figure>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Logger.d(<span class="string">"hello"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h2><p><img src="/media/15337379282287.jpg" alt=""></p>
+<h2 id="可选项"><a href="#可选项" class="headerlink" title="可选项"></a>可选项</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Logger.d(<span class="string">"debug"</span>);</span><br><span class="line">Logger.e(<span class="string">"error"</span>);</span><br><span class="line">Logger.w(<span class="string">"warning"</span>);</span><br><span class="line">Logger.v(<span class="string">"verbose"</span>);</span><br><span class="line">Logger.i(<span class="string">"information"</span>);</span><br><span class="line">Logger.wtf(<span class="string">"What a Terrible Failure"</span>);</span><br></pre></td></tr></table></figure>
+<p>支持字符串格式参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Logger.d(<span class="string">"hello %s"</span>, <span class="string">"world"</span>);</span><br></pre></td></tr></table></figure>
+<p>支持集合（仅适用于调试日志）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Logger.d(MAP);</span><br><span class="line">Logger.d(SET);</span><br><span class="line">Logger.d(LIST);</span><br><span class="line">Logger.d(ARRAY);</span><br></pre></td></tr></table></figure>
+<p>Json和Xml支持（输出将处于调试级别）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Logger.json(JSON_CONTENT);</span><br><span class="line">Logger.xml(XML_CONTENT);</span><br></pre></td></tr></table></figure>
+<h2 id="高级"><a href="#高级" class="headerlink" title="高级"></a>高级</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()</span><br><span class="line">  .showThreadInfo(<span class="keyword">false</span>)  <span class="comment">// (可选) 是否显示线程信息。默认为true</span></span><br><span class="line">  .methodCount(<span class="number">0</span>)         <span class="comment">// (可选) 要显示多少个方法行。默认2</span></span><br><span class="line">  .methodOffset(<span class="number">7</span>)        <span class="comment">// (可选) 隐藏内部方法调用以抵消偏移。默认5</span></span><br><span class="line">  .logStrategy(customLog) <span class="comment">// (可选) 更改打印日志策略。默认LogCat</span></span><br><span class="line">  .tag(<span class="string">"My custom tag"</span>)   <span class="comment">// (可选) 每个日志的全局TAG。默认“PRETTY_LOGGER”</span></span><br><span class="line">  .build();</span><br><span class="line"></span><br><span class="line">Logger.addLogAdapter(<span class="keyword">new</span> AndroidLogAdapter(formatStrategy));</span><br></pre></td></tr></table></figure>
+<h2 id="可打印"><a href="#可打印" class="headerlink" title="可打印"></a>可打印</h2><p>日志适配器通过检查此功能来检查是否应打印日志。如果要禁用/隐藏输出日志，请覆盖isLoggable方法。 true将打印日志消息，false将忽略它。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Logger.addLogAdapter(<span class="keyword">new</span> AndroidLogAdapter() &#123;</span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isLoggable</span><span class="params">(<span class="keyword">int</span> priority, String tag)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> BuildConfig.DEBUG;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="将日志保存到文件中"><a href="#将日志保存到文件中" class="headerlink" title="将日志保存到文件中"></a>将日志保存到文件中</h2><p>// TODO：稍后会添加更多信息</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Logger.addLogAdapter(<span class="keyword">new</span> DiskLogAdapter());</span><br></pre></td></tr></table></figure>
+<p>将自定义 TAG 添加到Csv格式策略</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FormatStrategy formatStrategy = CsvFormatStrategy.newBuilder()</span><br><span class="line">  .tag(<span class="string">"custom"</span>)</span><br><span class="line">  .build();</span><br><span class="line">  </span><br><span class="line">Logger.addLogAdapter(<span class="keyword">new</span> DiskLogAdapter(formatStrategy));</span><br></pre></td></tr></table></figure>
+<h2 id="怎么运行的"><a href="#怎么运行的" class="headerlink" title="怎么运行的"></a>怎么运行的</h2><p><img src="/media/15337379584559.jpg" alt=""></p>
+<h2 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h2><ul>
+<li>使用过滤器可获得更好的效果。 PRETTY_LOGGER或您的自定义标记</li>
+<li>确保禁用换行选项</li>
+<li>您还可以通过更改设置来简化输出</li>
+</ul>
+<p><img src="/media/15337379723935.jpg" alt=""></p>
+<ul>
+<li>Timber Integration</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将methodOffset设置为5以隐藏内部方法调用</span></span><br><span class="line">Timber.plant(<span class="keyword">new</span> Timber.DebugTree() &#123;</span><br><span class="line">  <span class="meta">@Override</span> <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">log</span><span class="params">(<span class="keyword">int</span> priority, String tag, String message, Throwable t)</span> </span>&#123;</span><br><span class="line">    Logger.log(priority, tag, message, t);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Android</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/post/de93668b.html">展开全文 >></a>
         </p>
       
 
@@ -710,15 +893,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Kotlin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">

@@ -161,6 +161,117 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-关于-Kotlin-几篇文章的一些讨论" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/post/95d4684d.html">关于 Kotlin 几篇文章的一些讨论</a>
+    </h1>
+  
+
+        
+        <a href="/post/95d4684d.html" class="archive-article-date">
+  	<time datetime="2018-06-26T05:25:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="抛弃-Java-改用-Kotlin-的六个月后，我后悔了"><a href="#抛弃-Java-改用-Kotlin-的六个月后，我后悔了" class="headerlink" title="抛弃 Java 改用 Kotlin 的六个月后，我后悔了"></a>抛弃 Java 改用 Kotlin 的六个月后，我后悔了</h2><p>原文地址：<a href="https://blog.csdn.net/csdnnews/article/details/80746096" target="_blank" rel="noopener">https://blog.csdn.net/csdnnews/article/details/80746096</a></p>
+<p>这篇文章我很早之前之前就看过了，是一片批判 Kotlin 的文章，一时间在各大技术论坛疯狂转载。由于我本人很喜欢 Kotlin ，所以只是粗略的看了一眼，并觉得作者是在放屁。上面做法并不符合我认真求学的风格，今天我决定认真的看看，仔细分析下。</p>
+<p>文中举了很多例子说明 Kotlin 的不完美，甚至会降低工作效率。我觉得，尽管 Kotlin 不完美，因为任何一门编程语言都不可能尽善尽美，但是他是在 Java 的基础上，为了解决 Java 的一些设计缺陷而设计出来的语言，使用 Kotlin 能极大增加工作效率。</p>
+<h3 id="名称遮蔽"><a href="#名称遮蔽" class="headerlink" title="名称遮蔽"></a>名称遮蔽</h3><p>作者认为这是 Koltin 的设计缺陷，试图通过警告信息来解决这个问题。我认为这是 Kotlin 的一个功能，并不属于缺陷，名称遮蔽并不会造成编程错误，在有些地方也有名称遮蔽的应用。</p>
+<h3 id="类型推断"><a href="#类型推断" class="headerlink" title="类型推断"></a>类型推断</h3><p>Kotlin 的类型推断比 Java 强大不止一点点，Java 在 8 开始才对类型推断有比较好的支持，到了 10 才可以使用<code>var</code>来声明变量，通过类型推断而不需要显示声明变量类型。这一特性也只在局部作用域生效。现在<br>Java 的使用者里面有很多都是Android开发者，本人就是。Android 对 Java 新语法的支持并不是很良好，为了兼容以前的 Android 系统，开发者们不得不使用 Java7 甚至 Java6 的语法。Kotlin 的出现让这一切有了很大的改观。</p>
+<h3 id="Null-安全类型"><a href="#Null-安全类型" class="headerlink" title="Null 安全类型"></a>Null 安全类型</h3><p>作者在描述 Kotlin 与Java 互操作的过程中不可避免的会产生第三种类型，<strong>平台类型</strong>，作者认为平台类型会让代表变得糟糕，误导你，会禁用 Kotlin 的 NULL 安全机制。</p>
+<p>我觉得 Kotlin 为了要与 Java 实现100% 互操作而产生平台类型这是不可避免的，因为 Java 从一开始就没有这种安全机制，在 Java 语言中，每个类变量都有可能为 null 。正是因为这样，Kotlin 编译器才为了我们做了更多的事情，他并没有将所有的 Java 变量翻译成可空类型。</p>
+<ul>
+<li>基础类型是不可能为 null 的，在 Kotlin 中会作为不可空类型的存在</li>
+<li>Kotlin编译器还支持识别<code>@Nullable</code> 和 <code>@NonNull</code> 注解，他们分别会被翻译为可空类型和非空类型，现在很多类库为了适应 Kotlin 而加上了这些注解。</li>
+<li>当平台类型不可避免的时候，可以显示为 Java 变量声明可空类型或者非空类型，避免在 Kotlin 中使用平台类型。如果你没有遵守这一规则，Kotlin 编译器则会以警告的形式提示你。</li>
+<li>Kotlin 有强大的 IDE 支持，在编辑器中会显示类型推断的实际类型。平台类型则是类型名称后面加上！。这只在编辑器中作为提示显示，语法中并不存在。</li>
+</ul>
+<p>Kotlin 并不会误导你，对语言的不熟悉才是你被误导的真正原因。我觉得 Kotlin有很多吸引我的地方，其中 Null 安全机制是我最喜欢的。</p>
+<h3 id="Maybe"><a href="#Maybe" class="headerlink" title="Maybe"></a>Maybe</h3><p>在 Java8 中为了解决空安全的问题，而引入了Optional。作者称 如今，Optional 是在 API 边界处理返回类型中的空值的非常流行的方式。而我倒觉得这是非常无奈的做法，比起 Kotlin 从根源上解决查太多。</p>
+<p>为了论证 Kotlin 很差，作者举了下面的例子：<br>例如，在 Java 中： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">parseAndInc</span><span class="params">(String number)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> Optional.ofNullable(number)</span><br><span class="line">                   .map(Integer::parseInt)</span><br><span class="line">                   .map(it -&gt; it + <span class="number">1</span>)</span><br><span class="line">                   .orElse(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在 Kotlin 中，需要这样做</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fun</span> <span class="title">parseAndInc</span><span class="params">(number: <span class="type">String</span>?)</span></span>: <span class="built_in">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> number?.let &#123; Integer.parseInt(it) &#125;</span><br><span class="line">                 ?.let &#123; it -&gt; it + <span class="number">1</span> &#125; ?: <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后比较这两段代码的可读性。</p>
+<p>可读性对于每个人都不一样吧，而且谁会在 kotlin 使用 <code>Integer.parseInt</code> 呢？如果作者喜欢 Optional ，你可以使用它。 Kotlin 在 JVM 上运行。即使是自己实现一个类似于 Optional 的类也是很容易的。</p>
+<h3 id="类名称字面常量"><a href="#类名称字面常量" class="headerlink" title="类名称字面常量"></a>类名称字面常量</h3><p>这点我就不想多说了，作者纯粹为了找茬嘛。<br>文中说：Kotlin 把 Kotlin 类和 Java 类进行了区分，并为其提供了语法规范：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> kotlinClass : KClass&lt;LocalDate&gt; = LocalDate::<span class="class"><span class="keyword">class</span></span></span><br><span class="line"><span class="keyword">val</span> javaClass : Class&lt;LocalDate&gt; = LocalDate::<span class="class"><span class="keyword">class</span>.<span class="title">java</span></span></span><br></pre></td></tr></table></figure>
+<p>这看起来非常丑陋。</p>
+<p>丑陋，呵呵呵呵呵呵呵。。。。。<br>还有其他的一些点论证 Kotlin 无比丑陋的说法就不一一说明了。</p>
+<p>另外作为认为 Kotlin 具有陡峭的学习路线，这点我是不认同的，我只用了两天就将 Kotlin 用于生产环境了。Groovy 虽然很容易从 Java 转换过来，因为Java代码是正确的 Groovy 代码，但是想要深入学习一点都不比 Kotlin 容易，特别是没有接触过弱类型语言的开发者来说。Groovy 我也学习过，我更认为同样作为静态类型的 Kotlin 与 Java 更接近，即使他的语法与 Scala 接近。</p>
+<h3 id="关于作者最后的想法"><a href="#关于作者最后的想法" class="headerlink" title="关于作者最后的想法"></a>关于作者最后的想法</h3><blockquote>
+<p>学习新技术就像一项投资。我们投入时间，新技术让我们得到回报。但我并不是说 Kotlin 是一种糟糕的语言，只是在我们的案例中，成本远超收益。</p>
+</blockquote>
+<p>作者说的是普遍的道理，所以我不能说他错，但是就目前而言我不认为 Kotlin 是糟糕的语言。使用 Kotlin 一年多时间以来，我感受到 Kotlin 带来的诸多好处，一种学习新语言，新特性带来的心灵洗礼，我不会说 Java 和 Kotlin 谁更好，他们都很好，我都很喜欢。</p>
+<h2 id="谷歌大牛说：为什么-Kotlin-比你们用的那些垃圾语言都好"><a href="#谷歌大牛说：为什么-Kotlin-比你们用的那些垃圾语言都好" class="headerlink" title="谷歌大牛说：为什么 Kotlin 比你们用的那些垃圾语言都好"></a>谷歌大牛说：为什么 Kotlin 比你们用的那些垃圾语言都好</h2><p>原文地址：<a href="http://blog.jobbole.com/111249/" target="_blank" rel="noopener">http://blog.jobbole.com/111249/</a></p>
+<p>这篇文章在安卓团队在谷歌 I/O 2017 大会上宣布 Kotlin 成为官方头等支持语言之后发布，同样获得疯狂的转载。这篇文章的标题有点标题党，甚至有点引战的味道。要让我用一个词来形容就是跪舔。</p>
+<p>作者讲述了十年来的经历，以及为什么使用 Kotlin 。<br>比如 Android 有几个很糟糕的 API。因为这样，接下来一年半没有碰 Android 编程。来自俄罗斯的救星 Kotlin，对他第一印象是简洁，而且有一种似曾相识的感觉，和 Swift 很像，然后简述 Kotlin 和 Swift 的历史，是 Kotlin 在前，Swift 在后，所以是 Swift 和 Kotlin 很像。<br>其实谁和谁像已经无所谓了， Kotlin 和 Swift 都是现代化语言，而现在化语言都是很像的，作者花了大篇幅只为争个先后，这是跪舔。</p>
+<p>接下里说为什么要从 Java 叛逃到 Kotlin。大部分是讲和 Java8 的对比，还有在 Android开发上的便利性，这和标题有个毛关系。回到糟糕的Android API，原文说：</p>
+<blockquote>
+<p>Kotlin 致力于让大家绕过 Android API 那些恶心的东西，并且能让你充分发挥你的经验，这一点甚至比 iOS 做得还要好。好吧，至少来说比 Objective-C 做得好，因为我觉得 Swift 肯定也不会差。知道为什么吗？因为 Swift 和 Kotlin 很像啊。</p>
+</blockquote>
+<p>Swift 和 Objective-C 只是在互操作性没有 Kotlin 与 Java 这么好，没办法，他们都是基础JVM的（我知道有人要杠了），这个 Android API 本身没有关系吧，API就在哪里，你用与不用，他都在哪里，请问 Kotlin 是如何绕过去的。 可能作者根本不喜欢 Android 吧，不然怎么会因为 Java 拒绝 Android，语句中看不出丝毫热爱。可能是为了跪舔而扯上的Android吧，但似乎有点用力过猛了。这也是跪舔。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Kotlin</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/post/95d4684d.html">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-让Java类在kotlin中也支持解构声明" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -168,12 +279,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Android/让Java类在kotlin中也支持解构声明/">让Java类在kotlin中也支持解构声明</a>
+      <a class="article-title" href="/post/dced847d.html">让Java类在kotlin中也支持解构声明</a>
     </h1>
   
 
         
-        <a href="/Android/让Java类在kotlin中也支持解构声明/" class="archive-article-date">
+        <a href="/post/dced847d.html" class="archive-article-date">
   	<time datetime="2018-02-08T03:34:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-08</time>
 </a>
         
@@ -246,7 +357,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/Android/让Java类在kotlin中也支持解构声明/">展开全文 >></a>
+          <a class="article-more-a" href="/post/dced847d.html">展开全文 >></a>
         </p>
       
 
@@ -283,12 +394,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Android/kotlin编译问题01/">kotlin编译 Kotlin home does not exist or is not a directory</a>
+      <a class="article-title" href="/post/1f2f4db2.html">kotlin编译 Kotlin home does not exist or is not a directory</a>
     </h1>
   
 
         
-        <a href="/Android/kotlin编译问题01/" class="archive-article-date">
+        <a href="/post/1f2f4db2.html" class="archive-article-date">
   	<time datetime="2018-02-03T19:19:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-04</time>
 </a>
         
@@ -340,7 +451,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/Android/kotlin编译问题01/">展开全文 >></a>
+          <a class="article-more-a" href="/post/1f2f4db2.html">展开全文 >></a>
         </p>
       
 
@@ -377,12 +488,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Android/Android蓝牙/">Android蓝牙</a>
+      <a class="article-title" href="/post/639eaf27.html">Android蓝牙</a>
     </h1>
   
 
         
-        <a href="/Android/Android蓝牙/" class="archive-article-date">
+        <a href="/post/639eaf27.html" class="archive-article-date">
   	<time datetime="2017-12-21T07:15:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-21</time>
 </a>
         
@@ -631,7 +742,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/Android/Android蓝牙/">展开全文 >></a>
+          <a class="article-more-a" href="/post/639eaf27.html">展开全文 >></a>
         </p>
       
 
@@ -668,12 +779,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Android/Android低功耗蓝牙/">Android低功耗蓝牙</a>
+      <a class="article-title" href="/post/647d650a.html">Android低功耗蓝牙</a>
     </h1>
   
 
         
-        <a href="/Android/Android低功耗蓝牙/" class="archive-article-date">
+        <a href="/post/647d650a.html" class="archive-article-date">
   	<time datetime="2017-12-21T06:58:17.709Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-21</time>
 </a>
         
@@ -781,7 +892,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/Android/Android低功耗蓝牙/">展开全文 >></a>
+          <a class="article-more-a" href="/post/647d650a.html">展开全文 >></a>
         </p>
       
 
@@ -818,12 +929,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Android/android-windowSoftInputMode详解/">android:windowSoftInputMode详解</a>
+      <a class="article-title" href="/post/c84ead9.html">android:windowSoftInputMode详解</a>
     </h1>
   
 
         
-        <a href="/Android/android-windowSoftInputMode详解/" class="archive-article-date">
+        <a href="/post/c84ead9.html" class="archive-article-date">
   	<time datetime="2017-12-07T03:25:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-07</time>
 </a>
         
@@ -889,7 +1000,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/Android/android-windowSoftInputMode详解/">展开全文 >></a>
+          <a class="article-more-a" href="/post/c84ead9.html">展开全文 >></a>
         </p>
       
 
@@ -926,12 +1037,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Android/Android-Handler机制详解/">Android Handler机制详解</a>
+      <a class="article-title" href="/post/fecfb901.html">Android Handler机制详解</a>
     </h1>
   
 
         
-        <a href="/Android/Android-Handler机制详解/" class="archive-article-date">
+        <a href="/post/fecfb901.html" class="archive-article-date">
   	<time datetime="2017-12-05T04:51:08.773Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-05</time>
 </a>
         
@@ -1021,7 +1132,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/Android/Android-Handler机制详解/">展开全文 >></a>
+          <a class="article-more-a" href="/post/fecfb901.html">展开全文 >></a>
         </p>
       
 
@@ -1058,12 +1169,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Android/Android应用内安装App的几种姿势/">Android应用内安装App的几种姿势</a>
+      <a class="article-title" href="/post/7bdf5ef8.html">Android应用内安装App的几种姿势</a>
     </h1>
   
 
         
-        <a href="/Android/Android应用内安装App的几种姿势/" class="archive-article-date">
+        <a href="/post/7bdf5ef8.html" class="archive-article-date">
   	<time datetime="2017-10-27T09:16:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
 </a>
         
@@ -1151,7 +1262,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/Android/Android应用内安装App的几种姿势/">展开全文 >></a>
+          <a class="article-more-a" href="/post/7bdf5ef8.html">展开全文 >></a>
         </p>
       
 
@@ -1188,12 +1299,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Android/如何理解Kotlin中属性/">如何理解Kotlin中属性</a>
+      <a class="article-title" href="/post/6585af7e.html">如何理解Kotlin中属性</a>
     </h1>
   
 
         
-        <a href="/Android/如何理解Kotlin中属性/" class="archive-article-date">
+        <a href="/post/6585af7e.html" class="archive-article-date">
   	<time datetime="2017-10-27T07:59:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
 </a>
         
@@ -1299,7 +1410,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/Android/如何理解Kotlin中属性/">展开全文 >></a>
+          <a class="article-more-a" href="/post/6585af7e.html">展开全文 >></a>
         </p>
       
 
@@ -1336,12 +1447,12 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/Android/Java转Kotlin-boolean属性的坑/">Java转Kotlin boolean属性的坑</a>
+      <a class="article-title" href="/post/2d13bd4b.html">Java转Kotlin boolean属性的坑</a>
     </h1>
   
 
         
-        <a href="/Android/Java转Kotlin-boolean属性的坑/" class="archive-article-date">
+        <a href="/post/2d13bd4b.html" class="archive-article-date">
   	<time datetime="2017-10-27T03:59:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
 </a>
         
@@ -1428,89 +1539,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/Android/Java转Kotlin-boolean属性的坑/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-自定义PAC列表规则" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/杂货铺/自定义PAC列表规则/">自定义PAC列表规则</a>
-    </h1>
-  
-
-        
-        <a href="/杂货铺/自定义PAC列表规则/" class="archive-article-date">
-  	<time datetime="2017-10-25T02:35:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="规则大概描述如下"><a href="#规则大概描述如下" class="headerlink" title="规则大概描述如下"></a>规则大概描述如下</h4><ul>
-<li>通配符支持，如 <em>.example.com/</em> 实际书写时可省略 <em> 如 .example.com/ 意即 </em>.example.com/*</li>
-<li>正则表达式支持，以\开始和结束， 如 [\w]+://example.com\</li>
-<li>例外规则 @@，如 @@.example.com/ 满足@@后规则的地址不使用代理<br>匹配地址开始和结尾 |，如 |<a href="http://example.com、example.com|" target="_blank" rel="noopener">http://example.com、example.com|</a> 分别表示以 <a href="http://example.com" target="_blank" rel="noopener">http://example.com</a> 开始和以 example.com 结束的地址</li>
-<li>|| 标记，如 ||example.com 则 <a href="http://example.com" target="_blank" rel="noopener">http://example.com</a> 、<a href="https://example.com" target="_blank" rel="noopener">https://example.com</a> 、<a href="ftp://example.com" target="_blank" rel="noopener">ftp://example.com</a> 等地址均满足条件，只用于匹配地址开头</li>
-<li>注释 ! 如 ! Comment</li>
-<li>分隔符^，表示除了字母、数字或者 _ - . % 之外的任何字符。如 <a href="http://example.com^" target="_blank" rel="noopener">http://example.com^</a> ，<a href="http://example.com/" target="_blank" rel="noopener">http://example.com/</a> 和 <a href="http://example.com:8000/" target="_blank" rel="noopener">http://example.com:8000/</a> 均满足条件，而 <a href="http://example.com.ar/" target="_blank" rel="noopener">http://example.com.ar/</a> 不满足条件</li>
-</ul>
-<h4 id="如何使用自定义规则"><a href="#如何使用自定义规则" class="headerlink" title="如何使用自定义规则"></a>如何使用自定义规则</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">! Put user rules line by line in this file.</span><br><span class="line">! See https://adblockplus.org/en/filter-cheatsheet</span><br><span class="line">||amazonaws.com</span><br><span class="line">||atom.io</span><br><span class="line">||github.com^</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/杂货铺//" class="article-tag-list-link color4">杂货铺</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/杂货铺/自定义PAC列表规则/">展开全文 >></a>
+          <a class="article-more-a" href="/post/2d13bd4b.html">展开全文 >></a>
         </p>
       
 
@@ -1641,15 +1670,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Kotlin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">

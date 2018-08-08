@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://mliyuanbiao.github.io">
-  <title>Java转Kotlin boolean属性的坑 | 我的个人博客</title>
+  <title>ThreadLocal详解 | 我的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
-<meta name="keywords" content="Android,Java,Kotlin">
+  <meta name="description" content="前言ThreadLocal类位于java.lang包下，jdk1.2开始引入。ThreadLocal为每个使用该类变量的线程提供单独的副本，线程之间不会互相影响。就是说在A线程设置的值只能在A线程读取到，在B线程是读取不到的。 在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁。但是局部变量">
+<meta name="keywords" content="Android,Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java转Kotlin boolean属性的坑">
-<meta property="og:url" content="https://mliyuanbiao.github.io/Android/Java转Kotlin-boolean属性的坑/index.html">
+<meta property="og:title" content="ThreadLocal详解">
+<meta property="og:url" content="https://mliyuanbiao.github.io/post/443887f3.html">
 <meta property="og:site_name" content="我的个人博客">
-<meta property="og:description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
+<meta property="og:description" content="前言ThreadLocal类位于java.lang包下，jdk1.2开始引入。ThreadLocal为每个使用该类变量的线程提供单独的副本，线程之间不会互相影响。就是说在A线程设置的值只能在A线程读取到，在B线程是读取不到的。 在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁。但是局部变量">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://mliyuanbiao.github.io/media/15057241768106.jpg">
-<meta property="og:updated_time" content="2017-11-23T08:20:42.376Z">
+<meta property="og:updated_time" content="2017-12-05T07:13:20.844Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java转Kotlin boolean属性的坑">
-<meta name="twitter:description" content="踩坑假设一个 JavaBean 类中有 boolean 类型的字段叫做 enabled它生成的setter/getter 方法将是  setter: setEnabled(boolean enabled) getter: isEnabled()  1234567891011public static class JavaBean&amp;#123;        private boolean enabl">
-<meta name="twitter:image" content="https://mliyuanbiao.github.io/media/15057241768106.jpg">
+<meta name="twitter:title" content="ThreadLocal详解">
+<meta name="twitter:description" content="前言ThreadLocal类位于java.lang包下，jdk1.2开始引入。ThreadLocal为每个使用该类变量的线程提供单独的副本，线程之间不会互相影响。就是说在A线程设置的值只能在A线程读取到，在B线程是读取不到的。 在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁。但是局部变量">
   
     <link rel="alternative" href="/atom.xml" title="我的个人博客" type="application/atom+xml">
   
@@ -163,63 +161,43 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Java转Kotlin-boolean属性的坑" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-ThreadLocal详解" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Java转Kotlin boolean属性的坑
+      ThreadLocal详解
     </h1>
   
 
         
-        <a href="/Android/Java转Kotlin-boolean属性的坑/" class="archive-article-date">
-  	<time datetime="2017-10-27T03:59:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-27</time>
+        <a href="/post/443887f3.html" class="archive-article-date">
+  	<time datetime="2017-10-10T04:59:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-10</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h3><p>假设一个 <code>JavaBean</code> 类中有 <code>boolean</code> 类型的字段叫做 <code>enabled</code><br>它生成的<code>setter</code>/<code>getter</code> 方法将是</p>
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>ThreadLocal类位于java.lang包下，jdk1.2开始引入。ThreadLocal为每个使用该类变量的线程提供单独的副本，线程之间不会互相影响。就是说在A线程设置的值只能在A线程读取到，在B线程是读取不到的。</p>
+<p>在多线程环境下，每个线程都有自己的数据。一个线程使用自己的局部变量比使用全局变量好，因为局部变量只有线程自己能看见，不会影响其他线程，而全局变量的修改必须加锁。<br>但是局部变量也有问题，就是在函数调用的时候，传递起来很麻烦。</p>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p>这个类一共提供了四个方法。</p>
 <ul>
-<li>setter: <code>setEnabled(boolean enabled)</code></li>
-<li>getter: <code>isEnabled()</code></li>
+<li><code>set(T value)</code> 将此线程局部变量的当前线程副本中的值设置为指定值。</li>
+<li><code>get()</code>  返回此线程局部变量的当前线程副本中的值。</li>
+<li><code>remove()</code>  移除此线程局部变量当前线程的值。</li>
+<li><code>initialValue()</code> 返回此线程局部变量的当前线程的“初始值”。该实现返回 null；如果程序员希望线程局部变量具有 <code>null</code> 以外的值，则必须为 ThreadLocal <strong>创建子类</strong>，并<strong>重写</strong>此方法。通常将使用<strong>匿名内部类</strong>完成此操作。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span></span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">boolean</span> enabled;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEnabled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> enabled;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEnabled</span><span class="params">(<span class="keyword">boolean</span> enabled)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.enabled = enabled;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>使用 <code>Android Studio</code> 的 <code>kotlin</code> 插件转换后将生成 <code>isEnabled</code> 属性，而不是 <code>enabled</code> 属性。</p>
-<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> isEnabled: <span class="built_in">Boolean</span> = <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们知道<code>kotlin</code>编译后也是生成<code>class</code>文件，所以也是可以转成<code>java</code>文件的，通过查看反编译后的结果来学习<code>kotlin</code>不失为一种好方法。</p>
-<p>可以在 <code>Android Studio</code> 执行下面的操作将 <code>kotlin</code> 代码重新转成<code>java</code>代码。<br>Tools / Kotlin / Show Kotlin Bytecode / Decompile. </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">JavaBean</span> </span>&#123;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">boolean</span> isEnabled;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">isEnabled</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.isEnabled;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">setEnabled</span><span class="params">(<span class="keyword">boolean</span> var1)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.isEnabled = var1;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>可以看到是 <code>isEnabled</code> ，不是 <code>enabled</code>。</p>
-<h4 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h4><ul>
-<li><p>我在项目中使用的是<strong>Gson</strong>来解析后台返回来的数据。<strong>Gson</strong>是通过反射字段的名称来赋值的，然而数据中是 <code>enbaled</code> ，代码里是 <code>isEnabled</code> ，它将永远不能被赋值，永远为<code>false</code>，解决方法可以是</p>
-<ul>
-<li>给字段添加 <code>@SerializedName(value = &quot;enbaled&quot;)</code></li>
-<li>直接将 <code>isEnabled</code> 改成 <code>enbaled</code>，保证kotlin的幕后字段与后台返回数据一致即可.</li>
-</ul>
-</li>
-<li><p>如果你项目中用的是<strong>fastjson</strong>，那么需要为每个字段添加<code>setter</code>/<code>getter</code> 方法。<strong>fastjson</strong>是根据<strong>Javabean</strong>属性来赋值的，所以必须保证属性名正确。由于之前<strong>fastjson</strong>出现过序列化成功，但是反序列化失败的bug，致使我放弃使用<strong>fastjson</strong>。虽然<strong>fastjson</strong>以快著称，但是快不是唯一的需求，它只在数据量大的时候有明显差异，数据量小的时候差异几乎可是忽略不计，所以我选择<strong>Gson</strong>。</p>
-</li>
-</ul>
-<h3 id="细谈Java属性"><a href="#细谈Java属性" class="headerlink" title="细谈Java属性"></a>细谈Java属性</h3><p>在Java里面生成 <code>setter</code>/<code>getter</code> 方法是有一定规则的。</p>
-<ul>
-<li>如果类的成员变量的名字是xxx，那么为了更改或获取成员变量的值，即更改或获取属性，在类中可以使用两个方法：<ul>
-<li>getXxx()，用来获取属性xxx。</li>
-<li>setXxx()，用来修改属性xxx.。</li>
-</ul>
-</li>
-<li>对于boolean类型的成员变量，即布尔逻辑类型的属性，允许使用”is”代替上面的”get”。</li>
-<li>类中访问属性的方法都必须是public的，一般属性是private的。</li>
-<li>类中如果有构造方法，那么这个构造方法也是public的并且是无参数的。</li>
-</ul>
-<p>因为Java属性是由 <code>setter</code>/<code>getter</code> 方法决定的，而不是字段。在一个Java类里面，如果有<code>void setName(String name)</code>和<code>String getName()</code>方法，那么可以认为这个类有<code>name</code>这个属性（<strong>可读可写</strong>），如果仅有get，那么这个<code>name</code>属性就是个<strong>只读属性</strong>。即使没有<code>name</code>这个字段也是一样成立的。</p>
-<p>也就是说，对于 <code>boolean</code> 类型，<code>enabled</code> 和 <code>isEnabled</code> 这两个字段生成的<code>setter</code>/<code>getter</code> 方法是一致的。当这两个字段同时存在时，只能针对其中一个生成<code>setter</code>/<code>getter</code> 方法。看下图你就明白了</p>
-<p><img src="/media/15057241768106.jpg" alt=""></p>
-<p><code>isEnabled</code> 已经无法再生成了，因为已经存在了。在项目当中应该避免则这样的命名，选择其一即可。</p>
+<p>下面看看ThreadLocal是如何解决这一问题的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ConcurrentHashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalDemo</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ThreadLocal&lt;String&gt; threadLocal = <span class="keyword">new</span> ThreadLocal&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        threadLocal.set(<span class="string">"hello"</span>);</span><br><span class="line">        printValue(); <span class="comment">//打印 main -&gt; hello</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                printValue(); <span class="comment">//打印 Thread-0 -&gt; null</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">printValue</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(Thread.currentThread().getName() + <span class="string">" -&gt; "</span> + threadLocal.get());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>&#123;</span><br><span class="line">        ThreadLocalDemo demo = <span class="keyword">new</span> ThreadLocalDemo();</span><br><span class="line">        demo.test();</span><br><span class="line"></span><br><span class="line">        Thread.sleep(<span class="number">1000</span>); <span class="comment">//防止程序结束</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从上面代码中可以看到不同线程获取到的值是不一样的，在主线程设置的值只能在主线程获取到，在子线程返回了一个<code>null</code>。同时把<strong>ThreadLocal</strong>生明为全局变量，也不会影响各线程之间的值。</p>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><p>下面的代码取自<strong>ThreadLocal</strong>类，展示了最基本的几个方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//每个Thread都有自己的ThreadLocalMap</span></span><br><span class="line"><span class="function">ThreadLocalMap <span class="title">getMap</span><span class="params">(Thread t)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> t.threadLocals;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="comment">//在不同线程调用这个方法获取到的ThreadLocalMap对象是不一样的，</span></span><br><span class="line">    <span class="comment">//所以从Map取到的对象更加不可能是一样了。</span></span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>)</span><br><span class="line">        <span class="comment">//用当前对象作为key存储value</span></span><br><span class="line">        map.set(<span class="keyword">this</span>, value); </span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        createMap(t, value);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">//用当前对象作为key获取value</span></span><br><span class="line">        <span class="comment">//由于是用当前对象作为key，所以一个ThreadLocal对象只能存储一个值。</span></span><br><span class="line">        <span class="comment">//如果想要存储几个值可以多用几个ThreadLocal。</span></span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">            T result = (T)e.value;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> setInitialValue();</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ThreadLocalMap m = getMap(Thread.currentThread());</span><br><span class="line">    <span class="keyword">if</span> (m != <span class="keyword">null</span>)</span><br><span class="line">        <span class="comment">//用当前对象作为key移除value</span></span><br><span class="line">         m.remove(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码可以很容易看出<strong>ThreadLocal</strong>的原理，但是由于<strong>ThreadLocal</strong>的代码太多，这只是很小的一部分，为了便于大家理解问题，我写了一个类模拟<strong>ThreadLocal</strong>的实现。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocal</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//每个线程有单独的Map来保证变量在不同线程之间互不影响</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Map&lt;Thread, Map&lt;ThreadLocal, Object&gt;&gt; tMap = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123;</span><br><span class="line">        Thread thread = Thread.currentThread();</span><br><span class="line">        Map&lt;ThreadLocal, Object&gt; map = tMap.get(thread);</span><br><span class="line">        <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</span><br><span class="line">            map.put(<span class="keyword">this</span>, value);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            map = <span class="keyword">new</span> ConcurrentHashMap&lt;&gt;();</span><br><span class="line">            tMap.put(thread, map);</span><br><span class="line">            map.put(<span class="keyword">this</span>, value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread thread = Thread.currentThread();</span><br><span class="line">        Map&lt;ThreadLocal, Object&gt; map = tMap.get(thread);</span><br><span class="line">        <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> (T) map.get(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Thread thread = Thread.currentThread();</span><br><span class="line">        Map&lt;ThreadLocal, Object&gt; map = tMap.get(thread);</span><br><span class="line">        <span class="keyword">if</span> (map != <span class="keyword">null</span>) &#123;</span><br><span class="line">            map.remove(<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>每个<strong>Thread</strong>都有自己的<strong>ThreadLocalMap</strong>，存储<strong>value</strong>的时候会存储到自己的<strong>ThreadLocalMap</strong>，所以在哪个线程设置的<strong>value</strong>就只能在哪个线程获取到，其他<strong>Thread</strong>是获取不到的。因为<strong>ThreadLocal</strong>类用<code>this</code>当做<strong>key</strong>，所以每个<strong>ThreadLocal</strong>最多存储一个<strong>value</strong>。如果想要存储几个值可以多用几个<strong>ThreadLocal</strong>。</p>
 
       
 
@@ -238,10 +216,6 @@
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Kotlin</a>
         		</li>
       		
 		</ul>
@@ -308,7 +282,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=https://mliyuanbiao.github.io/Android/Java转Kotlin-boolean属性的坑/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=https://mliyuanbiao.github.io/post/443887f3.html" alt="微信分享二维码">
     </div>
 </div>
 
@@ -322,18 +296,18 @@
   
 <nav id="article-nav">
   
-    <a href="/Android/如何理解Kotlin中属性/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/post/d14050d0.html" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          如何理解Kotlin中属性
+          JavaScript 继承与原型链
         
       </div>
     </a>
   
   
-    <a href="/杂货铺/自定义PAC列表规则/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">自定义PAC列表规则</div>
+    <a href="/post/7f9876e8.html" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">javascript 模板字符串</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -463,15 +437,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Kotlin</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
